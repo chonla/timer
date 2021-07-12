@@ -1,1 +1,209 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap')
+@import '../node_modules/bulma/css/bulma.css'
+@import './assets/sass/_colors'
+@import './assets/sass/_variables'
+
+@mixin square-button($size, $font-size)
+    width: $size
+    height: $size
+    line-height: $size !important
+    font-size: $font-size !important
+
+.timer-panel
+    &__container
+        background: $timer-panel-color
+        border-radius: 10px
+        height: calc((100vw - 6rem) * .5625 - 6rem)
+        box-shadow: 0px 0px 2rem rgba(0, 0, 0, 0.9)
+        overflow: hidden
+
+        .timer
+            &__container
+                width: 100%
+                height: 100%
+
+            &__interface
+                width: calc((100vw - 6rem) * .5625 - 6rem)
+                height: 100%
+                background: $timer-interface-color
+
+            &__controller
+                width: calc((100vw - 6rem) - ((100vw - 6rem) * .5625 - 6rem))
+                height: 100%
+                padding: 0.5rem 1rem
+                border-left: 1px solid $timer-panel-splitter-color
+                background: $timer-controller-color
+
+        @media screen and (max-width: 768px) 
+            .timer
+                &__controller
+                    width: calc((100vw - 3rem) - ((100vw - 6rem) * .5625 - 6rem))
+
+.presets-panel
+    padding: 12px
+
+    &__header
+        color: $panel-label-color
+        font-family: $panel-label-font-family
+        font-weight: 600
+        font-size: $panel-label-font-size
+        line-height: $panel-label-font-size
+        margin-bottom: calc(100vw * 0.01)
+
+    .preset-button
+        @include square-button(calc((((100vw - 6rem) - ((100vw - 6rem) * .5625 - 6rem)) - 60px - (0.5rem * 8)) / 9), calc(((((100vw - 6rem) - ((100vw - 6rem) * .5625 - 6rem)) - 60px - (0.5rem * 8)) / 9) * 0.25))
+        border: none !important
+        background-color: $preset-button-color
+        font-family: $preset-button-label-font-family
+        font-weight: 600
+        color: $preset-button-label-color
+        box-shadow: 0px 0px 0.2rem rgba(0, 0, 0, 0.05)
+        text-align: center
+        border-radius: $preset-button-radius
+
+        &:hover
+            color: $preset-button-label-color--hover
+            background-color: $preset-button-color--hover
+
+            .add-icon
+                background-color: $preset-button-label-color--hover
+
+        .add-icon
+            width: 100%
+            height: 100%
+            mask: url('/assets/icons/add.svg')
+            mask-position: center center
+            mask-size: calc(((((100vw - 6rem) - ((100vw - 6rem) * .5625 - 6rem)) - 60px - (0.5rem * 8)) / 9) * 0.33)
+            mask-repeat: no-repeat
+            background-color: $preset-button-label-color
+
+.settings-panel
+    padding: 12px
+
+    &__header
+        color: $panel-label-color
+        font-family: $panel-label-font-family
+        font-weight: 600
+        font-size: $panel-label-font-size
+        line-height: $panel-label-font-size
+        margin-bottom: calc(100vw * 0.01)
+
+    .settings
+        &__container
+            position: relative
+            background-color: $settings-panel-color
+            border-radius: 4px
+
+        &__item
+            padding: 8px 20px
+            display: flex
+            justify-content: space-between
+            align-items: center
+            line-height: 1.5rem
+
+            &:not(:last-child)
+                border-bottom: 1px solid $light-gray-4
+        
+            &_label
+                color: $panel-label-color
+                font-weight: 400
+                font-size: $settings-item-label-font-size
+            
+            &_value
+                display: flex
+                justify-content: flex-end
+
+        &__subfields
+            display: flex
+            align-items: center
+
+        &__subfield
+            flex: none
+
+            &_label
+                color: $panel-label-color
+                font-weight: 400
+                font-size: calc(((2 * #{$checkbox-button-padding}) + #{$checkbox-size}) * 0.7)
+                line-height: calc(((2 * #{$checkbox-button-padding}) + #{$checkbox-size}) * 0.7)
+        
+            &--with-subfield
+                display: flex
+
+            
+
+.form
+    &__checkbox
+        cursor: pointer
+        position: relative
+        line-height: calc((2 * #{$checkbox-button-padding}) + #{$checkbox-size})
+
+        .label
+            display: block
+            float: left
+            margin-left: 0.25rem
+            top: calc(-1 * (((2 * #{$checkbox-button-padding}) + #{$checkbox-size}) * 0.15))
+            line-height: calc((2 * #{$checkbox-button-padding}) + #{$checkbox-size})
+
+        input[type="checkbox"]
+            position: absolute
+            opacity: 0
+
+
+        input[type="checkbox"]:not(:checked)
+            & + .toggler
+
+                // check container
+                &::before
+                    width: calc(2 * (#{$checkbox-button-padding} + #{$checkbox-size}))
+                    height: calc((2 * #{$checkbox-button-padding}) + #{$checkbox-size})
+                    background-color: $checkbox-color
+                    content: " "
+                    display: block
+                    border-radius: $checkbox-radius
+                    float: left
+
+                // check button
+                &::after
+                    width: $checkbox-size
+                    height: $checkbox-size
+                    content: " "
+                    display: block
+                    float: left
+                    background-color: $light-gray-6
+                    border-radius: calc(#{$checkbox-radius} / 2)
+                    margin-top: $checkbox-button-padding
+                    margin-left: calc((-1 * 2 * (#{$checkbox-button-padding} + #{$checkbox-size})) + #{$checkbox-button-padding})
+
+        input[type="checkbox"]:checked
+            & + .toggler
+                // check container
+                &::before
+                    width: calc(2 * (#{$checkbox-button-padding} + #{$checkbox-size}))
+                    height: calc((2 * #{$checkbox-button-padding}) + #{$checkbox-size})
+                    background-color: $checkbox-color--checked
+                    content: " "
+                    display: block
+                    border-radius: $checkbox-radius
+                    float: left
+
+                // check button
+                &::after
+                    width: $checkbox-size
+                    height: $checkbox-size
+                    content: " "
+                    display: block
+                    float: left
+                    background-color: $light-gray-6
+                    border-radius: calc(#{$checkbox-radius} / 2)
+                    margin-top: $checkbox-button-padding
+                    margin-left: calc(-1 * (#{$checkbox-button-padding} + #{$checkbox-size}))
+
+    &__select
+        &:not(.is-multiple):not(.is-loading):not(:hover)
+            &::after
+                border-color: $inactive-color
+
+        &:not(.is-multiple):not(.is-loading):hover
+            &::after
+                border-color: $active-color
