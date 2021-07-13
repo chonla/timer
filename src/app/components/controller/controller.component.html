@@ -1,58 +1,54 @@
 <div class="timer__controller">
-  <div class="presets-panel">
-    <div class="presets-panel__header">Time Presets</div>
-    <div class="buttons preset-button__container">
-      <div class="button preset-button">1m</div>
-      <div class="button preset-button">2m</div>
-      <div class="button preset-button">3m</div>
-      <div class="button preset-button">5m</div>
-      <div class="button preset-button">10m</div>
-      <div class="button preset-button">20m</div>
-      <div class="button preset-button">30m</div>
-      <div class="button preset-button">60m</div>
-      <div class="button preset-button">
-        <div class="add-icon"></div>
+  <div class="pad-panel">
+    <div class="presets-panel">
+      <div class="presets-panel__header">Time Presets</div>
+      <div class="buttons preset-buttons__container">
+        <div class="button form__square-button">1m</div>
+        <div class="button form__square-button">2m</div>
+        <div class="button form__square-button">3m</div>
+        <div class="button form__square-button">5m</div>
+        <div class="button form__square-button">10m</div>
+        <div class="button form__square-button">20m</div>
+        <div class="button form__square-button">30m</div>
+        <div class="button form__square-button">60m</div>
+        <div class="button form__square-button">
+          <div class="icon add-icon"></div>
+        </div>
+      </div>
+    </div>
+    <div class="settings-panel">
+      <div class="settings-panel__header">Settings</div>
+      <div class="settings__container">
+        <div class="settings__item">
+          <div class="settings__item_label">Play sound</div>
+          <div class="settings__item_value">
+            <app-switch (toggled)="soundToggled($event)" [value]="useSound"></app-switch>
+          </div>
+        </div>
+        <div class="settings__item" [ngClass]="{'settings__item--disabled': !useSound}">
+          <div class="settings__item_label">Time's Up sound</div>
+          <div class="settings__item_value">
+            <div class="select form__select is-small pull-left" [ngClass]="{'form__select--disabled': !useSound}">
+              <select [disabled]="!useSound">
+                <option value="">Mario's Ending Theme</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="settings-panel">
-    <div class="settings-panel__header">Settings</div>
-    <div class="settings__container">
-      <div class="settings__item">
-        <div class="settings__item_label">Play sound</div>
-        <div class="settings__item_value">
-          <label for="setting-sound" class="form__checkbox">
-            <input type="checkbox" id="setting-sound">
-            <div class="toggler"></div>
-          </label>
-        </div>
+  <div class="controller-panel">
+    <div class="buttons controller-buttons__container">
+      <div class="button form__square-button">
+        <div class="icon play-icon"></div>
       </div>
-      <div class="settings__item">
-        <div class="settings__item_label">Time's Up sound</div>
-        <div class="settings__item_value">
-          <div class="select form__select is-small pull-left">
-            <select>
-              <option value="">Mario's Ending Theme</option>
-            </select>
-          </div>
-        </div>
+      <div class="button form__square-button">
+        <div class="icon pause-icon"></div>
       </div>
-      <!-- <div class="columns">
-        <div class="column is-3">
-          <label for="setting-sound" class="form__checkbox">
-            <input type="checkbox" id="setting-sound">
-            <div class="toggler"></div>
-            <div class="label settings__subfield_label">Play Sound</div>
-          </label>
-        </div>
-        <div class="column is-9">
-          <div class="select is-small pull-left">
-            <select>
-              <option value="">Mario's Ending Theme</option>
-            </select>
-          </div>
-        </div>
-      </div> -->
+      <div class="button form__square-button">
+        <div class="icon stop-icon"></div>
+      </div>
     </div>
   </div>
 </div>

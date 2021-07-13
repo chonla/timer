@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./controller.component.sass']
 })
 export class ControllerComponent implements OnInit {
+  public useSound: boolean;
 
-  constructor() { }
+  constructor() {
+    this.useSound = true;
+  }
 
   ngOnInit(): void {
+  }
+
+  public soundToggled(checked: boolean): void {
+    this.useSound = checked;
   }
 
 }

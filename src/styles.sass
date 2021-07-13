@@ -34,103 +34,103 @@
                 padding: 0.5rem 1rem
                 border-left: 1px solid $timer-panel-splitter-color
                 background: $timer-controller-color
+                position: relative
 
         @media screen and (max-width: 768px) 
             .timer
                 &__controller
                     width: calc((100vw - 3rem) - ((100vw - 6rem) * .5625 - 6rem))
 
-.presets-panel
-    padding: 12px
+.pad-panel
+    height: calc(100% - 6rem)
+    overflow-y: auto
+    padding-bottom: 1rem
+    -ms-overflow-style: none
+    scrollbar-width: none
 
-    &__header
-        color: $panel-label-color
-        font-family: $panel-label-font-family
-        font-weight: 600
-        font-size: $panel-label-font-size
-        line-height: $panel-label-font-size
-        margin-bottom: calc(100vw * 0.01)
+    &::-webkit-scrollbar
+        display: none
 
-    .preset-button
-        @include square-button(calc((((100vw - 6rem) - ((100vw - 6rem) * .5625 - 6rem)) - 60px - (0.5rem * 8)) / 9), calc(((((100vw - 6rem) - ((100vw - 6rem) * .5625 - 6rem)) - 60px - (0.5rem * 8)) / 9) * 0.25))
-        border: none !important
-        background-color: $preset-button-color
-        font-family: $preset-button-label-font-family
-        font-weight: 600
-        color: $preset-button-label-color
-        box-shadow: 0px 0px 0.2rem rgba(0, 0, 0, 0.05)
-        text-align: center
-        border-radius: $preset-button-radius
 
-        &:hover
-            color: $preset-button-label-color--hover
-            background-color: $preset-button-color--hover
+    .presets-panel
+        padding: 12px
 
-            .add-icon
-                background-color: $preset-button-label-color--hover
+        &__header
+            color: $panel-label-color
+            font-family: $panel-label-font-family
+            font-weight: 600
+            font-size: $panel-label-font-size
+            line-height: $panel-label-font-size
+            margin-bottom: calc(100vw * 0.01)
 
-        .add-icon
-            width: 100%
-            height: 100%
-            mask: url('/assets/icons/add.svg')
-            mask-position: center center
-            mask-size: calc(((((100vw - 6rem) - ((100vw - 6rem) * .5625 - 6rem)) - 60px - (0.5rem * 8)) / 9) * 0.33)
-            mask-repeat: no-repeat
-            background-color: $preset-button-label-color
+    .settings-panel
+        padding: 12px
 
-.settings-panel
-    padding: 12px
+        &__header
+            color: $panel-label-color
+            font-family: $panel-label-font-family
+            font-weight: 600
+            font-size: $panel-label-font-size
+            line-height: $panel-label-font-size
+            margin-bottom: calc(100vw * 0.01)
 
-    &__header
-        color: $panel-label-color
-        font-family: $panel-label-font-family
-        font-weight: 600
-        font-size: $panel-label-font-size
-        line-height: $panel-label-font-size
-        margin-bottom: calc(100vw * 0.01)
+        .settings
+            &__container
+                position: relative
+                background-color: $settings-panel-color
+                border-radius: 4px
 
-    .settings
-        &__container
-            position: relative
-            background-color: $settings-panel-color
-            border-radius: 4px
-
-        &__item
-            padding: 8px 20px
-            display: flex
-            justify-content: space-between
-            align-items: center
-            line-height: 1.5rem
-
-            &:not(:last-child)
-                border-bottom: 1px solid $light-gray-4
-        
-            &_label
-                color: $panel-label-color
-                font-weight: 400
-                font-size: $settings-item-label-font-size
-            
-            &_value
+            &__item
+                padding: 8px 20px
                 display: flex
-                justify-content: flex-end
+                justify-content: space-between
+                align-items: center
+                line-height: 1.5rem
 
-        &__subfields
-            display: flex
-            align-items: center
-
-        &__subfield
-            flex: none
-
-            &_label
-                color: $panel-label-color
-                font-weight: 400
-                font-size: calc(((2 * #{$checkbox-button-padding}) + #{$checkbox-size}) * 0.7)
-                line-height: calc(((2 * #{$checkbox-button-padding}) + #{$checkbox-size}) * 0.7)
-        
-            &--with-subfield
-                display: flex
-
+                &:not(:last-child)
+                    border-bottom: 1px solid $light-gray-4
             
+                &_label
+                    color: $panel-label-color
+                    font-weight: 400
+                    font-size: $settings-item-label-font-size
+
+                &--disabled
+                    .settings__item_label
+                        color: $disabled-color
+                
+                &_value
+                    display: flex
+                    justify-content: flex-end
+
+            &__subfields
+                display: flex
+                align-items: center
+
+            &__subfield
+                flex: none
+
+                &_label
+                    color: $panel-label-color
+                    font-weight: 400
+                    font-size: calc(((2 * #{$checkbox-button-padding}) + #{$checkbox-size}) * 0.7)
+                    line-height: calc(((2 * #{$checkbox-button-padding}) + #{$checkbox-size}) * 0.7)
+            
+                &--with-subfield
+                    display: flex
+
+.controller-panel
+    position: absolute
+    height: 6rem
+    left: 0
+    bottom: 0
+    width: 100%
+    border-bottom-right-radius: 10px
+    overflow: hidden
+    z-index: 400
+    padding: 1rem 2rem
+    background-color: $timer-controller-color
+    border-top: 1px solid $controller-panel-splitter-color
 
 .form
     &__checkbox
@@ -207,3 +207,50 @@
         &:not(.is-multiple):not(.is-loading):hover
             &::after
                 border-color: $active-color
+
+        &--disabled
+            &:not(.is-multiple):not(.is-loading):not(:hover)
+                &::after
+                    border-color: $disabled-color
+
+            &:not(.is-multiple):not(.is-loading):hover
+                &::after
+                    border-color: $disabled-color
+
+    &__square-button
+        @include square-button(3.5rem, 1rem)
+        border: none !important
+        background-color: $preset-button-color
+        font-family: $preset-button-label-font-family
+        font-weight: 600
+        color: $preset-button-label-color
+        box-shadow: 0px 0px 0.2rem rgba(0, 0, 0, 0.05)
+        text-align: center
+        border-radius: $preset-button-radius
+
+        &:hover
+            color: $preset-button-label-color--hover
+            background-color: $preset-button-color--hover
+
+            .icon
+                background-color: $preset-button-label-color--hover
+
+.icon
+    width: 100%
+    height: 100%
+    mask-position: center center
+    mask-size: calc(((((100vw - 6rem) - ((100vw - 6rem) * .5625 - 6rem)) - 60px - (0.5rem * 8)) / 9) * 0.33)
+    mask-repeat: no-repeat
+    background-color: $preset-button-label-color
+
+    &.add-icon
+        mask: url('/assets/icons/add.svg')
+
+    &.play-icon
+        mask: url('/assets/icons/play.svg')
+
+    &.pause-icon
+        mask: url('/assets/icons/pause.svg')
+
+    &.stop-icon
+        mask: url('/assets/icons/stop.svg')
