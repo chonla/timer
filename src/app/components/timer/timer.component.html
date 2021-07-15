@@ -1,1 +1,3 @@
-<div class="timer__interface"></div>
+<div class="timer__interface">
+    <app-developer-theme *ngIf="theme === 'developer'" [ticks]="ticks" [state]="state"></app-developer-theme>
+</div>

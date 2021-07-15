@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DefaultTheme } from './constants/themes';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,10 @@ export class AppComponent {
   public selectedTheme: string;
 
   constructor() {
-    this.selectedTheme = '';
+    this.selectedTheme = DefaultTheme;
   }
 
   public themeChanged(theme: string): void {
-    console.log(theme);
+    this.selectedTheme = theme;
   }
 }

@@ -55,6 +55,7 @@ export class TimerService {
       this.setState(TimerState.RUNNING);
 
       this._ticksLeft = this._ticks;
+      this._ticksSource$.next(this._ticksLeft);
       if (!this._interval$.closed) {
         this._interval$.unsubscribe();
       }
@@ -100,6 +101,12 @@ export class TimerService {
   private ticking(): void {
     this._ticksLeft--;
     this._ticksSource$.next(this._ticksLeft);
+    if (this._ticksLeft === 0) {
+      if (!this._interval$.closed) {
+        this._interval$.unsubscribe();
+      }
+      this.setState(TimerState.IDLE);
+    }
   }
 
   private setState(state: TimerState): void {

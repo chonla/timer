@@ -85,7 +85,7 @@ export class ControllerComponent implements OnInit {
   }
 
   public shouldShowPlayButton(): boolean {
-    return this.isIdle();
+    return this.isIdle() || this.isUninitialized();
   }
 
   public shouldShowResumeButton(): boolean {

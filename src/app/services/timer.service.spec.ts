@@ -149,7 +149,7 @@ describe('TimerService', () => {
       service.start();
 
       jest.advanceTimersByTime(3500);
-      expect(tickCounter).toHaveBeenCalledTimes(4); // 3 for ticking, 1 for initializing
+      expect(tickCounter).toHaveBeenCalledTimes(5); // 3 for ticking, 1 for initializing on start, 1 for constructor
     });
   });
 });

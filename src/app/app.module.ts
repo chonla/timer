@@ -7,6 +7,7 @@ import { TimerComponent } from './components/timer/timer.component';
 import { ControllerComponent } from './components/controller/controller.component';
 import { SwitchComponent } from './components/switch/switch.component';
 import { PresetButtonComponent } from './components/preset-button/preset-button.component';
+import { DeveloperThemeComponent } from './components/developer-theme/developer-theme.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { PresetButtonComponent } from './components/preset-button/preset-button.
     TimerComponent,
     ControllerComponent,
     SwitchComponent,
-    PresetButtonComponent
+    PresetButtonComponent,
+    DeveloperThemeComponent
   ],
   imports: [
     BrowserModule,

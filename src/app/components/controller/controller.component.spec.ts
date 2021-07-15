@@ -152,14 +152,20 @@ describe('ControllerComponent', () => {
         expect(component.shouldShowPlayButton()).toBe(true);
       });
 
-      it('should not display play button if timer is not ready to start', () => {
+      it('should display play button if timer is not ready to start', () => {
         component.state = TimerState.UNINITIALIZED;
 
-        expect(component.shouldShowPlayButton()).toBe(false);
+        expect(component.shouldShowPlayButton()).toBe(true);
       });
 
       it('should not display play button if timer is running', () => {
         component.state = TimerState.RUNNING;
+
+        expect(component.shouldShowPlayButton()).toBe(false);
+      });
+
+      it('should not display play button if timer is paused', () => {
+        component.state = TimerState.PAUSED;
 
         expect(component.shouldShowPlayButton()).toBe(false);
       });

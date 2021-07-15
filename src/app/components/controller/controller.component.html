@@ -37,6 +37,8 @@
       <div class="settings-panel__header">Time Presets</div>
       <div class="settings__blank_container">
         <div class="buttons-list">
+          <app-preset-button class="preset-button" label="5s" (click)="setTime(5)" [disabled]="shouldDisableTimeSetButton()">
+          </app-preset-button>
           <app-preset-button class="preset-button" label="1m" (click)="setTime(60)" [disabled]="shouldDisableTimeSetButton()">
           </app-preset-button>
           <app-preset-button class="preset-button" label="2m" (click)="setTime(120)" [disabled]="shouldDisableTimeSetButton()">
