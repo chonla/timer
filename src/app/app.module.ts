@@ -8,6 +8,7 @@ import { ControllerComponent } from './components/controller/controller.componen
 import { SwitchComponent } from './components/switch/switch.component';
 import { PresetButtonComponent } from './components/preset-button/preset-button.component';
 import { DeveloperThemeComponent } from './components/developer-theme/developer-theme.component';
+import { ReadableStatePipe } from './pipes/readable-state.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { DeveloperThemeComponent } from './components/developer-theme/developer-
     ControllerComponent,
     SwitchComponent,
     PresetButtonComponent,
-    DeveloperThemeComponent
+    DeveloperThemeComponent,
+    ReadableStatePipe
   ],
   imports: [
     BrowserModule,

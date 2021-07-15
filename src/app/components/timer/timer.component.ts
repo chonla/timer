@@ -14,12 +14,14 @@ import { TimerService } from '../../services/timer.service';
 export class TimerComponent implements OnInit {
   @Input() theme: string = '';
 
+  public totalTicks: number;
   public ticks: number;
   public state: TimerState;
 
   private destroy$: ReplaySubject<boolean>;
 
   constructor(private timer: TimerService) {
+    this.totalTicks = 0;
     this.ticks = 0;
     this.state = TimerState.UNINITIALIZED;
     this.destroy$ = new ReplaySubject(1);
@@ -30,6 +32,7 @@ export class TimerComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(ticks => {
         this.ticks = ticks;
+        this.totalTicks = this.timer.getTicks();
       });
 
     this.timer.onStateChange$()
