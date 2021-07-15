@@ -89,7 +89,7 @@ export class ControllerComponent implements OnInit {
   }
 
   public shouldShowResumeButton(): boolean {
-    return !this.isIdle();
+    return !this.isIdle() && !this.isUninitialized();
   }
 
   public shouldDisablePauseButton(): boolean {
