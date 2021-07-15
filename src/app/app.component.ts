@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'timer';
+  public selectedTheme: string;
+
+  constructor() {
+    this.selectedTheme = '';
+  }
+
+  public themeChanged(theme: string): void {
+    console.log(theme);
+  }
 }

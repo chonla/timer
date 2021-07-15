@@ -52,17 +52,6 @@
         display: none
 
 
-    .presets-panel
-        padding: 12px
-
-        &__header
-            color: $panel-label-color
-            font-family: $panel-label-font-family
-            font-weight: 600
-            font-size: $panel-label-font-size
-            line-height: $panel-label-font-size
-            margin-bottom: calc(100vw * 0.01)
-
     .settings-panel
         padding: 12px
 
@@ -75,33 +64,43 @@
             margin-bottom: calc(100vw * 0.01)
 
         .settings
-            &__container
-                position: relative
-                background-color: $settings-panel-color
-                border-radius: 4px
+            &__list
+                &_container
+                    position: relative
+                    background-color: $settings-panel-color
+                    border-radius: 4px
 
-            &__item
-                padding: 8px 20px
-                display: flex
-                justify-content: space-between
-                align-items: center
-                line-height: 1.5rem
-
-                &:not(:last-child)
-                    border-bottom: 1px solid $light-gray-4
-            
-                &_label
-                    color: $panel-label-color
-                    font-weight: 400
-                    font-size: $settings-item-label-font-size
-
-                &--disabled
-                    .settings__item_label
-                        color: $disabled-color
-                
-                &_value
+                &_item
+                    padding: 8px 20px
                     display: flex
-                    justify-content: flex-end
+                    justify-content: space-between
+                    align-items: center
+                    line-height: 1.5rem
+
+                    &:not(:last-child)
+                        border-bottom: 1px solid $light-gray-4
+                
+                    &_label
+                        color: $panel-label-color
+                        font-weight: 400
+                        font-size: $settings-item-label-font-size
+                        -webkit-user-select: none
+                        -ms-user-select: none
+                        user-select: none
+
+                    &--disabled
+                        .settings__list_item_label
+                            color: $disabled-color
+                    
+                    &_value
+                        display: flex
+                        justify-content: flex-end
+            &__blank
+                &_container
+                    .buttons-list
+                        &  > .preset-button:not(:last-child):not(.is-fullwidth)
+                            margin-right: 0.5rem
+
 
             &__subfields
                 display: flex
@@ -234,6 +233,13 @@
 
             .icon
                 background-color: $preset-button-label-color--hover
+        
+        &--disabled
+            color: $disabled-color
+            pointer-events: none
+
+            .icon
+                background-color: $disabled-color
 
 .icon
     width: 100%
@@ -247,6 +253,9 @@
         mask: url('/assets/icons/add.svg')
 
     &.play-icon
+        mask: url('/assets/icons/play.svg')
+
+    &.resume-icon
         mask: url('/assets/icons/play.svg')
 
     &.pause-icon

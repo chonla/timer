@@ -1,3 +1,4 @@
+import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./timer.component.sass']
 })
 export class TimerComponent implements OnInit {
+  @Input() theme: string = '';
 
   constructor() { }
 

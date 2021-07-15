@@ -1,8 +1,8 @@
 <section class="hero is-dark is-fullheight">
   <div class="hero-body">
     <div class="container is-fluid timer-panel__container p-0 timer__container is-flex is-justify-content-space-between">
-      <app-timer></app-timer>
-      <app-controller></app-controller>
+      <app-timer [theme]="selectedTheme"></app-timer>
+      <app-controller (themeChanged)="themeChanged($event)"></app-controller>
     </div>
   </div>
 </section>

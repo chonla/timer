@@ -1,10 +1,13 @@
+import { TimerService } from '../../services/timer.service';
 import { ControllerComponent } from './controller.component';
 
 describe('ControllerComponent', () => {
   let component: ControllerComponent;
-
+  let timer: TimerService;
+  
   beforeEach(() => {
-    component = new ControllerComponent();
+    timer = new TimerService();
+    component = new ControllerComponent(timer);
   });
 
   it('should create', () => {

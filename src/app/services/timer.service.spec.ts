@@ -32,48 +32,74 @@ describe('TimerService', () => {
   });
 
   describe('State', () => {
-    it('should set timer state to IDLE when initialized', () => {
-      expect(service.getState()).toEqual(TimerState.IDLE);
+    it('should set timer state to UNINITIALIZED when initialized', () => {
+      expect(service.getState()).toEqual(TimerState.UNINITIALIZED);
+    });
+
+    it('should keep uninitialized if start without setting time', () => {
+      service.start();
+      expect(service.getState()).toEqual(TimerState.UNINITIALIZED);
+    });
+
+    it('should keep uninitialized if stop without setting time', () => {
+      service.stop();
+      expect(service.getState()).toEqual(TimerState.UNINITIALIZED);
+    });
+
+    it('should keep uninitialized if pause without setting time', () => {
+      service.pause();
+      expect(service.getState()).toEqual(TimerState.UNINITIALIZED);
+    });
+
+    it('should keep uninitialized if resume without setting time', () => {
+      service.resume();
+      expect(service.getState()).toEqual(TimerState.UNINITIALIZED);
     });
 
     it('should set state to running when start timer', () => {
+      service.setTicks(1);
       service.start();
       expect(service.getState()).toEqual(TimerState.RUNNING);
     });
   
     it('should trigger state change when set state', (done) => {
       service.onStateChange$().subscribe(state => {
-        expect(state).toEqual(TimerState.RUNNING);
+        expect(state).toEqual(TimerState.IDLE);
         done();
       });
-      service.start();
+      service.setTicks(1);
     });
 
     it('should set state to idle when stop timer', () => {
+      service.setTicks(1);
       service.start();
       service.stop();
       expect(service.getState()).toEqual(TimerState.IDLE);
     });
 
     it('should set state to paused when pause timer in running state', () => {
+      service.setTicks(1);
       service.start();
       service.pause();
       expect(service.getState()).toEqual(TimerState.PAUSED);
     });
 
-    it('should keep state to running when start timer in paused state', () => {
+    it('should keep state to paused when start timer in paused state', () => {
+      service.setTicks(1);
       service.start();
       service.pause();
       service.start();
-      expect(service.getState()).toEqual(TimerState.RUNNING);
+      expect(service.getState()).toEqual(TimerState.PAUSED);
     });
 
     it('should keep state to idle when pause timer in idle state', () => {
+      service.setTicks(1);
       service.pause();
       expect(service.getState()).toEqual(TimerState.IDLE);
     });
 
     it('should keep state to idle when pause timer in paused state', () => {
+      service.setTicks(1);
       service.start();
       service.pause();
       service.pause();
@@ -81,6 +107,7 @@ describe('TimerService', () => {
     });
 
     it('should continue running when resume from paused state', () => {
+      service.setTicks(1);
       service.start();
       service.pause();
       service.resume();
@@ -88,11 +115,13 @@ describe('TimerService', () => {
     });
 
     it('should keep state to idle when resume from idle state', () => {
+      service.setTicks(1);
       service.resume();
       expect(service.getState()).toEqual(TimerState.IDLE);
     });
 
     it('should keep state to running when resume from running state', () => {
+      service.setTicks(1);
       service.start();
       service.resume();
       expect(service.getState()).toEqual(TimerState.RUNNING);
