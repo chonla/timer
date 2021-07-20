@@ -9,6 +9,7 @@ import { SwitchComponent } from './components/switch/switch.component';
 import { PresetButtonComponent } from './components/preset-button/preset-button.component';
 import { DeveloperThemeComponent } from './components/developer-theme/developer-theme.component';
 import { ReadableStatePipe } from './pipes/readable-state.pipe';
+import { DigitalThemeComponent } from './components/digital-theme/digital-theme.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ReadableStatePipe } from './pipes/readable-state.pipe';
     SwitchComponent,
     PresetButtonComponent,
     DeveloperThemeComponent,
-    ReadableStatePipe
+    ReadableStatePipe,
+    DigitalThemeComponent
   ],
   imports: [
     BrowserModule,

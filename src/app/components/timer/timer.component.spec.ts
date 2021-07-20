@@ -5,10 +5,10 @@ import { TimerComponent } from './timer.component';
 
 describe('TimerComponent', () => {
   let component: TimerComponent;
-  let timer: TimerService;
+  let mockTimer: TimerService;
 
   beforeEach(() => {
-    timer = ({
+    mockTimer = ({
       start: jest.fn(),
       stop: jest.fn(),
       pause: jest.fn(),
@@ -16,7 +16,7 @@ describe('TimerComponent', () => {
       setTicks: jest.fn(),
       onStateChange$: jest.fn().mockReturnValue(of(TimerState.UNINITIALIZED)),
     } as unknown) as TimerService;
-    component = new TimerComponent(timer);
+    component = new TimerComponent(mockTimer);
   });
 
   it('should create', () => {

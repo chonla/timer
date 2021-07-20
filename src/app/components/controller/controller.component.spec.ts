@@ -1,14 +1,16 @@
 import { of } from 'rxjs';
+import { ColorSchemeService } from '../../services/color-scheme.service';
 import { TimerState } from '../../enums/timer-state.enum';
 import { TimerService } from '../../services/timer.service';
 import { ControllerComponent } from './controller.component';
 
 describe('ControllerComponent', () => {
   let component: ControllerComponent;
-  let timer: TimerService;
+  let mockTimer: TimerService;
+  let mockColor: ColorSchemeService;
 
   beforeEach(() => {
-    timer = ({
+    mockTimer = ({
       start: jest.fn(),
       stop: jest.fn(),
       pause: jest.fn(),
@@ -16,7 +18,10 @@ describe('ControllerComponent', () => {
       setTicks: jest.fn(),
       onStateChange$: jest.fn().mockReturnValue(of(TimerState.UNINITIALIZED)),
     } as unknown) as TimerService;
-    component = new ControllerComponent(timer);
+    mockColor = ({
+      setColorScheme: jest.fn()
+    } as unknown) as ColorSchemeService;
+    component = new ControllerComponent(mockTimer, mockColor);
   });
 
   it('should create', () => {
@@ -50,7 +55,7 @@ describe('ControllerComponent', () => {
         const event = ({
           target: target
         } as unknown) as Event;
-    
+
         component.onThemeChanged.subscribe(theme => {
           expect(theme).toEqual('test-theme');
           done();
@@ -59,39 +64,53 @@ describe('ControllerComponent', () => {
         component.themeChanged(event);
       });
     });
+
+    describe('Color Scheme Settings', () => {
+      it('should change color scheme to dark mode when dark mode is selected', () => {
+        component.darkModeToggled(true);
+
+        expect(mockColor.setColorScheme).toBeCalledWith('dark');
+      });
+
+      it('should change color scheme to dark mode when dark mode is deselected', () => {
+        component.darkModeToggled(false);
+
+        expect(mockColor.setColorScheme).toBeCalledWith('default');
+      });
+    });
   });
 
   describe('Controller', () => {
     describe('Calling Service', () => {
       it('should call timer start', () => {
         component.start();
-        
-        expect(timer.start).toBeCalledTimes(1);
+
+        expect(mockTimer.start).toBeCalledTimes(1);
       });
 
       it('should call timer stop', () => {
         component.stop();
-        
-        expect(timer.stop).toBeCalledTimes(1);
+
+        expect(mockTimer.stop).toBeCalledTimes(1);
       });
 
       it('should call timer pause', () => {
         component.pause();
-        
-        expect(timer.pause).toBeCalledTimes(1);
+
+        expect(mockTimer.pause).toBeCalledTimes(1);
       });
 
       it('should call timer resume', () => {
         component.resume();
-        
-        expect(timer.resume).toBeCalledTimes(1);
+
+        expect(mockTimer.resume).toBeCalledTimes(1);
       });
 
       it('should call timer setTicks', () => {
         component.setTime(300);
 
-        expect(timer.setTicks).toBeCalledWith(300);
-        expect(timer.setTicks).toBeCalledTimes(1);
+        expect(mockTimer.setTicks).toBeCalledWith(300);
+        expect(mockTimer.setTicks).toBeCalledTimes(1);
       })
     });
 

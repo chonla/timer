@@ -1,93 +1,107 @@
-<div class="timer__controller">
-  <div class="pad-panel">
+<div class="settings__open_button" (click)="openSettings()"></div>
 
-    <div class="settings-panel">
-      <div class="settings-panel__header">Settings</div>
-      <div class="settings__list_container">
-        <div class="settings__list_item">
-          <div class="settings__list_item_label">Play sound</div>
-          <div class="settings__list_item_value">
-            <app-switch (toggled)="soundToggled($event)" [value]="useSound"></app-switch>
+<div class="timer__settings" [ngClass]="{'hidden': settingClosed, 'shown': !settingClosed}">
+
+  <div class="settings-panel">
+    <div class="settings-panel__header">Settings</div>
+    <div class="settings-panel__list-container">
+      <div class="settings-panel__list-item">
+        <div class="settings-panel__list-item-label">Dark mode</div>
+        <div class="settings-panel__list-item-value">
+          <app-switch (toggled)="darkModeToggled($event)" [value]="darkMode"></app-switch>
+        </div>
+      </div>
+      <div class="settings-panel__list-item">
+        <div class="settings-panel__list-item-label">Play sound</div>
+        <div class="settings-panel__list-item-value">
+          <app-switch (toggled)="soundToggled($event)" [value]="useSound"></app-switch>
+        </div>
+      </div>
+      <div class="settings-panel__list-item" [ngClass]="{'disabled': !useSound}">
+        <div class="settings-panel__list-item-label">Time's Up sound</div>
+        <div class="settings-panel__list-item-value">
+          <div class="select form__select is-small pull-left" [ngClass]="{'form__select--disabled': !useSound}">
+            <select [disabled]="!useSound" [(ngModel)]="selectedSound" (change)="soundChanged($event)">
+              <option *ngFor="let sound of sounds" [value]="sound.key">{{ sound.label }}</option>
+            </select>
           </div>
         </div>
-        <div class="settings__list_item" [ngClass]="{'settings__list_item--disabled': !useSound}">
-          <div class="settings__list_item_label">Time's Up sound</div>
-          <div class="settings__list_item_value">
-            <div class="select form__select is-small pull-left" [ngClass]="{'form__select--disabled': !useSound}">
-              <select [disabled]="!useSound" [(ngModel)]="selectedSound">
-                <option *ngFor="let sound of sounds" [value]="sound.key">{{ sound.label }}</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="settings__list_item" [ngClass]="{'settings__list_item--disabled': !useSound}">
-          <div class="settings__list_item_label">Theme</div>
-          <div class="settings__list_item_value">
-            <div class="select form__select is-small pull-left">
-              <select (change)="themeChanged($event)" [(ngModel)]="selectedTheme">
-                <option *ngFor="let theme of themes" [value]="theme.key">{{ theme.label }}</option>
-              </select>
-            </div>
+      </div>
+      <div class="settings-panel__list-item" [ngClass]="{'settings-panel__list-item--disabled': !useSound}">
+        <div class="settings-panel__list-item-label">Theme</div>
+        <div class="settings-panel__list-item-value">
+          <div class="select form__select is-small pull-left">
+            <select (change)="themeChanged($event)" [(ngModel)]="selectedTheme">
+              <option *ngFor="let theme of themes" [value]="theme.key">{{ theme.label }}</option>
+            </select>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="settings-panel">
-      <div class="settings-panel__header">Time Presets</div>
-      <div class="settings__blank_container">
-        <div class="buttons-list">
-          <app-preset-button class="preset-button" label="5s" (click)="setTime(5)" [disabled]="shouldDisableTimeSetButton()">
-          </app-preset-button>
-          <app-preset-button class="preset-button" label="1m" (click)="setTime(60)" [disabled]="shouldDisableTimeSetButton()">
-          </app-preset-button>
-          <app-preset-button class="preset-button" label="2m" (click)="setTime(120)" [disabled]="shouldDisableTimeSetButton()">
-          </app-preset-button>
-          <app-preset-button class="preset-button" label="3m" (click)="setTime(180)" [disabled]="shouldDisableTimeSetButton()">
-          </app-preset-button>
-          <app-preset-button class="preset-button" label="5m" (click)="setTime(300)" [disabled]="shouldDisableTimeSetButton()">
-          </app-preset-button>
-          <app-preset-button class="preset-button" label="10m" (click)="setTime(600)" [disabled]="shouldDisableTimeSetButton()">
-          </app-preset-button>
-          <app-preset-button class="preset-button" label="20m" (click)="setTime(1200)" [disabled]="shouldDisableTimeSetButton()">
-          </app-preset-button>
-          <app-preset-button class="preset-button" label="30m" (click)="setTime(1800)" [disabled]="shouldDisableTimeSetButton()">
-          </app-preset-button>
-          <app-preset-button class="preset-button" label="60m" (click)="setTime(3600)" [disabled]="shouldDisableTimeSetButton()">
-          </app-preset-button>
-        </div>
-      </div>
-    </div>
-
-    <div class="settings-panel">
-      <div class="settings-panel__header">Custom Timers</div>
-      <div class="settings__blank_container">
-        <div class="buttons-list">
-          <div class="button form__square-button" [ngClass]="{'form__square-button--disabled': shouldDisableTimeSetButton()}">
-            <div class="icon add-icon"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
+  <div class="settings-panel">
+    <div class="settings-panel__header">Time Presets</div>
+    <div class="settings__blank_container">
+      <div class="form__buttons">
+        <app-preset-button class="form__button--square" label="1m" (clicked)="setTime(60)"
+          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
+        </app-preset-button>
+        <app-preset-button class="form__button--square" label="2m" (clicked)="setTime(120)"
+          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
+        </app-preset-button>
+        <app-preset-button class="form__button--square" label="3m" (clicked)="setTime(180)"
+          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
+        </app-preset-button>
+        <app-preset-button class="form__button--square" label="5m" (clicked)="setTime(300)"
+          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
+        </app-preset-button>
+        <app-preset-button class="form__button--square" label="10m" (clicked)="setTime(600)"
+          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
+        </app-preset-button>
+        <app-preset-button class="form__button--square" label="20m" (clicked)="setTime(1200)"
+          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
+        </app-preset-button>
+        <app-preset-button class="form__button--square" label="30m" (clicked)="setTime(1800)"
+          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
+        </app-preset-button>
+        <app-preset-button class="form__button--square" label="60m" (clicked)="setTime(3600)"
+          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
+        </app-preset-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-panel">
+    <div class="settings-panel__header">Custom Timers</div>
+    <div class="settings__blank_container">
+      <div class="form__buttons">
+        <div class="form__button--square" [ngClass]="{'disabled': shouldDisableTimeSetButton()}">
+          <div class="icon add-icon"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings__close_button" (click)="closeSettings()"></div>
+</div>
+
+<div class="timer__controller">
   <div class="controller-panel">
-    <div class="buttons controller-buttons__container">
-      <div class="button form__square-button" (click)="start()"
-        [ngClass]="{'is-hidden': !shouldShowPlayButton(), 'form__square-button--disabled': isUninitialized()}">
+    <div class="buttons">
+      <div class="button" (click)="start()"
+        [ngClass]="{'is-hidden': !shouldShowPlayButton(), 'disabled': isUninitialized()}">
         <div class="icon play-icon"></div>
       </div>
-      <div class="button form__square-button" (click)="resume()"
-        [ngClass]="{'is-hidden': !shouldShowResumeButton(), 'form__square-button--disabled': !isPaused()}">
+      <div class="button" (click)="resume()"
+        [ngClass]="{'is-hidden': !shouldShowResumeButton(), 'disabled': !isPaused()}">
         <div class="icon resume-icon"></div>
       </div>
-      <div class="button form__square-button" (click)="pause()"
-        [ngClass]="{'form__square-button--disabled': shouldDisablePauseButton()}">
+      <div class="button" (click)="pause()" [ngClass]="{'disabled': shouldDisablePauseButton()}">
         <div class="icon pause-icon"></div>
       </div>
-      <div class="button form__square-button" (click)="stop()"
-        [ngClass]="{'form__square-button--disabled': shouldDisableStopButton()}">
+      <div class="divider"></div>
+      <div class="button" (click)="stop()" [ngClass]="{'disabled': shouldDisableStopButton()}">
         <div class="icon stop-icon"></div>
       </div>
     </div>

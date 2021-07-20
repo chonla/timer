@@ -1,8 +1,4 @@
-<section class="hero is-dark is-fullheight">
-  <div class="hero-body">
-    <div class="container is-fluid timer-panel__container p-0 timer__container is-flex is-justify-content-space-between">
-      <app-timer [theme]="selectedTheme"></app-timer>
-      <app-controller (themeChanged)="themeChanged($event)"></app-controller>
-    </div>
-  </div>
-</section>
+<div class="timer__app" [ngClass]="{'timer__app--dark':colorScheme==='dark'}">
+  <app-timer [theme]="selectedTheme"></app-timer>
+  <app-controller (themeChanged)="themeChanged($event)"></app-controller>
+</div>

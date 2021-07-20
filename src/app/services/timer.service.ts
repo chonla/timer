@@ -38,7 +38,7 @@ export class TimerService {
     }
   }
 
-  public onTicksChange$(): Observable<number> {
+  public onTicksChanged$(): Observable<number> {
     return this._ticksSource$.asObservable();
   }
 

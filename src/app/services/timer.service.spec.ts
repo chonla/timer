@@ -23,7 +23,7 @@ describe('TimerService', () => {
     });
   
     it('should trigger ticks change when set ticks', (done) => {
-      service.onTicksChange$().subscribe(ticks => {
+      service.onTicksChanged$().subscribe(ticks => {
         expect(ticks).toEqual(300);
         done();
       });
@@ -138,7 +138,7 @@ describe('TimerService', () => {
 
       jest.useFakeTimers();
 
-      service.onTicksChange$().subscribe((ticks) => {
+      service.onTicksChanged$().subscribe((ticks) => {
         tickCounter();
         if (ticks === 0) {
           done();

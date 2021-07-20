@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class PresetButtonComponent implements OnInit {
   @Input() label: string = '';
   @Input() disabled: boolean = false;
-  @Output('click') onClicked: EventEmitter<void> = new EventEmitter();
+  @Output('clicked') onClicked: EventEmitter<void> = new EventEmitter();
 
   constructor() { }
 

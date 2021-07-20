@@ -7,6 +7,7 @@ import { TimerService } from '../../services/timer.service';
 import { ITheme } from '../../interfaces/themes.interface';
 import { ISound } from '../../interfaces/sound.interface';
 import { AvailableSounds, DefaultSound } from '../../constants/sounds';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-controller',
@@ -22,13 +23,17 @@ export class ControllerComponent implements OnInit {
   public selectedSound: string = DefaultSound;
   public useSound: boolean;
   public state: TimerState;
+  public darkMode: boolean;
+  public settingClosed: boolean;
 
   private destroy$: ReplaySubject<boolean>;
 
-  constructor(private timer: TimerService) {
+  constructor(private timer: TimerService, private settings: SettingsService) {
     this.destroy$ = new ReplaySubject(1);
     this.useSound = true;
+    this.darkMode = false;
     this.state = TimerState.UNINITIALIZED;
+    this.settingClosed = false;
 
     this.timer.onStateChange$()
       .pipe(takeUntil(this.destroy$))
@@ -42,10 +47,23 @@ export class ControllerComponent implements OnInit {
 
   public soundToggled(checked: boolean): void {
     this.useSound = checked;
+    this.settings.update('useSound', checked);
+  }
+
+  public darkModeToggled(checked: boolean): void {
+    this.darkMode = checked;
+    this.settings.update('darkMode', checked);
   }
 
   public themeChanged($event: Event): void {
-    this.onThemeChanged.emit(($event.target as HTMLSelectElement).value);
+    const theme: string = ($event.target as HTMLSelectElement).value;
+    this.onThemeChanged.emit(theme);
+    this.settings.update('selectedTheme', theme);
+  }
+
+  public soundChanged($event: Event): void {
+    const theme: string = ($event.target as HTMLSelectElement).value;
+    this.settings.update('selectedSound', theme);
   }
 
   public start(): void {
@@ -102,5 +120,13 @@ export class ControllerComponent implements OnInit {
 
   public shouldDisableTimeSetButton(): boolean {
     return this.isRunning() || this.isPaused();
+  }
+
+  public openSettings(): void {
+    this.settingClosed = false;
+  }
+
+  public closeSettings(): void {
+    this.settingClosed = true;
   }
 }

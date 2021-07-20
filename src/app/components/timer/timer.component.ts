@@ -28,7 +28,7 @@ export class TimerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.timer.onTicksChange$()
+    this.timer.onTicksChanged$()
       .pipe(takeUntil(this.destroy$))
       .subscribe(ticks => {
         this.ticks = ticks;
