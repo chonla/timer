@@ -13,6 +13,7 @@ import { TimerService } from '../../services/timer.service';
 })
 export class TimerComponent implements OnInit {
   @Input() theme: string = '';
+  @Input() darkMode: boolean = false;
 
   public totalTicks: number;
   public ticks: number;

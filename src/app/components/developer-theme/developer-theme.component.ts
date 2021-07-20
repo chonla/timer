@@ -10,6 +10,7 @@ export class DeveloperThemeComponent implements OnInit {
   @Input() ticks: number = 0;
   @Input() totalTicks: number = 0;
   @Input() state: TimerState = TimerState.UNINITIALIZED;
+  @Input() darkMode: boolean = false;
 
   constructor() { }
 

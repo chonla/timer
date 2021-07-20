@@ -20,13 +20,6 @@ $element-radius: 5px
 $default-drop-shadow: none
 $disabled-color-light: $light-gray-2
 
-$lighten-1: rgba(255, 255, 255, 0.85)
-$lighten-2: rgba(255, 255, 255, 0.75)
-$lighten-3: rgba(255, 255, 255, 0.65)
-$lighten-4: rgba(255, 255, 255, 0.5)
-$lighten-5: rgba(255, 255, 255, 0.35)
-$lighten-6: rgba(255, 255, 255, 0.25)
-
 $primary-font-family: 'Montserrat', sans-serif
 
 $primary-background-light: $light-gray-6
@@ -66,6 +59,11 @@ $form-dropdown-trigger-color: $light-gray-2
 $form-dropdown-trigger-color--hovered: $light-pink
 $form-dropdown-text-color: $light-gray-0
 $form-dropdown-text-size: 0.7rem
+
+$setting-panel-open-button-color: $light-gray-0
+$setting-panel-close-button-color: $light-gray-0
+$setting-panel-open-button-color-light: $light-gray-2
+$setting-panel-close-button-color-light: $light-gray-0
 
 .timer
     &__app
@@ -151,7 +149,7 @@ $form-dropdown-text-size: 0.7rem
                 background-color: red
                 mask-position: center center
                 mask-repeat: no-repeat
-                background-color: $preset-button-label-color
+                background-color: $setting-panel-open-button-color
                 mask: url('/assets/icons/more.svg')
                 cursor: pointer
 
@@ -163,7 +161,7 @@ $form-dropdown-text-size: 0.7rem
                 height: $setting-panel-toggle-button-size
                 mask-position: center center
                 mask-repeat: no-repeat
-                background-color: $preset-button-label-color
+                background-color: $setting-panel-close-button-color
                 mask: url('/assets/icons/close.svg')
                 cursor: pointer
 
@@ -367,6 +365,11 @@ $form-dropdown-text-size: 0.7rem
                     background-color: $secondary-background-dark
                 &__settings
                     background-color: $secondary-background-dark
+            .settings
+                &__open_button
+                    background-color: $setting-panel-open-button-color-light
+                &__close_button
+                    background-color: $setting-panel-close-button-color-light
 
 .icon
     width: 100%

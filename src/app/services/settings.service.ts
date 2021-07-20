@@ -61,6 +61,10 @@ export class SettingsService {
     return this._settingSource$.asObservable();
   }
 
+  public restore(): void {
+    this.load();
+  }
+
   private _syncSettings(): void {
     localStorage.setItem('bayo.timer', JSON.stringify(this._settings));
     this._settingSource$.next(this._settings);

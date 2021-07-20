@@ -1,17 +1,15 @@
 import { AppComponent } from './app.component';
-import { ColorSchemeService } from './services/color-scheme.service';
+import { SettingsService } from './services/settings.service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
-  let mockColor: ColorSchemeService;
 
   beforeEach(() => {
-    mockColor = ({
-      setColorScheme: jest.fn(),
-      onColorSchemeChanged$: jest.fn()
-    } as unknown) as ColorSchemeService;
+    const mockSettings = ({
+      onSettingChanged$: jest.fn()
+    } as unknown) as SettingsService;
 
-    component = new AppComponent(mockColor);
+    component = new AppComponent(mockSettings);
   });
 
   it('should create', () => {

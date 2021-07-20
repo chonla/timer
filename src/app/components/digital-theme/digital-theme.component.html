@@ -1,1 +1,4 @@
-<div class="ticks-panel">{{ ticks }}/{{ totalTicks }}</div>
+<div class="ticks-panel" [ngClass]="{'dark': darkMode}">
+    <div class="ticks-left">{{ ticks | toTime }}</div>
+</div>
+{{ ticks }}/{{ totalTicks }}

@@ -8,6 +8,7 @@ import { ITheme } from '../../interfaces/themes.interface';
 import { ISound } from '../../interfaces/sound.interface';
 import { AvailableSounds, DefaultSound } from '../../constants/sounds';
 import { SettingsService } from 'src/app/services/settings.service';
+import { ISettings } from 'src/app/interfaces/setting.interface';
 
 @Component({
   selector: 'app-controller',
@@ -39,10 +40,20 @@ export class ControllerComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(state => {
         this.state = state;
-      })
+      });
+
+    this.settings.onSettingChanged$()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((settings: ISettings) => {
+        this.darkMode = settings.darkMode;
+        this.useSound = settings.useSound;
+        this.selectedSound = settings.selectedSound;
+        this.selectedTheme = settings.selectedTheme;
+      });
   }
 
   ngOnInit(): void {
+    this.settings.load();
   }
 
   public soundToggled(checked: boolean): void {

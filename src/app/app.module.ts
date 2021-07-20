@@ -10,6 +10,7 @@ import { PresetButtonComponent } from './components/preset-button/preset-button.
 import { DeveloperThemeComponent } from './components/developer-theme/developer-theme.component';
 import { ReadableStatePipe } from './pipes/readable-state.pipe';
 import { DigitalThemeComponent } from './components/digital-theme/digital-theme.component';
+import { ToTimePipe } from './pipes/to-time.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DigitalThemeComponent } from './components/digital-theme/digital-theme.
     PresetButtonComponent,
     DeveloperThemeComponent,
     ReadableStatePipe,
-    DigitalThemeComponent
+    DigitalThemeComponent,
+    ToTimePipe
   ],
   imports: [
     BrowserModule,

@@ -12,24 +12,22 @@ import { SettingsService } from './services/settings.service';
 })
 export class AppComponent implements OnInit {
   public selectedTheme: string;
-  public colorScheme: string;
+  public darkMode: boolean;
   private destroy$: ReplaySubject<boolean>;
 
   constructor(private settings: SettingsService) {
     this.selectedTheme = DefaultTheme;
-    this.colorScheme = '';
+    this.darkMode = false;
     this.destroy$ = new ReplaySubject(1);
-  }
 
-  public ngOnInit(): void {
     this.settings.onSettingChanged$()
       .pipe(takeUntil(this.destroy$))
       .subscribe((settings: ISettings) => {
-        this.colorScheme = settings.darkMode ? 'dark' : 'default';
+        this.darkMode = settings.darkMode;
+        this.selectedTheme = settings.selectedTheme;
       });
   }
 
-  public themeChanged(theme: string): void {
-    this.selectedTheme = theme;
+  public ngOnInit(): void {
   }
 }

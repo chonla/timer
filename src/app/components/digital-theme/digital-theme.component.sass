@@ -1,5 +1,46 @@
 @import url('http://fonts.cdnfonts.com/css/digit')
+@import '../../../assets/sass/_colors'
+
+$digit-size: 15rem
+$placeholder-color: $light-gray-4
+$digit-color: $dark-green
+$placeholder-color--dark: $dark-gray-2
+$digit-color--dark: $light-green
 
 .ticks-panel
-    font-family: "Digit"
-    font-size: 6rem
+    position: relative
+    margin-left: auto
+    margin-right: auto
+    width: 100%
+
+    &::before
+        font-family: "Digit"
+        font-size: $digit-size
+        font-size-adjust: 1
+        line-height: $digit-size
+        content: "88:88"
+        color: $placeholder-color
+        position: absolute
+        left: 0
+        top: calc((100vh - #{$digit-size}) * 0.4)
+        width: 100%
+        text-align: center
+
+    .ticks-left
+        font-family: "Digit"
+        font-size: $digit-size
+        font-size-adjust: 1
+        line-height: $digit-size
+        position: absolute
+        left: 0
+        top: calc((100vh - #{$digit-size}) * 0.4)
+        color: $digit-color
+        width: 100%
+        text-align: center
+        text-shadow: 0 0 3px $digit-color, 0 0 6px $lighten-6, 0 0 10px $lighten-5
+
+    &.dark
+        &::before
+            color: $placeholder-color--dark
+        .ticks-left
+            color: $digit-color--dark
