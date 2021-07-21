@@ -6,10 +6,14 @@ const AvailableThemes: ITheme[] = [
         'label': 'Digital Life'
     },
     {
+        'key': 'google',
+        'label': 'Google\'s Style'
+    },
+    {
         'key': 'developer',
         'label': 'Developer Mode'
     },
 ];
-const DefaultTheme = 'developer';
+const DefaultTheme = 'digital';
 
 export { AvailableThemes, DefaultTheme }

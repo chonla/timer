@@ -3,6 +3,6 @@ interface ISettings {
     useSound: boolean
     selectedSound: string
     selectedTheme: string
-}
+};
 
 export { ISettings }

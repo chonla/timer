@@ -11,6 +11,7 @@ import { DeveloperThemeComponent } from './components/developer-theme/developer-
 import { ReadableStatePipe } from './pipes/readable-state.pipe';
 import { DigitalThemeComponent } from './components/digital-theme/digital-theme.component';
 import { ToTimePipe } from './pipes/to-time.pipe';
+import { GoogleThemeComponent } from './components/google-theme/google-theme.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ToTimePipe } from './pipes/to-time.pipe';
     DeveloperThemeComponent,
     ReadableStatePipe,
     DigitalThemeComponent,
-    ToTimePipe
+    ToTimePipe,
+    GoogleThemeComponent
   ],
   imports: [
     BrowserModule,

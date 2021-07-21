@@ -1,5 +1,4 @@
-import { Input } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import { Input, Component, OnInit } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TimerState } from '../../enums/timer-state.enum';
@@ -28,7 +27,7 @@ export class TimerComponent implements OnInit {
     this.destroy$ = new ReplaySubject(1);
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.timer.onTicksChanged$()
       .pipe(takeUntil(this.destroy$))
       .subscribe(ticks => {

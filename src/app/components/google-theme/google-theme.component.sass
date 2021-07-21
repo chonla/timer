@@ -1,0 +1,35 @@
+@import '../../../assets/sass/_colors'
+
+$watch-face-size: 32rem
+$placeholder-color: $darken-6
+$placeholder-color--dark-mode: $lighten-6
+$progress-color: $light-green
+$progress-color--dark-mode: $dark-green
+
+.ticks-panel
+    position: relative
+    width: 100%
+    display: flex
+    justify-content: center
+
+    svg
+        width: $watch-face-size
+        height: $watch-face-size
+        position: absolute
+        top: calc((100vh - #{$watch-face-size}) * 0.4)
+
+        .progress-placeholder
+            stroke: $placeholder-color
+            stroke-width: 1px
+            fill: none
+        .progress
+            stroke: $progress-color
+            stroke-width: 1px
+            fill: none
+
+    &.dark
+        svg
+            .progress-placeholder
+                stroke: $placeholder-color--dark-mode
+            .progress
+                stroke: $progress-color--dark-mode

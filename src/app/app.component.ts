@@ -13,21 +13,25 @@ import { SettingsService } from './services/settings.service';
 export class AppComponent implements OnInit {
   public selectedTheme: string;
   public darkMode: boolean;
+  public loaded: boolean;
   private destroy$: ReplaySubject<boolean>;
 
   constructor(private settings: SettingsService) {
     this.selectedTheme = DefaultTheme;
     this.darkMode = false;
     this.destroy$ = new ReplaySubject(1);
+    this.loaded = false;
+  }
 
+  public ngOnInit(): void {
     this.settings.onSettingChanged$()
       .pipe(takeUntil(this.destroy$))
       .subscribe((settings: ISettings) => {
         this.darkMode = settings.darkMode;
         this.selectedTheme = settings.selectedTheme;
+        this.loaded = true;
       });
-  }
 
-  public ngOnInit(): void {
+    this.settings.load();
   }
 }

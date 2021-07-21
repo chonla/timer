@@ -35,7 +35,9 @@ export class ControllerComponent implements OnInit {
     this.darkMode = false;
     this.state = TimerState.UNINITIALIZED;
     this.settingClosed = true;
+  }
 
+  public ngOnInit(): void {
     this.timer.onStateChange$()
       .pipe(takeUntil(this.destroy$))
       .subscribe(state => {
@@ -50,10 +52,6 @@ export class ControllerComponent implements OnInit {
         this.selectedSound = settings.selectedSound;
         this.selectedTheme = settings.selectedTheme;
       });
-  }
-
-  ngOnInit(): void {
-    this.settings.load();
   }
 
   public soundToggled(checked: boolean): void {
@@ -79,6 +77,7 @@ export class ControllerComponent implements OnInit {
 
   public start(): void {
     this.timer.start();
+    this.closeSettings();
   }
 
   public pause(): void {
