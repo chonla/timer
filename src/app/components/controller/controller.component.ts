@@ -7,8 +7,8 @@ import { TimerService } from '../../services/timer.service';
 import { ITheme } from '../../interfaces/themes.interface';
 import { ISound } from '../../interfaces/sound.interface';
 import { AvailableSounds, DefaultSound } from '../../constants/sounds';
-import { SettingsService } from 'src/app/services/settings.service';
-import { ISettings } from 'src/app/interfaces/setting.interface';
+import { SettingsService } from '../../services/settings.service';
+import { ISettings } from '../../interfaces/setting.interface';
 
 @Component({
   selector: 'app-controller',
@@ -34,7 +34,7 @@ export class ControllerComponent implements OnInit {
     this.useSound = true;
     this.darkMode = false;
     this.state = TimerState.UNINITIALIZED;
-    this.settingClosed = false;
+    this.settingClosed = true;
 
     this.timer.onStateChange$()
       .pipe(takeUntil(this.destroy$))

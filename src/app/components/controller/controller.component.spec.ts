@@ -1,5 +1,5 @@
 import { of } from 'rxjs';
-import { ColorSchemeService } from '../../services/color-scheme.service';
+import { SettingsService } from '../../services/settings.service';
 import { TimerState } from '../../enums/timer-state.enum';
 import { TimerService } from '../../services/timer.service';
 import { ControllerComponent } from './controller.component';
@@ -7,7 +7,7 @@ import { ControllerComponent } from './controller.component';
 describe('ControllerComponent', () => {
   let component: ControllerComponent;
   let mockTimer: TimerService;
-  let mockColor: ColorSchemeService;
+  let mockSettings: SettingsService;
 
   beforeEach(() => {
     mockTimer = ({
@@ -18,10 +18,16 @@ describe('ControllerComponent', () => {
       setTicks: jest.fn(),
       onStateChange$: jest.fn().mockReturnValue(of(TimerState.UNINITIALIZED)),
     } as unknown) as TimerService;
-    mockColor = ({
-      setColorScheme: jest.fn()
-    } as unknown) as ColorSchemeService;
-    component = new ControllerComponent(mockTimer, mockColor);
+    mockSettings = ({
+      update: jest.fn(),
+      onSettingChanged$: jest.fn().mockReturnValue(of({
+        useSound: true,
+        darkMode: false,
+        selectedSound: '',
+        selectedTheme: ''
+      }))
+    } as unknown) as SettingsService;
+    component = new ControllerComponent(mockTimer, mockSettings);
   });
 
   it('should create', () => {
@@ -69,13 +75,13 @@ describe('ControllerComponent', () => {
       it('should change color scheme to dark mode when dark mode is selected', () => {
         component.darkModeToggled(true);
 
-        expect(mockColor.setColorScheme).toBeCalledWith('dark');
+        expect(mockSettings.update).toBeCalledWith('darkMode', true);
       });
 
       it('should change color scheme to dark mode when dark mode is deselected', () => {
         component.darkModeToggled(false);
 
-        expect(mockColor.setColorScheme).toBeCalledWith('default');
+        expect(mockSettings.update).toBeCalledWith('darkMode', false);
       });
     });
   });
