@@ -6,6 +6,8 @@ $placeholder-color: $darken-6
 $digit-color: $light-green
 $placeholder-color--dark-mode: $lighten-6
 $digit-color--dark-mode: $dark-green
+$digit-color--hilighted: $light-pink
+$digit-color--hilighted--dark-mode: $dark-pink
 
 .ticks-panel
     position: relative
@@ -40,8 +42,18 @@ $digit-color--dark-mode: $dark-green
         text-shadow: 0 0 0.3rem $digit-color, 0 0 0.5rem $lighten-4
         pointer-events: none
 
+    &.attention-required
+        .ticks-left
+            color: $digit-color--hilighted
+            text-shadow: 0 0 0.3rem $digit-color--hilighted, 0 0 0.5rem $lighten-4
+
     &.dark
         &::before
             color: $placeholder-color--dark-mode
         .ticks-left
             color: $digit-color--dark-mode
+
+        &.attention-required
+            .ticks-left
+                color: $digit-color--hilighted--dark-mode
+                text-shadow: 0 0 0.3rem $digit-color--hilighted--dark-mode, 0 0 0.5rem $lighten-4

@@ -2,8 +2,8 @@ import { Input, Component, OnInit } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TimerState } from '../../enums/timer-state.enum';
-import { DefaultTheme } from '../../constants/themes';
 import { TimerService } from '../../services/timer.service';
+import { configurations } from '../../constants/configurations';
 
 @Component({
   selector: 'app-timer',
@@ -17,6 +17,7 @@ export class TimerComponent implements OnInit {
   public totalTicks: number;
   public ticks: number;
   public state: TimerState;
+  public attentionRequired: boolean;
 
   private destroy$: ReplaySubject<boolean>;
 
@@ -24,6 +25,7 @@ export class TimerComponent implements OnInit {
     this.totalTicks = 0;
     this.ticks = 0;
     this.state = TimerState.UNINITIALIZED;
+    this.attentionRequired = false;
     this.destroy$ = new ReplaySubject(1);
   }
 
@@ -33,12 +35,16 @@ export class TimerComponent implements OnInit {
       .subscribe(ticks => {
         this.ticks = ticks;
         this.totalTicks = this.timer.getTicks();
+        if (this.ticks <= configurations.attentionRequiredAt) {
+          this.attentionRequired = true;
+        }
       });
 
     this.timer.onStateChange$()
       .pipe(takeUntil(this.destroy$))
       .subscribe(state => {
         this.state = state;
+        this.attentionRequired = false;
       });
   }
 

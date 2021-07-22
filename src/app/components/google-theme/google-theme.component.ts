@@ -12,6 +12,7 @@ export class GoogleThemeComponent implements OnInit, OnChanges {
   @Input() totalTicks: number = 0;
   @Input() state: TimerState = TimerState.UNINITIALIZED;
   @Input() darkMode: boolean = false;
+  @Input() attentionRequired: boolean = false;
 
   public arc: string;
 
@@ -31,7 +32,7 @@ export class GoogleThemeComponent implements OnInit, OnChanges {
 
   public renderTicks(): void {
     const context = d3.path();
-    let portion = (this.ticks % 60 / 60);
+    let portion = this.ticks / this.totalTicks;
     if (portion === 0.0 && this.ticks > 0) {
       portion = 1.0;
     }

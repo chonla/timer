@@ -11,6 +11,7 @@ export class DigitalThemeComponent implements OnInit {
   @Input() totalTicks: number = 0;
   @Input() state: TimerState = TimerState.UNINITIALIZED;
   @Input() darkMode: boolean = false;
+  @Input() attentionRequired: boolean = false;
 
   constructor() { }
 
