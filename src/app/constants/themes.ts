@@ -7,13 +7,12 @@ const AvailableThemes: ITheme[] = [
     },
     {
         'key': 'google',
-        'label': 'Google\'s Style'
+        'label': 'Minimalist'
     },
     {
         'key': 'developer',
-        'label': 'Developer Mode'
+        'label': 'Developer'
     },
 ];
-const DefaultTheme = 'digital';
 
-export { AvailableThemes, DefaultTheme }
+export { AvailableThemes }

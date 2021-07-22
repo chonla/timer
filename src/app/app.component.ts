@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { DefaultTheme } from './constants/themes';
+import { configurations } from './constants/configurations';
 import { ISettings } from './interfaces/setting.interface';
 import { SettingsService } from './services/settings.service';
 
@@ -17,8 +17,8 @@ export class AppComponent implements OnInit {
   private destroy$: ReplaySubject<boolean>;
 
   constructor(private settings: SettingsService) {
-    this.selectedTheme = DefaultTheme;
-    this.darkMode = false;
+    this.selectedTheme = configurations.defaultTheme;
+    this.darkMode = configurations.defaultDarkMode;
     this.destroy$ = new ReplaySubject(1);
     this.loaded = false;
   }

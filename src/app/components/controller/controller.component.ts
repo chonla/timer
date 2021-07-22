@@ -1,14 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AvailableThemes, DefaultTheme } from '../../constants/themes';
+import { AvailableThemes } from '../../constants/themes';
 import { TimerState } from '../../enums/timer-state.enum';
 import { TimerService } from '../../services/timer.service';
 import { ITheme } from '../../interfaces/themes.interface';
 import { ISound } from '../../interfaces/sound.interface';
-import { AvailableSounds, DefaultSound } from '../../constants/sounds';
+import { AvailableSounds } from '../../constants/sounds';
 import { SettingsService } from '../../services/settings.service';
 import { ISettings } from '../../interfaces/setting.interface';
+import { configurations } from '../../constants/configurations';
 
 @Component({
   selector: 'app-controller',
@@ -20,8 +21,8 @@ export class ControllerComponent implements OnInit {
 
   public themes: ITheme[] = AvailableThemes;
   public sounds: ISound[] = AvailableSounds;
-  public selectedTheme: string = DefaultTheme;
-  public selectedSound: string = DefaultSound;
+  public selectedTheme: string;
+  public selectedSound: string;
   public useSound: boolean;
   public state: TimerState;
   public darkMode: boolean;
@@ -31,8 +32,10 @@ export class ControllerComponent implements OnInit {
 
   constructor(private timer: TimerService, private settings: SettingsService) {
     this.destroy$ = new ReplaySubject(1);
-    this.useSound = true;
-    this.darkMode = false;
+    this.useSound = configurations.defaultUseSound;
+    this.darkMode = configurations.defaultDarkMode;
+    this.selectedTheme = configurations.defaultTheme;
+    this.selectedSound = configurations.defaultSound;
     this.state = TimerState.UNINITIALIZED;
     this.settingClosed = true;
   }

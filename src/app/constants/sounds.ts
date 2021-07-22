@@ -12,6 +12,5 @@ const AvailableSounds: ISound[] = [
         'url': ''
     },
 ];
-const DefaultSound = 'mario-greeting';
 
-export { AvailableSounds, DefaultSound }
+export { AvailableSounds }

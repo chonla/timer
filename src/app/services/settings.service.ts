@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import _ from 'lodash';
 import { Observable, Subject } from 'rxjs';
-import { DefaultSound } from '../constants/sounds';
-import { DefaultTheme } from '../constants/themes';
+import { configurations } from '../constants/configurations';
 import { ISettings } from '../interfaces/setting.interface';
 
 @Injectable({
@@ -15,10 +14,10 @@ export class SettingsService {
 
   constructor() {
     this._settings = {
-      useSound: true,
-      darkMode: false,
-      selectedSound: DefaultSound,
-      selectedTheme: DefaultTheme
+      useSound: configurations.defaultUseSound,
+      darkMode: configurations.defaultDarkMode,
+      selectedSound: configurations.defaultSound,
+      selectedTheme: configurations.defaultTheme
     };
     this._settingSource$ = new Subject();
   }
