@@ -23,9 +23,9 @@
     "@types/d3": "^7.0.0",
     "@types/lodash": "^4.14.171",
     "bulma": "^0.9.3",
-    "d3": "^7.0.0",
     "lodash": "^4.17.21",
     "rxjs": "~6.6.0",
+    "svg-arc": "^1.0.2",
     "tslib": "^2.2.0",
     "uuid": "^8.3.2",
     "zone.js": "~0.11.4"
@@ -57,7 +57,8 @@
     "globals": {
       "ts-jest": {
         "tsconfig": "<rootDir>/tsconfig.spec.json",
-        "stringifyContentPathRegex": "\\.html$"
+        "stringifyContentPathRegex": "\\.html$",
+        "allowJs": true
       }
     }
   }

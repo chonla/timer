@@ -1,22 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { SvgService } from 'src/app/services/svg.service';
 import { GoogleThemeComponent } from './google-theme.component';
 
 describe('GoogleThemeComponent', () => {
   let component: GoogleThemeComponent;
-  let fixture: ComponentFixture<GoogleThemeComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ GoogleThemeComponent ]
-    })
-    .compileComponents();
-  });
+  let mockSvg: SvgService = ({
+    circularArc: jest.fn()
+  } as unknown) as SvgService;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GoogleThemeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new GoogleThemeComponent(mockSvg);
   });
 
   it('should create', () => {

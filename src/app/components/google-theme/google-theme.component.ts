@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TimerState } from '../../enums/timer-state.enum';
-import { path as d3path } from 'd3';
+import { SvgService } from '../../services/svg.service';
 
 @Component({
   selector: 'app-google-theme',
@@ -18,7 +18,7 @@ export class GoogleThemeComponent implements OnInit, OnChanges {
 
   private readonly watchFaceRadiusSize: number = 49.5;
 
-  constructor() {
+  constructor(private svg: SvgService) {
     this.arc = 'M0,0';
   }
 
@@ -31,14 +31,13 @@ export class GoogleThemeComponent implements OnInit, OnChanges {
   }
 
   public renderTicks(): void {
-    const context = d3path();
     let portion = this.ticks / this.totalTicks;
     if (portion === 0.0 && this.ticks > 0) {
       portion = 1.0;
     }
-    context.arc(0, 0, this.watchFaceRadiusSize, 0, portion * 2 * Math.PI, false);
+    this.arc = this.svg.circularArc(0, 0, this.watchFaceRadiusSize, 0, portion * 2 * Math.PI, false);
 
-    this.arc = context.toString();
+    // this.arc = context.toString();
   }
 
 }
