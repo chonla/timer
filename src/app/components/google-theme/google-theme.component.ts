@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TimerState } from '../../enums/timer-state.enum';
-import * as d3 from 'd3';
+import { path as d3path } from 'd3';
 
 @Component({
   selector: 'app-google-theme',
@@ -31,7 +31,7 @@ export class GoogleThemeComponent implements OnInit, OnChanges {
   }
 
   public renderTicks(): void {
-    const context = d3.path();
+    const context = d3path();
     let portion = this.ticks / this.totalTicks;
     if (portion === 0.0 && this.ticks > 0) {
       portion = 1.0;
