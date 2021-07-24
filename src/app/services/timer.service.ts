@@ -87,14 +87,11 @@ export class TimerService {
   public resume(): void {
     if (this._state === TimerState.PAUSED) {
       this.setState(TimerState.RUNNING);
-
-      if (!this._interval$.closed) {
-        this._interval$.unsubscribe();
-      }
-
-      this._interval$ = interval(1000).pipe(take(this._ticksLeft)).subscribe(t => {
-        this.ticking();
-      });
+      this._interval$ = interval(1000)
+        .pipe(take(this._ticksLeft))
+        .subscribe(t => {
+          this.ticking();
+        });
     }
   }
 

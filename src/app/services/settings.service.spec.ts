@@ -1,49 +1,82 @@
+import { ISettings } from '../interfaces/setting.interface';
 import { SettingsService } from './settings.service';
 
 describe('SettingsService', () => {
   let service: SettingsService;
-  // let originalLocalStorage: Storage;
-  // let mockLocalStorage = {
-  //   getItem: jest.fn(),
-  //   setItem: jest.fn(),
-  //   removeItem: jest.fn(),
-  //   clear: jest.fn(),
-  //   key: jest.fn(),
-  //   length: 0
-  // };
 
   beforeEach(() => {
-    // originalLocalStorage = global.localStorage;
-    // global.localStorage = mockLocalStorage;
     localStorage.clear();
     jest.clearAllMocks();
-    
+
     service = new SettingsService();
   });
-
-  // afterEach(() => {
-  //   global.localStorage = originalLocalStorage;
-  // });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should save data to local storage', () => {
-    jest.spyOn(localStorage, 'setItem');
+  describe('Auto-save settings', () => {
+    it('should save data to local storage when update darkMode setting', () => {
+      jest.spyOn(localStorage, 'setItem');
 
-    service.update('darkMode', true);
+      service.update('darkMode', true);
 
-    expect(localStorage.setItem).toBeCalledTimes(1);
-    expect(localStorage.setItem).toBeCalledWith('bayo.timer', expect.any(String));
+      expect(localStorage.setItem).toBeCalledTimes(1);
+      expect(localStorage.setItem).toBeCalledWith('bayo.timer', expect.any(String));
+    });
+
+    it('should save data to local storage when update useSound setting', () => {
+      jest.spyOn(localStorage, 'setItem');
+
+      service.update('useSound', true);
+
+      expect(localStorage.setItem).toBeCalledTimes(1);
+      expect(localStorage.setItem).toBeCalledWith('bayo.timer', expect.any(String));
+    });
+
+    it('should save data to local storage when update selectedTheme setting', () => {
+      jest.spyOn(localStorage, 'setItem');
+
+      service.update('selectedTheme', 'some-theme');
+
+      expect(localStorage.setItem).toBeCalledTimes(1);
+      expect(localStorage.setItem).toBeCalledWith('bayo.timer', expect.any(String));
+    });
+
+    it('should save data to local storage when update selectedSound setting', () => {
+      jest.spyOn(localStorage, 'setItem');
+
+      service.update('selectedSound', 'some-sound');
+
+      expect(localStorage.setItem).toBeCalledTimes(1);
+      expect(localStorage.setItem).toBeCalledWith('bayo.timer', expect.any(String));
+    });
   });
 
-  it('should load data to local storage', () => {
-    jest.spyOn(localStorage, 'getItem');
+  describe('Load data from storage', () => {
+    it('should load data to local storage', () => {
+      jest.spyOn(localStorage, 'getItem');
 
-    service.load();
+      service.load();
 
-    expect(localStorage.getItem).toBeCalledTimes(1);
-    expect(localStorage.getItem).toBeCalledWith('bayo.timer');
+      expect(localStorage.getItem).toBeCalledTimes(1);
+      expect(localStorage.getItem).toBeCalledWith('bayo.timer');
+    });
+
+    it('should set settings to data loaded from storage', (done) => {
+      const expectedSettings = { darkMode: false, useSound: false, selectedSound: "aa", selectedTheme: "bb" };
+
+      jest.spyOn(localStorage, 'getItem').mockReturnValue(JSON.stringify(expectedSettings));
+      jest.spyOn(service._settingSource$, 'next');
+      
+      service.onSettingChange$().subscribe((settings: ISettings) => {
+        expect(service._settingSource$.next).toBeCalledWith(expectedSettings);
+        expect(settings).toEqual(expectedSettings);
+        
+       done();
+      });
+      
+      service.load();
+    });
   });
 });
