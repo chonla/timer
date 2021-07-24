@@ -20,13 +20,10 @@
     "@angular/platform-browser": "~12.1.1",
     "@angular/platform-browser-dynamic": "~12.1.1",
     "@angular/router": "~12.1.1",
-    "@types/d3": "^7.0.0",
     "@types/lodash": "^4.14.171",
     "bulma": "^0.9.3",
-    "howler": "^2.2.3",
     "lodash": "^4.17.21",
     "rxjs": "~6.6.0",
-    "svg-arc": "^1.0.2",
     "tslib": "^2.2.0",
     "uuid": "^8.3.2",
     "zone.js": "~0.11.4"
@@ -35,14 +32,12 @@
     "@angular-devkit/build-angular": "~12.1.1",
     "@angular/cli": "~12.1.1",
     "@angular/compiler-cli": "~12.1.1",
-    "@types/howler": "^2.2.3",
     "@types/jest": "^26.0.24",
     "@types/node": "^12.11.1",
     "@types/uuid": "^8.3.1",
     "jest": "^27.0.6",
     "jest-localstorage-mock": "^2.4.14",
     "jest-preset-angular": "^9.0.4",
-    "karma-coverage": "~2.0.3",
     "typescript": "~4.3.2"
   },
   "jest": {

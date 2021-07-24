@@ -56,7 +56,7 @@ export class SettingsService {
     return _.cloneDeep(this._settings);
   }
 
-  public onSettingChanged$(): Observable<ISettings> {
+  public onSettingChange$(): Observable<ISettings> {
     return this._settingSource$.asObservable();
   }
 

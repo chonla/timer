@@ -17,7 +17,7 @@ import { configurations } from '../../constants/configurations';
   styleUrls: ['./controller.component.sass']
 })
 export class ControllerComponent implements OnInit {
-  @Output('themeChanged') onThemeChanged: EventEmitter<string> = new EventEmitter<string>();
+  @Output('themeChange') onThemeChange: EventEmitter<string> = new EventEmitter<string>();
 
   public themes: ITheme[] = AvailableThemes;
   public sounds: ISound[] = AvailableSounds;
@@ -47,7 +47,7 @@ export class ControllerComponent implements OnInit {
         this.state = state;
       });
 
-    this.settings.onSettingChanged$()
+    this.settings.onSettingChange$()
       .pipe(takeUntil(this.destroy$))
       .subscribe((settings: ISettings) => {
         this.darkMode = settings.darkMode;
@@ -69,13 +69,13 @@ export class ControllerComponent implements OnInit {
     this.settings.update('darkMode', checked);
   }
 
-  public themeChanged($event: Event): void {
+  public themeChange($event: Event): void {
     const theme: string = ($event.target as HTMLSelectElement).value;
-    this.onThemeChanged.emit(theme);
+    this.onThemeChange.emit(theme);
     this.settings.update('selectedTheme', theme);
   }
 
-  public soundChanged($event: Event): void {
+  public soundChange($event: Event): void {
     const theme: string = ($event.target as HTMLSelectElement).value;
     this.settings.update('selectedSound', theme);
   }

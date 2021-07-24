@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.settings.onSettingChanged$()
+    this.settings.onSettingChange$()
       .pipe(takeUntil(this.destroy$))
       .subscribe((settings: ISettings) => {
         this.darkMode = settings.darkMode;
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
 
     this.settings.load();
 
-    this.timer.onTicksChanged$()
+    this.timer.onTicksChange$()
       .pipe(takeUntil(this.destroy$))
       .subscribe(ticks => {
         if (ticks === 0) {

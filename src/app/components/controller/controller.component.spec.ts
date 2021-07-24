@@ -20,7 +20,7 @@ describe('ControllerComponent', () => {
     } as unknown) as TimerService;
     mockSettings = ({
       update: jest.fn(),
-      onSettingChanged$: jest.fn().mockReturnValue(of({
+      onSettingChange$: jest.fn().mockReturnValue(of({
         useSound: true,
         darkMode: false,
         selectedSound: '',
@@ -62,12 +62,12 @@ describe('ControllerComponent', () => {
           target: target
         } as unknown) as Event;
 
-        component.onThemeChanged.subscribe(theme => {
+        component.onThemeChange.subscribe(theme => {
           expect(theme).toEqual('test-theme');
           done();
         });
 
-        component.themeChanged(event);
+        component.themeChange(event);
       });
     });
 

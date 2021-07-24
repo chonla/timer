@@ -30,7 +30,7 @@ export class TimerComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.timer.onTicksChanged$()
+    this.timer.onTicksChange$()
       .pipe(takeUntil(this.destroy$))
       .subscribe(ticks => {
         this.ticks = ticks;
@@ -44,7 +44,6 @@ export class TimerComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(state => {
         this.state = state;
-        this.attentionRequired = false;
       });
   }
 

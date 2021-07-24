@@ -1,5 +1,6 @@
 import { ITheme } from '../interfaces/themes.interface';
 
+// Available themes in alphabetical order
 const AvailableThemes: ITheme[] = [
     {
         'key': 'digital',
@@ -9,10 +10,10 @@ const AvailableThemes: ITheme[] = [
         'key': 'google',
         'label': 'Minimalist'
     },
-    {
-        'key': 'developer',
-        'label': 'Developer'
-    },
+    // {
+    //     'key': 'developer',
+    //     'label': 'Developer'
+    // },
 ];
 
 export { AvailableThemes }

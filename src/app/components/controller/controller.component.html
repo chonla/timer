@@ -21,7 +21,7 @@
         <div class="settings-panel__list-item-label">Time's Up sound</div>
         <div class="settings-panel__list-item-value">
           <div class="select form__select is-small pull-left" [ngClass]="{'form__select--disabled': !useSound}">
-            <select [disabled]="!useSound" [(ngModel)]="selectedSound" (change)="soundChanged($event)">
+            <select [disabled]="!useSound" [(ngModel)]="selectedSound" (change)="soundChange($event)">
               <option *ngFor="let sound of sounds" [value]="sound.key">{{ sound.label }}</option>
             </select>
           </div>
@@ -31,7 +31,7 @@
         <div class="settings-panel__list-item-label">Theme</div>
         <div class="settings-panel__list-item-value">
           <div class="select form__select is-small pull-left">
-            <select (change)="themeChanged($event)" [(ngModel)]="selectedTheme">
+            <select (change)="themeChange($event)" [(ngModel)]="selectedTheme">
               <option *ngFor="let theme of themes" [value]="theme.key">{{ theme.label }}</option>
             </select>
           </div>
