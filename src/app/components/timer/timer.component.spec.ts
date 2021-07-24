@@ -55,29 +55,40 @@ describe('TimerComponent', () => {
     expect(component.totalTicks).toEqual(400);
   });
 
-  it('should set user attention flag to true if ticks left is equal to attentionRequiredAt constant', () => {
-    mockTimer.onTicksChange$ = jest.fn().mockReturnValue(of(configurations.attentionRequiredAt))
-
-    component.ngOnInit();
-
-    expect(component.attentionRequired).toEqual(true);
+  describe('Time is almost running out', () => {    
+    it('should set user attention flag to true if ticks left is equal to attentionRequiredAt constant', () => {
+      mockTimer.onTicksChange$ = jest.fn().mockReturnValue(of(configurations.attentionRequiredAt))
+  
+      component.ngOnInit();
+  
+      expect(component.attentionRequired).toEqual(true);
+    });
+  
+  
+    it('should set user attention flag to true if ticks left is less than attentionRequiredAt constant', () => {
+      mockTimer.onTicksChange$ = jest.fn().mockReturnValue(of(configurations.attentionRequiredAt - 1));
+  
+      component.ngOnInit();
+  
+      expect(component.attentionRequired).toEqual(true);
+    });
+  
+    it('should set user attention flag to false if ticks left is greater than attentionRequiredAt constant', () => {
+      mockTimer.onTicksChange$ = jest.fn().mockReturnValue(of(configurations.attentionRequiredAt + 1));
+  
+      component.ngOnInit();
+  
+      expect(component.attentionRequired).toEqual(false);
+    });
   });
 
+  describe('Timer state is changed', () => {
+    it('should update component state when timer state changes', () => {
+      mockTimer.onStateChange$ = jest.fn().mockReturnValue(of(TimerState.PAUSED));
 
+      component.ngOnInit();
 
-  it('should set user attention flag to true if ticks left is less than attentionRequiredAt constant', () => {
-    mockTimer.onTicksChange$ = jest.fn().mockReturnValue(of(configurations.attentionRequiredAt - 1));
-
-    component.ngOnInit();
-
-    expect(component.attentionRequired).toEqual(true);
-  });
-
-  it('should set user attention flag to false if ticks left is greater than attentionRequiredAt constant', () => {
-    mockTimer.onTicksChange$ = jest.fn().mockReturnValue(of(configurations.attentionRequiredAt + 1));
-
-    component.ngOnInit();
-
-    expect(component.attentionRequired).toEqual(false);
+      expect(component.state).toEqual(TimerState.PAUSED);
+    });
   });
 });

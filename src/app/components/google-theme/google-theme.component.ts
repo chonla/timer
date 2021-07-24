@@ -36,8 +36,6 @@ export class GoogleThemeComponent implements OnInit, OnChanges {
       portion = 1.0;
     }
     this.arc = this.svg.circularArc(0, 0, this.watchFaceRadiusSize, 0, portion * 2 * Math.PI, false);
-
-    // this.arc = context.toString();
   }
 
 }

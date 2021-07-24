@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { HumanReadableStates } from '../constants/states';
 import { TimerState } from '../enums/timer-state.enum';
 
 @Pipe({
@@ -7,13 +8,10 @@ import { TimerState } from '../enums/timer-state.enum';
 export class ReadableStatePipe implements PipeTransform {
 
   transform(state: TimerState): string {
-    const readableStates = {
-      0: 'Uninitialized',
-      1: 'Idle',
-      2: 'Running',
-      3: 'Paused'
+    if (state in TimerState) {
+      return HumanReadableStates[state];
     }
-    return readableStates[state];
+    return 'Unknown';
   }
 
 }
