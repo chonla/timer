@@ -148,8 +148,30 @@ describe('TimerService', () => {
       service.setTicks(3);
       service.start();
 
-      jest.advanceTimersByTime(3500);
+      jest.advanceTimersByTime(3100);
       expect(tickCounter).toHaveBeenCalledTimes(5); // 3 for ticking, 1 for initializing on start, 1 for constructor
+    });
+
+    it('should trigger timer changes 5 times when set ticks to 5 and start timer and after 3 ticks then pause and resume for 2 more ticks then timer should stop', (done) => {
+      const tickCounter = jest.fn();
+
+      jest.useFakeTimers();
+
+      service.onTicksChange$().subscribe((ticks) => {
+        tickCounter();
+        if (ticks === 0) {
+          done();
+        }
+      });
+
+      service.setTicks(5);
+      service.start();
+      jest.advanceTimersByTime(3000);
+      service.pause();
+      service.resume();
+      jest.advanceTimersByTime(2100);
+
+      expect(tickCounter).toHaveBeenCalledTimes(7); // 5 for ticking, 1 for initializing on start, 1 for constructor
     });
   });
 });
