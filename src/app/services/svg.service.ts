@@ -33,7 +33,9 @@ export class SvgService {
     let d = "";
 
     // Is the radius negative? Error.
-    if (radius < 0) throw new Error("negative radius: " + radius);
+    if (radius < 0) {
+      throw new Error("negative radius: " + radius);
+    }
 
     d += `M${x0},${y0}`;
 
