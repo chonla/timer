@@ -56,7 +56,7 @@ export class ControllerComponent implements OnInit {
         this.selectedTheme = settings.selectedTheme;
       });
 
-      this.settings.load();
+    this.settings.load();
   }
 
   public soundToggled(checked: boolean): void {

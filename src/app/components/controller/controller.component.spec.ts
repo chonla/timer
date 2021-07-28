@@ -19,6 +19,7 @@ describe('ControllerComponent', () => {
       onStateChange$: jest.fn().mockReturnValue(of(TimerState.UNINITIALIZED)),
     } as unknown) as TimerService;
     mockSettings = ({
+      load: jest.fn(),
       update: jest.fn(),
       onSettingChange$: jest.fn().mockReturnValue(of({
         useSound: true,
@@ -34,7 +35,39 @@ describe('ControllerComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  describe('Subscription', () => {
+    it('should change state when timer state changes', () => {
+      mockTimer.onStateChange$ = jest.fn().mockReturnValue(of(TimerState.PAUSED));
+
+      component.ngOnInit();
+
+      expect(component.state).toEqual(TimerState.PAUSED);
+    });
+
+    it('should update setting when setting changes', () => {
+      mockSettings.onSettingChange$ = jest.fn().mockReturnValue(of({
+        useSound: false,
+        darkMode: true,
+        selectedSound: 'test1',
+        selectedTheme: 'test2',
+      }));
+
+      component.ngOnInit();
+
+      expect(component.darkMode).toEqual(true);
+      expect(component.useSound).toEqual(false);
+      expect(component.selectedSound).toEqual('test1');
+      expect(component.selectedTheme).toEqual('test2');
+    });
+  });
+
   describe('Settings', () => {
+    it('should load settings when component init', () => {
+      component.ngOnInit();
+
+      expect(mockSettings.load).toBeCalledTimes(1);
+    });
+
     describe('Sound Settings', () => {
       it('should turn off sound when toggle sound with false', () => {
         component.soundToggled(false);
