@@ -76,7 +76,8 @@
     <div class="settings-panel__header">Custom Timers</div>
     <div class="settings__blank_container">
       <div class="form__buttons">
-        <div class="form__button--square" [ngClass]="{'disabled': shouldDisableTimeSetButton()}">
+        <div class="form__button--square" [ngClass]="{'disabled': shouldDisableTimeSetButton()}"
+          (click)="openCustomModal()">
           <div class="icon add-icon"></div>
         </div>
       </div>
@@ -104,6 +105,18 @@
       <div class="button" (click)="stop()" [ngClass]="{'disabled': shouldDisableStopButton()}">
         <div class="icon stop-icon"></div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" [ngClass]="{'is-active': !customModalClosed}">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="timer__time-input-panel">
+      <app-scrollable-digit [digits]=[0,1,2,3,4,5,6,7,8,9]></app-scrollable-digit>
+      <app-scrollable-digit [digits]=[0,1,2,3,4,5,6,7,8,9]></app-scrollable-digit>
+      <app-scrollable-digit [digits]=[0,1,2,3,4,5]></app-scrollable-digit>
+      <app-scrollable-digit [digits]=[0,1,2,3,4,5,6,7,8,9]></app-scrollable-digit>
     </div>
   </div>
 </div>

@@ -27,6 +27,7 @@ export class ControllerComponent implements OnInit {
   public state: TimerState;
   public darkMode: boolean;
   public settingClosed: boolean;
+  public customModalClosed: boolean;
 
   private destroy$: ReplaySubject<boolean>;
 
@@ -38,6 +39,7 @@ export class ControllerComponent implements OnInit {
     this.selectedSound = configurations.defaultSound;
     this.state = TimerState.UNINITIALIZED;
     this.settingClosed = true;
+    this.customModalClosed = true;
   }
 
   public ngOnInit(): void {
@@ -143,5 +145,13 @@ export class ControllerComponent implements OnInit {
 
   public closeSettings(): void {
     this.settingClosed = true;
+  }
+
+  public openCustomModal(): void {
+    this.customModalClosed = false;
+  }
+
+  public closeCustomModal(): void {
+    this.customModalClosed = true;
   }
 }

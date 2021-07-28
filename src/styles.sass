@@ -65,6 +65,8 @@ $setting-panel-close-button-color: $light-gray-0
 $setting-panel-open-button-color-light: $light-gray-2
 $setting-panel-close-button-color-light: $light-gray-0
 
+$timer-input-text-size: 5rem
+
 .timer
     &__app
         height: 100vh
@@ -137,6 +139,45 @@ $setting-panel-close-button-color-light: $light-gray-0
                     opacity: 1
                     right: calc(#{$app-padding} - #{$container-padding})
                     pointer-events: unset
+
+            &__time-input
+                &-panel
+                    font-family: $primary-font-family
+                    font-size: $timer-input-text-size
+                    line-height: $timer-input-text-size
+                    width: 40%
+                    height: calc(2rem * 2 + #{$timer-input-text-size})
+                    margin-left: auto
+                    margin-right: auto
+                    background-color: $tertiary-background-light
+                    padding: 2rem
+                    border-radius: $container-radius
+                    overflow: hidden
+                    display: flex
+                    flex-direction: row
+
+                    .digits
+                        display: flex
+                        flex-direction: column
+                        height: $timer-input-text-size
+                        overflow-y: scroll
+                        -ms-overflow-style: none
+                        scrollbar-width: none
+                        font-family: $primary-font-family
+                        font-size: $timer-input-text-size
+                        line-height: $timer-input-text-size
+                        scroll-snap-type: y mandatory
+
+                        &::-webkit-scrollbar
+                            display: none
+                        
+                        .digit
+                            scroll-snap-align: start
+                            justify-content: center
+                            text-align: center
+                            font-family: $primary-font-family
+                            font-size: $timer-input-text-size
+                            line-height: $timer-input-text-size
 
         .settings
 

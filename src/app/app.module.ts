@@ -12,6 +12,8 @@ import { ReadableStatePipe } from './pipes/readable-state.pipe';
 import { DigitalThemeComponent } from './components/digital-theme/digital-theme.component';
 import { ToTimePipe } from './pipes/to-time.pipe';
 import { GoogleThemeComponent } from './components/google-theme/google-theme.component';
+import { CustomTimeModalComponent } from './components/custom-time-modal/custom-time-modal.component';
+import { ScrollableDigitComponent } from './components/scrollable-digit/scrollable-digit.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { GoogleThemeComponent } from './components/google-theme/google-theme.com
     ReadableStatePipe,
     DigitalThemeComponent,
     ToTimePipe,
-    GoogleThemeComponent
+    GoogleThemeComponent,
+    CustomTimeModalComponent,
+    ScrollableDigitComponent
   ],
   imports: [
     BrowserModule,
