@@ -16,11 +16,13 @@ export class AppComponent implements OnInit {
   public selectedTheme: string;
   public darkMode: boolean;
   public loaded: boolean;
+  public useSound: boolean;
   private destroy$: ReplaySubject<boolean>;
 
   constructor(private settings: SettingsService, private timer: TimerService, private audio: AudioService) {
     this.selectedTheme = configurations.defaultTheme;
     this.darkMode = configurations.defaultDarkMode;
+    this.useSound = false;
     this.destroy$ = new ReplaySubject(1);
     this.loaded = false;
   }
@@ -31,7 +33,10 @@ export class AppComponent implements OnInit {
       .subscribe((settings: ISettings) => {
         this.darkMode = settings.darkMode;
         this.selectedTheme = settings.selectedTheme;
-        this.audio.load(settings.selectedSound);
+        this.useSound = settings.useSound;
+        if (this.useSound) {
+          this.audio.load(settings.selectedSound);
+        }
         this.loaded = true;
       });
 
@@ -40,7 +45,7 @@ export class AppComponent implements OnInit {
     this.timer.onTicksChange$()
       .pipe(takeUntil(this.destroy$))
       .subscribe(ticks => {
-        if (ticks === 0) {
+        if (ticks === 0 && this.useSound) {
           this.audio.play();
         }
       });

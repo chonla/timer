@@ -30,12 +30,18 @@ export class GoogleThemeComponent implements OnInit, OnChanges {
     this.renderTicks();
   }
 
-  public renderTicks(): void {
-    let portion = this.ticks / this.totalTicks;
-    if (portion === 0.0 && this.ticks > 0) {
-      portion = 1.0;
+  private renderTicks(): void {
+    let portion = 0.0;
+    
+    if (this.totalTicks > 0) {
+      portion = this.ticks / this.totalTicks;
     }
-    this.arc = this.svg.circularArc(0, 0, this.watchFaceRadiusSize, 0, portion * 2 * Math.PI, false);
+
+    if (portion > 0.0) {
+      this.arc = this.svg.circularArc(0, 0, this.watchFaceRadiusSize, 0, portion * 2 * Math.PI, false);
+    } else {
+      this.arc = 'M0,0';
+    }
   }
 
 }

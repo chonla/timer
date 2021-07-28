@@ -57,17 +57,56 @@ describe('AppComponent', () => {
 
   it('should play ending sound when tick is counted down to zero', () => {
     mockTimer.onTicksChange$ = jest.fn().mockReturnValue(of(0));
+    mockSettings.onSettingChange$ = jest.fn().mockReturnValue(of({
+      useSound: true,
+      darkMode: false,
+      selectedSound: '',
+      selectedTheme: ''
+    }));
 
     component.ngOnInit();
 
     expect(mockAudio.play).toBeCalledTimes(1);
   });
 
-  it('should not play ending sound when tick is not counted down to zero', () => {
-    mockTimer.onTicksChange$ = jest.fn().mockReturnValue(of(1));
+  it('should play ending sound when tick is counted down to zero', () => {
+    mockTimer.onTicksChange$ = jest.fn().mockReturnValue(of(0));
+    mockSettings.onSettingChange$ = jest.fn().mockReturnValue(of({
+      useSound: false,
+      darkMode: false,
+      selectedSound: '',
+      selectedTheme: ''
+    }));
 
     component.ngOnInit();
 
     expect(mockAudio.play).toBeCalledTimes(0);
   });
+
+  it('should not play ending sound when tick is not counted down to zero', () => {
+    mockTimer.onTicksChange$ = jest.fn().mockReturnValue(of(1));
+    mockSettings.onSettingChange$ = jest.fn().mockReturnValue(of({
+      useSound: true,
+      darkMode: false,
+      selectedSound: '',
+      selectedTheme: ''
+    }));
+
+    component.ngOnInit();
+
+    expect(mockAudio.play).toBeCalledTimes(0);
+  });
+
+  it('should play load sound when sound is used', () => {
+    mockSettings.onSettingChange$ = jest.fn().mockReturnValue(of({
+      useSound: true,
+      darkMode: false,
+      selectedSound: 'whaaa!',
+      selectedTheme: ''
+    }));
+
+    component.ngOnInit();
+
+    expect(mockAudio.load).toBeCalledWith('whaaa!');
+  });  
 });
