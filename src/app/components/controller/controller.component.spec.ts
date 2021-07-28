@@ -84,6 +84,19 @@ describe('ControllerComponent', () => {
       it('should turn on sound by default', () => {
         expect(component.useSound).toBe(true);
       });
+
+      it('should emit selected sound when sound changes', () => {
+        const target = ({
+          value: 'test-sound'
+        } as unknown) as HTMLSelectElement;
+        const event = ({
+          target: target
+        } as unknown) as Event;
+
+        component.soundChange(event);
+
+        expect(mockSettings.update).toBeCalledWith('selectedSound', 'test-sound');
+      });
     });
 
     describe('Theme Settings', () => {
@@ -101,6 +114,8 @@ describe('ControllerComponent', () => {
         });
 
         component.themeChange(event);
+
+        expect(mockSettings.update).toBeCalledWith('selectedTheme', 'test-theme');
       });
     });
 
@@ -115,6 +130,24 @@ describe('ControllerComponent', () => {
         component.darkModeToggled(false);
 
         expect(mockSettings.update).toBeCalledWith('darkMode', false);
+      });
+    });
+
+    describe('Settings Panel', () => {
+      it('should open setting panel', () => {
+        component.settingClosed = true;
+
+        component.openSettings();
+
+        expect(component.settingClosed).toBe(false);
+      });
+
+      it('should close setting panel', () => {
+        component.settingClosed = false;
+
+        component.closeSettings();
+
+        expect(component.settingClosed).toBe(true);
       });
     });
   });
