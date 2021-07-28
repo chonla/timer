@@ -44,9 +44,6 @@
     <div class="settings-panel__header">Time Presets</div>
     <div class="settings__blank_container">
       <div class="form__buttons">
-        <app-preset-button class="form__button--square" label="6s" (clicked)="setTime(6)"
-          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
-        </app-preset-button>
         <app-preset-button class="form__button--square" label="1m" (clicked)="setTime(60)"
           [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
         </app-preset-button>

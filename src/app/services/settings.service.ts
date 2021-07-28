@@ -52,6 +52,14 @@ export class SettingsService {
         this._settingSource$.next(this._settings);
       } catch (e) {
       }
+    } else {
+      this._settings = {
+        darkMode: configurations.defaultDarkMode,
+        useSound: configurations.defaultUseSound,
+        selectedSound: configurations.defaultSound,
+        selectedTheme: configurations.defaultTheme,
+      };
+      this._settingSource$.next(this._settings);
     }
     return _.cloneDeep(this._settings);
   }

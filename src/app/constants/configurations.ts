@@ -4,7 +4,7 @@ const configurations: IAppConfig = {
     attentionRequiredAt: 5,
     defaultDarkMode: false,
     defaultUseSound: true,
-    defaultTheme: 'digital',
+    defaultTheme: 'google',
     defaultSound: 'mario_game_over'
 }
 

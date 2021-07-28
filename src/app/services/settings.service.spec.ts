@@ -1,3 +1,4 @@
+import { configurations } from '../constants/configurations';
 import { ISettings } from '../interfaces/setting.interface';
 import { SettingsService } from './settings.service';
 
@@ -68,14 +69,35 @@ describe('SettingsService', () => {
 
       jest.spyOn(localStorage, 'getItem').mockReturnValue(JSON.stringify(expectedSettings));
       jest.spyOn(service._settingSource$, 'next');
-      
+
       service.onSettingChange$().subscribe((settings: ISettings) => {
         expect(service._settingSource$.next).toBeCalledWith(expectedSettings);
         expect(settings).toEqual(expectedSettings);
-        
-       done();
+
+        done();
       });
-      
+
+      service.load();
+    });
+
+    it('should set settings to default setting if no previous setting', (done) => {
+      const expectedSettings = {
+        darkMode: configurations.defaultDarkMode,
+        useSound: configurations.defaultUseSound,
+        selectedTheme: configurations.defaultTheme,
+        selectedSound: configurations.defaultSound
+      };
+
+      jest.spyOn(localStorage, 'getItem').mockReturnValue('');
+      jest.spyOn(service._settingSource$, 'next');
+
+      service.onSettingChange$().subscribe((settings: ISettings) => {
+        expect(service._settingSource$.next).toBeCalledWith(expectedSettings);
+        expect(settings).toEqual(expectedSettings);
+
+        done();
+      });
+
       service.load();
     });
   });
