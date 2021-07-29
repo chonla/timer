@@ -28,7 +28,8 @@
             "inlineStyleLanguage": "sass",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/google6ae9727ed5b96edb.html"
             ],
             "styles": [
               "src/styles.sass"
