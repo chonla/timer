@@ -26,6 +26,7 @@ export class ControllerComponent implements OnInit {
   public useSound: boolean;
   public state: TimerState;
   public darkMode: boolean;
+  public customTimers: number[];
   public settingClosed: boolean;
   public customModalClosed: boolean;
 
@@ -37,8 +38,9 @@ export class ControllerComponent implements OnInit {
     this.darkMode = configurations.defaultDarkMode;
     this.selectedTheme = configurations.defaultTheme;
     this.selectedSound = configurations.defaultSound;
+    this.customTimers = [];
     this.state = TimerState.UNINITIALIZED;
-    this.settingClosed = true;
+    this.settingClosed = false;
     this.customModalClosed = true;
   }
 
@@ -56,6 +58,7 @@ export class ControllerComponent implements OnInit {
         this.useSound = settings.useSound;
         this.selectedSound = settings.selectedSound;
         this.selectedTheme = settings.selectedTheme;
+        this.customTimers = settings.customTimers?settings.customTimers:[];
       });
 
     this.settings.load();
@@ -153,5 +156,19 @@ export class ControllerComponent implements OnInit {
 
   public closeCustomModal(): void {
     this.customModalClosed = true;
+  }
+
+  public onTimerModalClosed(): void {
+    this.customModalClosed = true;
+  }
+
+  public onCreateCustomTime($event: number): void {
+    this.customTimers.push($event);
+    this.settings.update('customTimers', this.customTimers);
+  }
+
+  public deleteTime(index: number): void {
+    this.customTimers.splice(index, 1);
+    this.settings.update('customTimers', this.customTimers);
   }
 }

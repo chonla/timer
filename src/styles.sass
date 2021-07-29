@@ -49,6 +49,20 @@ $tertiary-button-label-light: $light-gray-0
 $tertiary-button-label-light--hovered: $light-pink
 $tertiary-button-label-light--disabled: $light-gray-2
 
+$quaternary-background-light: $light-gray-4
+$quaternary-background-dark: $dark-gray-4
+$quaternary-text-color-light: $dark-gray-5
+$quaternary-text-color-dark: $light-gray-5
+$quaternary-button-background-light: $light-gray-6
+$quaternary-button-background-dark: $dark-gray-3
+$quaternary-button-ghost-label-light: $light-gray-0
+$quaternary-button-ghost-label-dark: $lighten-1
+$quaternary-button-ghost-label-light--hovered: $light-pink
+$quaternary-button-label-light: $dark-gray-5
+$quaternary-button-label-light--hovered: $light-pink
+$quaternary-button-label-dark: $light-gray-5
+$quaternary-button-label-dark--hovered: $light-pink
+
 $setting-panel-toggle-button-size: 2rem
 
 $form-checkbox-size: 1.2rem
@@ -65,7 +79,9 @@ $setting-panel-close-button-color: $light-gray-0
 $setting-panel-open-button-color-light: $light-gray-2
 $setting-panel-close-button-color-light: $light-gray-0
 
-$timer-input-text-size: 5rem
+$timer-input-text-size: 7rem
+$timer-input-placeholder-color-light: $darken-5
+$timer-input-placeholder-color-dark: $lighten-5
 
 .timer
     &__app
@@ -141,20 +157,41 @@ $timer-input-text-size: 5rem
                     pointer-events: unset
 
             &__time-input
+                width: calc(10rem + 4 * #{$timer-input-text-size})
+                margin-left: auto
+                margin-right: auto
+                border-radius: $container-radius
+                background-color: $quaternary-background-light
+                overflow: hidden
+
+                &-header
+                    font-family: $primary-font-family
+                    text-align: center
+                    display: flex
+                    justify-content: center
+                    align-content: center
+                    font-weight: 600
+                    height: 3rem
+                    line-height: 3rem
+                    color: $quaternary-text-color-light
+
+                &-footer
+                    font-family: $primary-font-family
+                    display: flex
+                    justify-content: flex-end
+
+                    .button
+
                 &-panel
                     font-family: $primary-font-family
                     font-size: $timer-input-text-size
                     line-height: $timer-input-text-size
-                    width: 40%
+                    width: 100%
                     height: calc(2rem * 2 + #{$timer-input-text-size})
-                    margin-left: auto
-                    margin-right: auto
-                    background-color: $tertiary-background-light
                     padding: 2rem
-                    border-radius: $container-radius
-                    overflow: hidden
                     display: flex
                     flex-direction: row
+                    justify-content: center
 
                     .digits
                         display: flex
@@ -167,10 +204,38 @@ $timer-input-text-size: 5rem
                         font-size: $timer-input-text-size
                         line-height: $timer-input-text-size
                         scroll-snap-type: y mandatory
+                        position: relative
+
+                        &-container
+                            display: flex
+                            flex-direction: column
+                            height: calc(#{$timer-input-text-size} + 4px)
+                            overflow-y: scroll
+                            font-family: $primary-font-family
+                            font-size: $timer-input-text-size
+                            line-height: $timer-input-text-size
+                            position: relative
+
+                            &::after
+                                content: ' '
+                                width: 100%
+                                height: 4px
+                                border-radius: 4000px
+                                position: absolute
+                                background-color: $timer-input-placeholder-color-light
+                                top: $timer-input-text-size
+                                margin-left: auto
+                                margin-right: auto
+                                z-index: 5000
 
                         &::-webkit-scrollbar
                             display: none
-                        
+
+                        &-selector
+                            margin-right: 0.3rem
+                            &:last-child
+                                margin-right: 0
+
                         .digit
                             scroll-snap-align: start
                             justify-content: center
@@ -178,10 +243,63 @@ $timer-input-text-size: 5rem
                             font-family: $primary-font-family
                             font-size: $timer-input-text-size
                             line-height: $timer-input-text-size
+                            font-size-adjust: 1
+                            cursor: default
+                            color: $quaternary-text-color-light
+
+                    .digit-separator
+                        justify-content: center
+                        text-align: center
+                        font-family: $primary-font-family
+                        font-size: $timer-input-text-size
+                        line-height: calc(0.9 * #{$timer-input-text-size})
+                        font-size-adjust: 1
+                        cursor: default
+                        margin-right: 0.3rem
+                        color: $quaternary-text-color-light
+                &-footer
+                    margin-top: 1rem
+                    padding-right: 1rem
+                    padding-bottom: 1rem
+                &-cancel-button
+                    padding-left: 2rem
+                    padding-right: 2rem
+                    height: 3rem
+                    min-width: 8rem
+                    cursor: pointer
+                    color: $quaternary-button-ghost-label-light
+                    line-height: 3rem
+                    text-align: center
+                    font-weight: 400
+                    border-radius: $element-radius
+                    margin-right: 1rem
+                    text-decoration: underline
+                    &:hover
+                        color: $quaternary-button-ghost-label-light--hovered
+                &-confirm-button
+                    padding-left: 2rem
+                    padding-right: 2rem
+                    height: 3rem
+                    min-width: 8rem
+                    line-height: 3rem
+                    cursor: pointer
+                    color: $quaternary-button-label-light
+                    background-color: $quaternary-button-background-light
+                    text-align: center
+                    font-weight: 600
+                    border-radius: $element-radius
+                    &:hover
+                        color: $quaternary-button-label-light--hovered
+                    &.disabled
+                        cursor: not-allowed
+                        pointer-events: none
+                        color: $disabled-color-light
+                        &:hover
+                            color: $disabled-color-light
 
         .settings
 
-            &__open_button
+            &__open-button
                 position: absolute
                 top: $app-padding
                 right: $app-padding
@@ -194,7 +312,7 @@ $timer-input-text-size: 5rem
                 mask: url('/assets/icons/more.svg')
                 cursor: pointer
 
-            &__close_button
+            &__close-button
                 position: absolute
                 top: $container-padding
                 right: $container-padding
@@ -216,7 +334,7 @@ $timer-input-text-size: 5rem
                     font-size: $tertiary-header-size
                     line-height: $tertiary-header-size
                     margin-bottom: 1rem
-                
+
                 &__list-container
                     position: relative
                     background-color: $tertiary-background-light
@@ -395,6 +513,57 @@ $timer-input-text-size: 5rem
                             .icon
                                 background-color: $tertiary-button-label-light--disabled
 
+                &--custom-timer
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    margin-bottom: 0.5rem
+                    height: $tertiary-button-size
+                    line-height: calc(#{$tertiary-button-label-size} * 1.2) !important
+                    font-size: $tertiary-button-label-size !important
+                    text-align: center
+                    font-family: $primary-font-family
+                    font-weight: $tertiary-button-label-weight
+                    background-color: $tertiary-button-background-light
+                    border-radius: $element-radius
+                    cursor: pointer
+                    color: $tertiary-button-label-light
+                    padding-left: 1rem
+                    padding-right: 1rem
+                    position: relative
+
+                    &-delete
+                        width: 16px
+                        height: 16px
+                        border-radius: 8px
+                        position: absolute
+                        right: -8px
+                        top: -8px
+                        background-color: $tertiary-button-label-light
+                        display: flex
+                        justify-content: center
+                        align-content: center
+                        padding: 5px
+                        &:hover
+                            background-color: $light-pink
+                        
+                        .icon
+                            &.remove
+                                mask-position: center center
+                                mask-repeat: no-repeat
+                                mask: url('/assets/icons/delete.svg')
+                                background-color: $white
+
+
+                    &:hover
+                        color: $tertiary-button-label-light--hovered
+
+                    &:not(:last-child)
+                        margin-right: 0.5rem
+                    &.disabled
+                        cursor: not-allowed
+                        pointer-events: none
+                        color: $tertiary-button-label-light--disabled
 
 // Dark Theme
 .timer
@@ -406,10 +575,28 @@ $timer-input-text-size: 5rem
                     background-color: $secondary-background-dark
                 &__settings
                     background-color: $secondary-background-dark
+                &__time-input
+                    background-color: $quaternary-background-dark
+                    &-header
+                        color: $quaternary-text-color-dark
+                    &-panel
+                        .digits
+                            &::before
+                                background-color: $timer-input-placeholder-color-dark
+                            .digit
+                                color: $quaternary-text-color-dark
+                        .digit-separator
+                            color: $quaternary-text-color-dark
+                    &-cancel-button
+                        color: $quaternary-button-ghost-label-dark
+                    &-close-button
+                        background-color: $quaternary-button-background-dark
+                        color: $quaternary-button-label-dark
+
             .settings
-                &__open_button
+                &__open-button
                     background-color: $setting-panel-open-button-color-light
-                &__close_button
+                &__close-button
                     background-color: $setting-panel-close-button-color-light
 
 .icon
@@ -434,8 +621,8 @@ $timer-input-text-size: 5rem
         mask: url('/assets/icons/stop.svg')
 
 @keyframes slideIn
-  from
-    transform: translate(100% 100%)
+    from
+        transform: translate(100% 100%)
 
-  to
-    transform: translate(0% 0%)
+    to
+        transform: translate(0% 0%)

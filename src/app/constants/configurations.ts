@@ -5,7 +5,8 @@ const configurations: IAppConfig = {
     defaultDarkMode: false,
     defaultUseSound: true,
     defaultTheme: 'google',
-    defaultSound: 'mario_game_over'
+    defaultSound: 'mario_game_over', 
+    defaultCustomTimers: []
 }
 
 export { configurations }

@@ -3,6 +3,7 @@ interface ISettings {
     useSound: boolean
     selectedSound: string
     selectedTheme: string
+    customTimers: number[]
 };
 
 export { ISettings }

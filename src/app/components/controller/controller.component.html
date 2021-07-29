@@ -1,4 +1,4 @@
-<div class="settings__open_button" (click)="openSettings()"></div>
+<div class="settings__open-button" (click)="openSettings()"></div>
 
 <div class="timer__settings" [ngClass]="{'hidden': settingClosed, 'shown': !settingClosed}">
 
@@ -80,11 +80,14 @@
           (click)="openCustomModal()">
           <div class="icon add-icon"></div>
         </div>
+        <div class="form__button--custom-timer" [ngClass]="{'disabled': shouldDisableTimeSetButton()}" *ngFor="let customTimer of customTimers; index as idx" (click)="setTime(customTimer)">
+          {{ customTimer | toTime }} <div class="form__button--custom-timer-delete" (click)="deleteTime(idx)"><div class="icon remove"></div></div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="settings__close_button" (click)="closeSettings()"></div>
+  <div class="settings__close-button" (click)="closeSettings()"></div>
 </div>
 
 <div class="timer__controller">
@@ -109,14 +112,4 @@
   </div>
 </div>
 
-<div class="modal" [ngClass]="{'is-active': !customModalClosed}">
-  <div class="modal-background"></div>
-  <div class="modal-content">
-    <div class="timer__time-input-panel">
-      <app-scrollable-digit [digits]=[0,1,2,3,4,5,6,7,8,9]></app-scrollable-digit>
-      <app-scrollable-digit [digits]=[0,1,2,3,4,5,6,7,8,9]></app-scrollable-digit>
-      <app-scrollable-digit [digits]=[0,1,2,3,4,5]></app-scrollable-digit>
-      <app-scrollable-digit [digits]=[0,1,2,3,4,5,6,7,8,9]></app-scrollable-digit>
-    </div>
-  </div>
-</div>
+<app-custom-time-modal [closed]="customModalClosed" (close)="onTimerModalClosed()" (submit)="onCreateCustomTime($event)"></app-custom-time-modal>

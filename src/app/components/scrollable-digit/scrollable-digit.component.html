@@ -1,3 +1,5 @@
-<div class="digits">
-    <div class="digit" *ngFor="let d of digits">{{ d }}</div>
+<div class="digits-container">
+  <div class="digits" #digits (scroll)="onDigitScroll($event)">
+    <div class="digit" *ngFor="let d of digitOptions">{{ d }}</div>
+  </div>
 </div>

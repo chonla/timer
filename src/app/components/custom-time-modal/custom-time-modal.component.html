@@ -1,0 +1,23 @@
+s<div class="modal" [ngClass]="{'is-active': !closed}" *ngIf="!closed">
+  <div class="modal-background" (click)="closeModal()"></div>
+  <div class="modal-content">
+    <div class="timer__time-input">
+      <div class="timer__time-input-header">Create a Timer</div>
+      <div class="timer__time-input-panel">
+        <app-scrollable-digit [digitOptions]=[0,1,2,3,4,5,6,7,8,9] class="digits-selector"
+          (digitChange)="onDigitChange($event, 'mm')"></app-scrollable-digit>
+        <app-scrollable-digit [digitOptions]=[0,1,2,3,4,5,6,7,8,9] class="digits-selector"
+          (digitChange)="onDigitChange($event, 'm')"></app-scrollable-digit>
+        <div class="digit-separator">:</div>
+        <app-scrollable-digit [digitOptions]=[0,1,2,3,4,5] class="digits-selector"
+          (digitChange)="onDigitChange($event, 'ss')"></app-scrollable-digit>
+        <app-scrollable-digit [digitOptions]=[0,1,2,3,4,5,6,7,8,9] class="digits-selector"
+          (digitChange)="onDigitChange($event, 's')"></app-scrollable-digit>
+      </div>
+      <div class="timer__time-input-footer">
+        <div class="timer__time-input-cancel-button" (click)="closeModal()">Cancel</div>
+        <div class="timer__time-input-confirm-button" [ngClass]="{'disabled': !canSubmit()}" (click)="submit()">OK</div>
+      </div>
+    </div>
+  </div>
+</div>

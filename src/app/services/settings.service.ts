@@ -17,12 +17,13 @@ export class SettingsService {
       useSound: configurations.defaultUseSound,
       darkMode: configurations.defaultDarkMode,
       selectedSound: configurations.defaultSound,
-      selectedTheme: configurations.defaultTheme
+      selectedTheme: configurations.defaultTheme,
+      customTimers: configurations.defaultCustomTimers,
     };
     this._settingSource$ = new Subject();
   }
 
-  public update(key: string, value: boolean | string): void {
+  public update(key: string, value: boolean | string | number[]): void {
     switch (key) {
       case 'darkMode':
         this._settings.darkMode = value as boolean;
@@ -40,32 +41,42 @@ export class SettingsService {
         this._settings.selectedSound = value as string;
         this._syncSettings();
         break;
+      case 'customTimers':
+        this._settings.customTimers = value as number[];
+        this._syncSettings();
+        break;
     }
   }
 
   public load(): ISettings {
     const settings = localStorage.getItem('bayo.timer');
-    if (settings !== null) {
+    if (settings !== null && settings !== '') {
       try {
         const json = JSON.parse(settings);
         this._settings = json;
         this._settingSource$.next(this._settings);
       } catch (e) {
+        this.restoreDefault();
       }
     } else {
-      this._settings = {
-        darkMode: configurations.defaultDarkMode,
-        useSound: configurations.defaultUseSound,
-        selectedSound: configurations.defaultSound,
-        selectedTheme: configurations.defaultTheme,
-      };
-      this._settingSource$.next(this._settings);
+      this.restoreDefault();
     }
     return _.cloneDeep(this._settings);
   }
 
   public onSettingChange$(): Observable<ISettings> {
     return this._settingSource$.asObservable();
+  }
+
+  private restoreDefault(): void {
+    this._settings = {
+      darkMode: configurations.defaultDarkMode,
+      useSound: configurations.defaultUseSound,
+      selectedSound: configurations.defaultSound,
+      selectedTheme: configurations.defaultTheme,
+      customTimers: configurations.defaultCustomTimers,
+    };
+    this._settingSource$.next(this._settings);
   }
 
   private _syncSettings(): void {

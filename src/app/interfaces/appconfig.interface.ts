@@ -9,6 +9,8 @@ interface IAppConfig {
     defaultUseSound: boolean
     // Default value for darmMode flag
     defaultDarkMode: boolean
+    
+    defaultCustomTimers: number[]
 }
 
 export { IAppConfig }

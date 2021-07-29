@@ -100,5 +100,27 @@ describe('SettingsService', () => {
 
       service.load();
     });
+
+
+    it('should set settings to default setting if previous setting is broken', (done) => {
+      const expectedSettings = {
+        darkMode: configurations.defaultDarkMode,
+        useSound: configurations.defaultUseSound,
+        selectedTheme: configurations.defaultTheme,
+        selectedSound: configurations.defaultSound
+      };
+
+      jest.spyOn(localStorage, 'getItem').mockReturnValue('xxx');
+      jest.spyOn(service._settingSource$, 'next');
+
+      service.onSettingChange$().subscribe((settings: ISettings) => {
+        expect(service._settingSource$.next).toBeCalledWith(expectedSettings);
+        expect(settings).toEqual(expectedSettings);
+
+        done();
+      });
+
+      service.load();
+    });
   });
 });
