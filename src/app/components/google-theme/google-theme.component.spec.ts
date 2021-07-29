@@ -32,7 +32,7 @@ describe('GoogleThemeComponent', () => {
 
         component.ngOnInit();
 
-        expect(mockSvg.circularArc).toBeCalledWith(0, 0, 49.5, 0, (component.ticks / component.totalTicks) * 2 * Math.PI, false);
+        expect(mockSvg.circularArc).toBeCalledWith(0, 0, 48, 0, (component.ticks / component.totalTicks) * 2 * Math.PI, false);
       });
 
       it('should generate a full circle from svg service', () => {
@@ -41,7 +41,7 @@ describe('GoogleThemeComponent', () => {
 
         component.ngOnInit();
 
-        expect(mockSvg.circularArc).toBeCalledWith(0, 0, 49.5, 0, (component.ticks / component.totalTicks) * 2 * Math.PI, false);
+        expect(mockSvg.circularArc).toBeCalledWith(0, 0, 48, 0, (component.ticks / component.totalTicks) * 2 * Math.PI, false);
       });
 
       it('should generate a empty arc from svg service', () => {
@@ -76,7 +76,7 @@ describe('GoogleThemeComponent', () => {
 
         component.ngOnChanges(changes);
 
-        expect(mockSvg.circularArc).toBeCalledWith(0, 0, 49.5, 0, (component.ticks / component.totalTicks) * 2 * Math.PI, false);
+        expect(mockSvg.circularArc).toBeCalledWith(0, 0, 48, 0, (component.ticks / component.totalTicks) * 2 * Math.PI, false);
       });
 
       it('should generate a full circle from svg service', () => {
@@ -89,7 +89,7 @@ describe('GoogleThemeComponent', () => {
 
         component.ngOnChanges(changes);
 
-        expect(mockSvg.circularArc).toBeCalledWith(0, 0, 49.5, 0, (component.ticks / component.totalTicks) * 2 * Math.PI, false);
+        expect(mockSvg.circularArc).toBeCalledWith(0, 0, 48, 0, (component.ticks / component.totalTicks) * 2 * Math.PI, false);
       });
 
       it('should generate a empty arc from svg service', () => {
