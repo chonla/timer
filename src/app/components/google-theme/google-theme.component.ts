@@ -16,7 +16,7 @@ export class GoogleThemeComponent implements OnInit, OnChanges {
 
   public arc: string;
 
-  private readonly watchFaceRadiusSize: number = 49.5;
+  private readonly watchFaceRadiusSize: number = 48;
 
   constructor(private svg: SvgService) {
     this.arc = 'M0,0';
