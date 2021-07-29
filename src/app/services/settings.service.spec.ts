@@ -1,4 +1,5 @@
 import { configurations } from '../constants/configurations';
+import { IAppConfig } from '../interfaces/appconfig.interface';
 import { ISettings } from '../interfaces/setting.interface';
 import { SettingsService } from './settings.service';
 
@@ -81,11 +82,12 @@ describe('SettingsService', () => {
     });
 
     it('should set settings to default setting if no previous setting', (done) => {
-      const expectedSettings = {
+      const expectedSettings: ISettings = {
         darkMode: configurations.defaultDarkMode,
         useSound: configurations.defaultUseSound,
         selectedTheme: configurations.defaultTheme,
-        selectedSound: configurations.defaultSound
+        selectedSound: configurations.defaultSound,
+        customTimers: configurations.defaultCustomTimers
       };
 
       jest.spyOn(localStorage, 'getItem').mockReturnValue('');
@@ -103,11 +105,12 @@ describe('SettingsService', () => {
 
 
     it('should set settings to default setting if previous setting is broken', (done) => {
-      const expectedSettings = {
+      const expectedSettings: ISettings = {
         darkMode: configurations.defaultDarkMode,
         useSound: configurations.defaultUseSound,
         selectedTheme: configurations.defaultTheme,
-        selectedSound: configurations.defaultSound
+        selectedSound: configurations.defaultSound,
+        customTimers: configurations.defaultCustomTimers
       };
 
       jest.spyOn(localStorage, 'getItem').mockReturnValue('xxx');
