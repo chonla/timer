@@ -16,7 +16,6 @@ export class CustomTimeModalComponent implements OnInit, OnChanges {
   private _mm: number;
   private _m: number;
   private _ticks: number;
-  private _changed: boolean;
 
   constructor() {
     this.onClose = new EventEmitter();
@@ -25,8 +24,7 @@ export class CustomTimeModalComponent implements OnInit, OnChanges {
     this._s = 0;
     this._mm = 0;
     this._m = 0;
-    this._ticks = -1;
-    this._changed = false;
+    this._ticks = 0;
   }
   
   ngOnInit(): void {
@@ -56,19 +54,17 @@ export class CustomTimeModalComponent implements OnInit, OnChanges {
         break;
     }
 
-    const newTicks = (((this._mm * 10) + this._m) * 60) + ((this._ss * 10) + this._s);
-    if (newTicks !== this._ticks) {
-      this._ticks = newTicks;
-      this._changed = true;
-    }
+    this._ticks = (((this._mm * 10) + this._m) * 60) + ((this._ss * 10) + this._s);
   }
 
   public canSubmit(): boolean {
-    return this._changed;
+    return this._ticks !== 0;
   }
 
   public submit(): void {
-    this.onSubmit.emit(this._ticks);
-    this.closeModal();
+    if (this.canSubmit()) {
+      this.onSubmit.emit(this._ticks);
+      this.closeModal();
+    }
   }
 }

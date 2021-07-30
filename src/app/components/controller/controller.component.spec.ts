@@ -359,4 +359,47 @@ describe('ControllerComponent', () => {
     });
   });
 
+  describe('Custom Timer', () => {
+    it('should open custom timer modal', () => {
+      component.customModalClosed = true;
+
+      component.openCustomModal();
+
+      expect(component.customModalClosed).toEqual(false);
+    });
+
+    it('should close custom timer modal', () => {
+      component.customModalClosed = false;
+
+      component.closeCustomModal();
+
+      expect(component.customModalClosed).toEqual(true);
+    });
+
+    it('should reset custom timer modal close flag when modal closed from modal itself', () => {
+      component.customModalClosed = false;
+
+      component.onTimerModalClosed();
+
+      expect(component.customModalClosed).toEqual(true);
+    });
+
+    it('should add new custom timer into setting', () => {
+      component.customTimers = [];
+
+      component.onCreateCustomTime(20);
+
+      expect(component.customTimers).toEqual([20]);
+      expect(mockSettings.update).toBeCalledWith('customTimers', [20]);
+    });
+
+    it('should remove a custom timer from setting', () => {
+      component.customTimers = [10, 20, 30];
+
+      component.deleteTime(1);
+
+      expect(component.customTimers).toEqual([10, 30]);
+      expect(mockSettings.update).toBeCalledWith('customTimers', [10, 30]);
+    });
+  });
 });

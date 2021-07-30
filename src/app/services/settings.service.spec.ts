@@ -53,6 +53,15 @@ describe('SettingsService', () => {
       expect(localStorage.setItem).toBeCalledTimes(1);
       expect(localStorage.setItem).toBeCalledWith('bayo.timer', expect.any(String));
     });
+
+    it('should save data to local storage when update customTimers setting', () => {
+      jest.spyOn(localStorage, 'setItem');
+
+      service.update('customTimers', [10]);
+
+      expect(localStorage.setItem).toBeCalledTimes(1);
+      expect(localStorage.setItem).toBeCalledWith('bayo.timer', expect.any(String));
+    });
   });
 
   describe('Load data from storage', () => {
