@@ -1,0 +1,197 @@
+<div class="ticks-panel" [ngClass]="{'dark': darkMode, 'attention-required': attentionRequired}">
+  <svg viewBox="0 0 80 102" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="sand-stream" viewBox="0 0 5 7.8" width="5" height="7" patternUnits="userSpaceOnUse" x="100%" y="0%">
+        <g id="falling-sand-close">
+          <circle cx="2" cy="2" r="1" fill="#000" />
+          <circle cx="4" cy="4" r="1" fill="#000" />
+          <circle cx="1.5" cy="6" r="1" fill="#000" />
+          <circle cx="4" cy="6.8" r="1" fill="#000" />
+        </g>
+        <g id="falling-sand-far" fill-opacity="0.6">
+          <circle cx="3.6" cy="1.3" r="0.8" fill="#000" />
+          <circle cx="3" cy="5" r="0.8" fill="#000" />
+        </g>
+      </pattern>
+      <mask id="falling-sand-mask">
+        <rect x="37.4" y="50" width="5" height="40" fill="#fff" fill-opacity="1" />
+      </mask>
+      <mask id="decreasing-mask">
+        <g id="decreasing-mask-part-1">
+          <path d="
+                        M8 10
+                        L8 12
+                        Q8 35 30 44
+                        Q36 46 36 50
+                        L40 50
+                        L40 10
+                        Z" fill="#fff" fill-opacity="1" />
+        </g>
+        <g id="decreasing-mask-part-2" transform="translate(30, 0) scale(-1, 1) translate(-50, 0)">
+          <path d="
+                        M8 10
+                        L8 12
+                        Q8 35 30 44
+                        Q36 46 36 50
+                        L40 50
+                        L40 10
+                        Z" fill="#fff" fill-opacity="1" />
+        </g>
+        <circle cx="40" cy="47" r="4" fill="#fff" />
+      </mask>
+    </defs>
+    <g id="sand-clock" transform="translate(0 0)">
+      <g id="sand-container-background">
+        <g id="sand-container-background-part-1">
+          <path d="
+                        M8 10
+                        L8 12
+                        Q8 35 30 44
+                        Q36 46 36 50
+                        L40 50
+                        L40 10
+                        Z" fill="#fff" fill-opacity="0.6" />
+        </g>
+        <g id="sand-container-background-part-2" transform="translate(30, 0) scale(-1, 1) translate(-50, 0)">
+          <path d="
+                        M8 10
+                        L8 12
+                        Q8 35 30 44
+                        Q36 46 36 50
+                        L40 50
+                        L40 10
+                        Z" fill="#fff" fill-opacity="0.6" />
+        </g>
+        <g id="sand-container-background-part-3" transform="translate(55, 75) rotate(180) translate(-25, -25)">
+          <path d="
+                        M8 10
+                        L8 12
+                        Q8 35 30 44
+                        Q36 46 36 50
+                        L40 50
+                        L40 10
+                        Z" fill="#fff" fill-opacity="0.6" />
+        </g>
+        <g id="sand-container-background-part-4"
+          transform="translate(25, 75) scale(-1, 1) rotate(180) translate(-25, -25)">
+          <path d="
+                        M8 10
+                        L8 12
+                        Q8 35 30 44
+                        Q36 46 36 50
+                        L40 50
+                        L40 10
+                        Z" fill="#fff" fill-opacity="0.6" />
+        </g>
+      </g>
+      <g id="top">
+        <path d="
+                M4 0
+                L76 0
+                Q80 0 80 4
+                L80 8
+                Q80 10 78 10
+                L2 10
+                Q0 10 0 8
+                L0 4
+                Q0 0 4 0
+                Z" stroke="#000" stroke-width="1" />
+      </g>
+      <g id="sand-container">
+        <g id="sand-container-part-1">
+          <path d="
+                        M8 10
+                        L8 12
+                        Q8 35 30 44
+                        Q36 46 36 50
+                        " stroke="#000" stroke-width="4" fill-opacity="0" />
+        </g>
+        <g id="sand-container-part-2" transform="translate(30, 0) scale(-1, 1) translate(-50, 0)">
+          <path d="
+                        M8 10
+                        L8 12
+                        Q8 35 30 44
+                        Q36 46 36 50
+                        " stroke="#000" stroke-width="4" fill-opacity="0" />
+        </g>
+        <g id="sand-container-part-3" transform="translate(55, 75) rotate(180) translate(-25, -25)">
+          <path d="
+                        M8 10
+                        L8 12
+                        Q8 35 30 44
+                        Q36 46 36 50
+                        " stroke="#000" stroke-width="4" fill-opacity="0" />
+        </g>
+        <g id="sand-container-part-4" transform="translate(25, 75) scale(-1, 1) rotate(180) translate(-25, -25)">
+          <path d="
+                        M8 10
+                        L8 12
+                        Q8 35 30 44
+                        Q36 46 36 50
+                        " stroke="#000" stroke-width="4" fill-opacity="0" />
+        </g>
+      </g>
+      <g id="bottom" transform="translate(0 88) translate(40 6) rotate(180) translate(-40 -6)">
+        <path d="
+                M4 0
+                L76 0
+                Q80 0 80 4
+                L80 8
+                Q80 10 78 10
+                L2 10
+                Q0 10 0 8
+                L0 4
+                Q0 0 4 0
+                Z" stroke="#000" stroke-width="1" />
+      </g>
+    </g>
+
+    <g id="falling-sand-view" mask="url(#falling-sand-mask)" *ngIf="isRunning()">
+      <g id="falling-sand">
+        <rect id="falling-sand-stream" x="0" y="0" width="5" height="2000" fill="url(#sand-stream)" />
+        <animateTransform attributeName="transform" type="translate" from="37.4 -1950" to="37.4 50" keyTimes="0;1"
+          repeatCount="indefinite" dur="100s" />
+      </g>
+    </g>
+
+    <g id="below-sand" transform="translate(0 40)" *ngIf="totalTicks > 0">
+      <path id="sand-dune" [attr.d]="dune" fill="#000">
+        <animate attributeName="d" dur="6s" repeatCount="once" keyTimes="0;.12;0.24;.36;.48;.60;.72;.84;1" values="
+                        M16 50
+                        C42 45 38 45 64 50
+                        Z;
+                        M16 50
+                        C42 40 38 40  64 50
+                        Z;
+                        M16 50
+                        C42 35 38 35  64 50
+                        Z;
+                        M16 50
+                        C42 31 38 31  64 50
+                        Z;
+                        M16 50
+                        C42 27 38 27  64 50
+                        Z;
+                        M16 50
+                        C42 23 38 23  64 50
+                        Z;
+                        M16 50
+                        C42 19 38 19  64 50
+                        Z;
+                        M16 50
+                        C42 15 38 15  64 50
+                        Z;
+                        M16 50
+                        C42 11 38 11  64 50
+                        Z" *ngIf="false" />
+      </path>
+    </g>
+
+    <g id="upper-sand" mask="url(#decreasing-mask)" *ngIf="totalTicks > 0">
+      <rect id="sand-source" x="10" [attr.y]="sandTop" width="80" [attr.height]="sandHeight" fill="#000">
+        <animateTransform attributeName="transform" type="translate" from="0 0" to="0 27" dur="6s" keyTimes="0;1"
+          fill="freeze" *ngIf="false" />
+      </rect>
+    </g>
+  </svg>
+</div>

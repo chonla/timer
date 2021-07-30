@@ -1,0 +1,14 @@
+$sandclock-size: 26rem
+    
+.ticks-panel
+    position: relative
+    width: 100%
+    display: flex
+    justify-content: center
+    pointer-events: none
+
+    svg
+        width: $sandclock-size
+        height: $sandclock-size
+        position: absolute
+        top: calc((100vh - #{$sandclock-size}) * 0.4)

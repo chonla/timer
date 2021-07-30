@@ -10,6 +10,10 @@ const AvailableThemes: ITheme[] = [
         'key': 'google',
         'label': 'Minimalist'
     },
+    {
+        'key': 'sandclock',
+        'label': 'Sandclock'
+    },
     // {
     //     'key': 'developer',
     //     'label': 'Developer'

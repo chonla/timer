@@ -14,6 +14,7 @@ import { ToTimePipe } from './pipes/to-time.pipe';
 import { GoogleThemeComponent } from './components/google-theme/google-theme.component';
 import { CustomTimeModalComponent } from './components/custom-time-modal/custom-time-modal.component';
 import { ScrollableDigitComponent } from './components/scrollable-digit/scrollable-digit.component';
+import { SandclockThemeComponent } from './components/sandclock-theme/sandclock-theme.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ScrollableDigitComponent } from './components/scrollable-digit/scrollab
     ToTimePipe,
     GoogleThemeComponent,
     CustomTimeModalComponent,
-    ScrollableDigitComponent
+    ScrollableDigitComponent,
+    SandclockThemeComponent
   ],
   imports: [
     BrowserModule,
