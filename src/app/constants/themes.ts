@@ -12,7 +12,7 @@ const AvailableThemes: ITheme[] = [
     },
     {
         'key': 'sandclock',
-        'label': 'Sandclock'
+        'label': 'Hourglass'
     },
     // {
     //     'key': 'developer',

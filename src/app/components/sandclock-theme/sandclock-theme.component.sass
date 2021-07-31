@@ -1,3 +1,6 @@
+@import '../../../assets/sass/_colors'
+@import '../../../assets/sass/_variables'
+    
 $sandclock-size: 26rem
     
 .ticks-panel
@@ -12,3 +15,29 @@ $sandclock-size: 26rem
         height: $sandclock-size
         position: absolute
         top: calc((100vh - #{$sandclock-size}) * 0.4)
+
+        .sand-container
+            &__cover
+                fill: #a38466
+
+            &__outline
+                stroke-width: 2px
+                fill: none
+                stroke: #94bec8
+
+            &__padding
+                stroke-width: 3px
+                fill: none
+                stroke: #fff
+
+            &__sand
+                fill: #ecdfc7
+
+                &--darken
+                    fill: #b1a38a
+
+    &.dark
+        svg
+            .sand-container
+                &__padding
+                    stroke: $dark-gray-3

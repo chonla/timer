@@ -40,7 +40,7 @@ export class ControllerComponent implements OnInit {
     this.selectedSound = configurations.defaultSound;
     this.customTimers = [];
     this.state = TimerState.UNINITIALIZED;
-    this.settingClosed = false;
+    this.settingClosed = true;
     this.customModalClosed = true;
   }
 
