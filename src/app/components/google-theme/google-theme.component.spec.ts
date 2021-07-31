@@ -1,5 +1,5 @@
 import { SimpleChange, SimpleChanges } from '@angular/core';
-import { SvgService } from 'src/app/services/svg.service';
+import { SvgService } from '../../services/svg.service';
 import { GoogleThemeComponent } from './google-theme.component';
 
 describe('GoogleThemeComponent', () => {

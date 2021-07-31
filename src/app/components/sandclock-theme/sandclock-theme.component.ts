@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { TimerState } from 'src/app/enums/timer-state.enum';
+import { TimerState } from '../../enums/timer-state.enum';
 
 @Component({
   selector: 'app-sandclock-theme',
