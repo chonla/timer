@@ -26,7 +26,7 @@
                 padding: $container-padding
                 background-color: $secondary-background-light
                 border-radius: $container-radius
-                box-shadow: $default-drop-shadow
+                // box-shadow: $default-drop-shadow
 
                 .buttons
                     display: flex
@@ -68,7 +68,7 @@
                 padding: $container-padding
                 background-color: $secondary-background-light
                 border-radius: $container-radius
-                box-shadow: $default-drop-shadow
+                // box-shadow: $default-drop-shadow
                 width: 500px
                 transition: all 0.6s ease-in-out
                 top: calc(#{$app-padding} - #{$container-padding})
@@ -216,9 +216,9 @@
                     &.disabled
                         cursor: not-allowed
                         pointer-events: none
-                        color: $disabled-color-light
+                        color: $label-color--disabled--light
                         &:hover
-                            color: $disabled-color-light
+                            color: $label-color--disabled--light
 
         .settings
 
@@ -289,7 +289,7 @@
                     &.disabled
                         pointer-events: none
                         *
-                            color: $disabled-color-light
+                            color: $label-color--disabled--light
 
                 &:first-child
                     margin-top: 0.5rem
@@ -321,7 +321,7 @@
                             background-color: $form-checkbox-color
                             content: " "
                             display: block
-                            border-radius: $checkbox-radius
+                            border-radius: $element-radius
                             float: left
                             margin-top: 2px
                             margin-bottom: 2px
@@ -334,7 +334,7 @@
                             display: block
                             float: left
                             background-color: $light-gray-6
-                            border-radius: calc(#{$checkbox-radius} / 2)
+                            border-radius: calc(#{$element-radius} / 2)
                             margin-top: calc(2px + #{$form-checkbox-inner-padding})
                             margin-left: calc((-1 * 2 * (#{$form-checkbox-inner-padding} + #{$form-checkbox-size})) + #{$form-checkbox-inner-padding})
 
@@ -347,7 +347,7 @@
                             background-color: $form-checkbox-color--checked
                             content: " "
                             display: block
-                            border-radius: $checkbox-radius
+                            border-radius: $element-radius
                             float: left
                             margin-top: 2px
                             margin-bottom: 2px
@@ -360,7 +360,7 @@
                             display: block
                             float: left
                             background-color: $light-gray-6
-                            border-radius: calc(#{$checkbox-radius} / 2)
+                            border-radius: calc(#{$element-radius} / 2)
                             margin-top: calc(2px + #{$form-checkbox-inner-padding})
                             margin-left: calc(-1 * (#{$form-checkbox-inner-padding} + #{$form-checkbox-size}))
 
@@ -382,11 +382,11 @@
                     pointer-events: none
                     &:not(.is-multiple):not(.is-loading):not(:hover)
                         &::after
-                            border-color: $disabled-color
+                            border-color: $border-color--disabled--light
 
                     &:not(.is-multiple):not(.is-loading):hover
                         &::after
-                            border-color: $disabled-color
+                            border-color: $border-color--disabled--light
 
             &__buttons
                 display: flex

@@ -2,6 +2,10 @@
 
 Bayo Timer
 
+## Use the Timer
+
+[https://bayo-timer.netlify.app/](https://bayo-timer.netlify.app/)
+
 ## Features
 
 * Preset Timers
@@ -13,3 +17,7 @@ Bayo Timer
 ## To Do
 
 * Responsive
+
+## License
+
+[MIT](LICENSE)
