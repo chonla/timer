@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class SwitchComponent implements OnInit {
   @Input('value') value: boolean = false;
+  @Input() darkMode: boolean = false;
   @Output('toggled') onChange: EventEmitter<boolean> = new EventEmitter();
   public componentId: string;
 

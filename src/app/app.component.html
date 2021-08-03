@@ -1,4 +1,5 @@
-<div class="timer__app" [ngClass]="{'timer__app--dark':darkMode}">
+<div class="timer__app-space" [ngClass]="{'dark':darkMode}">
   <app-timer [theme]="selectedTheme" [darkMode]="darkMode" *ngIf="loaded"></app-timer>
-  <app-controller></app-controller>
+  <app-controller [darkMode]="darkMode"></app-controller>
+  <app-setting></app-setting>
 </div>

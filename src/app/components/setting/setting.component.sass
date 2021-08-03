@@ -1,0 +1,127 @@
+@import '../../../assets/sass/_all'
+
+$toggle-button-size: 2rem
+
+.settings
+    &__panels
+        position: absolute
+        padding: $container-padding
+        background-color: $setting-background-color--light
+        border-radius: $container-radius
+        width: 500px
+        top: calc(#{$app-padding} - #{$container-padding})
+        transition: all 0.6s ease-in-out
+
+        &.hidden
+            opacity: 0
+            right: -500px
+            pointer-events: none
+
+        &.shown
+            opacity: 1
+            right: calc(#{$app-padding} - #{$container-padding})
+            pointer-events: unset
+
+    &__panel
+        margin-top: 1rem
+
+        &__header
+            color: $setting-panel-header-color--light
+            font-family: $primary-font-family
+            font-weight: 600
+            font-size: $tertiary-header-size
+            line-height: $tertiary-header-size
+            margin-bottom: 1rem
+
+        &__list-container
+            position: relative
+            background-color: $setting-form-group-background-color--light
+            border-radius: 4px
+
+        &__list-item
+            padding: 0.5rem 1rem
+            display: flex
+            justify-content: space-between
+            align-items: center
+            line-height: 1.5rem
+
+            &:not(:first-child)
+                border-top: 1px solid $setting-background-color--light
+
+            &-label
+                color: $setting-form-label-color--light
+                font-weight: $tertiary-text-weight
+                font-family: $primary-font-family
+                font-size: $tertiary-text-size
+                -webkit-user-select: none
+                -ms-user-select: none
+                user-select: none
+
+            &-value
+                display: flex
+                justify-content: flex-end
+
+            &.disabled
+                pointer-events: none
+                .settings
+                    &__panel
+                        &__list-item
+                            &-label
+                                color: $setting-form-label-color--disabled--light
+
+        &:first-child
+            margin-top: 0.5rem
+
+    &__open-button
+        position: absolute
+        top: $app-padding
+        right: $app-padding
+        width: $toggle-button-size
+        height: $toggle-button-size
+        mask-position: center center
+        mask-repeat: no-repeat
+        background-color: $setting-open-toggler-color--light
+        mask: url('/assets/icons/more.svg')
+        cursor: pointer
+
+        &.dark
+            background-color: $setting-open-toggler-color--dark
+
+    &__close-button
+        position: absolute
+        top: $container-padding
+        right: $container-padding
+        width: $toggle-button-size
+        height: $toggle-button-size
+        mask-position: center center
+        mask-repeat: no-repeat
+        background-color: $setting-close-toggler-color--light
+        mask: url('/assets/icons/close.svg')
+        cursor: pointer
+
+// Dark theme
+.settings
+    &__panels
+        &.dark
+            background-color: $setting-background-color--dark
+            .settings
+                &__panel
+                    &__header
+                        color: $setting-panel-header-color--dark
+                    &__list-container
+                        background-color: $setting-form-group-background-color--dark
+                    &__list-item
+                        &-label
+                            color: $setting-form-label-color--dark
+                        &:not(:first-child)
+                            border-top: 1px solid $setting-background-color--dark
+                        &.disabled
+                            pointer-events: none
+                            .settings
+                                &__panel
+                                    &__list-item
+                                        &-label
+                                            color: $setting-form-label-color--disabled--dark
+
+                &__close-button
+                    background-color: $setting-close-toggler-color--dark

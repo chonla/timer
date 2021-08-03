@@ -15,6 +15,7 @@ import { GoogleThemeComponent } from './components/google-theme/google-theme.com
 import { CustomTimeModalComponent } from './components/custom-time-modal/custom-time-modal.component';
 import { ScrollableDigitComponent } from './components/scrollable-digit/scrollable-digit.component';
 import { SandclockThemeComponent } from './components/sandclock-theme/sandclock-theme.component';
+import { SettingComponent } from './components/setting/setting.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SandclockThemeComponent } from './components/sandclock-theme/sandclock-
     GoogleThemeComponent,
     CustomTimeModalComponent,
     ScrollableDigitComponent,
-    SandclockThemeComponent
+    SandclockThemeComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,

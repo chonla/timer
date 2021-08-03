@@ -4,489 +4,482 @@
 @import './assets/sass/_colors'
 @import './assets/sass/_variables'
 
-@mixin square-button($size, $font-size)
-    width: $size
-    height: $size
-    line-height: $size !important
-    font-size: $font-size !important
-
 .timer
-    &__app
-        height: 100vh
-        width: 100vw
-        padding: $app-padding
-        background-color: $primary-background-light
+    // &__app
+    //     height: 100vh
+    //     width: 100vw
+    //     padding: $app-padding
+    //     background-color: $primary-background-light
 
-        .timer
-            &__controller
-                position: absolute
-                left: 50%
-                bottom: $app-padding
-                transform: translateX(-50%)
-                padding: $container-padding
-                background-color: $secondary-background-light
-                border-radius: $container-radius
-                // box-shadow: $default-drop-shadow
+    // &__controller
+    //     position: absolute
+    //     left: 50%
+    //     bottom: $app-padding
+    //     transform: translateX(-50%)
+    //     padding: $container-padding
+    //     background-color: $secondary-background-light
+    //     border-radius: $container-radius
+    //     // box-shadow: $default-drop-shadow
 
-                .buttons
+    //     .buttons
+    //         display: flex
+    //         align-items: center
+
+    //         .button
+    //             background-color: $secondary-button-background-light
+    //             border: none
+
+    //             &:not(:last-child)
+    //                 margin-right: 1rem
+
+    //             .icon
+    //                 background-color: $secondary-button-label-light
+
+    //             &:not(:disabled):hover
+    //                 .icon
+    //                     background-color: $secondary-button-label-light--hovered
+
+    //             &.disabled
+    //                 cursor: not-allowed
+    //                 pointer-events: none
+    //                 .icon
+    //                     background-color: $secondary-button-label-light--disabled
+    //                 &:hover
+    //                     .icon
+    //                         background-color: $secondary-button-label-light--disabled
+
+    //         .divider
+    //             width: 0.2rem
+    //             height: 2.5rem
+    //             margin-right: 1rem
+    //             margin-bottom: 0.5rem
+    //             background-color: $secondary-button-background-divider-light
+    //             border-radius: 100000px
+
+    // &__settings
+    //     position: absolute
+    //     padding: $container-padding
+    //     background-color: $secondary-background-light
+    //     border-radius: $container-radius
+    //     // box-shadow: $default-drop-shadow
+    //     width: 500px
+    //     transition: all 0.6s ease-in-out
+    //     top: calc(#{$app-padding} - #{$container-padding})
+
+    //     &.hidden
+    //         opacity: 0
+    //         right: -500px
+    //         pointer-events: none
+
+    //     &.shown
+    //         opacity: 1
+    //         right: calc(#{$app-padding} - #{$container-padding})
+    //         pointer-events: unset
+
+    &__time-input
+        width: calc(10rem + 4 * #{$timer-input-text-size})
+        margin-left: auto
+        margin-right: auto
+        border-radius: $container-radius
+        background-color: $quaternary-background-light
+        overflow: hidden
+
+        &-header
+            font-family: $primary-font-family
+            text-align: center
+            display: flex
+            justify-content: center
+            align-content: center
+            font-weight: 600
+            height: 3rem
+            line-height: 3rem
+            color: $quaternary-text-color-light
+
+        &-footer
+            font-family: $primary-font-family
+            display: flex
+            justify-content: flex-end
+
+        &-panel
+            font-family: $primary-font-family
+            font-size: $timer-input-text-size
+            line-height: $timer-input-text-size
+            width: 100%
+            height: calc(2rem * 2 + #{$timer-input-text-size})
+            padding: 2rem
+            display: flex
+            flex-direction: row
+            justify-content: center
+
+            .digits
+                display: flex
+                flex-direction: column
+                height: $timer-input-text-size
+                overflow-y: scroll
+                -ms-overflow-style: none
+                scrollbar-width: none
+                font-family: $primary-font-family
+                font-size: $timer-input-text-size
+                line-height: $timer-input-text-size
+                scroll-snap-type: y mandatory
+                position: relative
+
+                &-container
                     display: flex
-                    align-items: center
-
-                    .button
-                        background-color: $secondary-button-background-light
-                        border: none
-
-                        &:not(:last-child)
-                            margin-right: 1rem
-
-                        .icon
-                            background-color: $secondary-button-label-light
-
-                        &:not(:disabled):hover
-                            .icon
-                                background-color: $secondary-button-label-light--hovered
-
-                        &.disabled
-                            cursor: not-allowed
-                            pointer-events: none
-                            .icon
-                                background-color: $secondary-button-label-light--disabled
-                            &:hover
-                                .icon
-                                    background-color: $secondary-button-label-light--disabled
-
-                    .divider
-                        width: 0.2rem
-                        height: 2.5rem
-                        margin-right: 1rem
-                        margin-bottom: 0.5rem
-                        background-color: $secondary-button-background-divider-light
-                        border-radius: 100000px
-
-            &__settings
-                position: absolute
-                padding: $container-padding
-                background-color: $secondary-background-light
-                border-radius: $container-radius
-                // box-shadow: $default-drop-shadow
-                width: 500px
-                transition: all 0.6s ease-in-out
-                top: calc(#{$app-padding} - #{$container-padding})
-
-                &.hidden
-                    opacity: 0
-                    right: -500px
-                    pointer-events: none
-
-                &.shown
-                    opacity: 1
-                    right: calc(#{$app-padding} - #{$container-padding})
-                    pointer-events: unset
-
-            &__time-input
-                width: calc(10rem + 4 * #{$timer-input-text-size})
-                margin-left: auto
-                margin-right: auto
-                border-radius: $container-radius
-                background-color: $quaternary-background-light
-                overflow: hidden
-
-                &-header
-                    font-family: $primary-font-family
-                    text-align: center
-                    display: flex
-                    justify-content: center
-                    align-content: center
-                    font-weight: 600
-                    height: 3rem
-                    line-height: 3rem
-                    color: $quaternary-text-color-light
-
-                &-footer
-                    font-family: $primary-font-family
-                    display: flex
-                    justify-content: flex-end
-
-                &-panel
+                    flex-direction: column
+                    height: calc(#{$timer-input-text-size} + 4px)
+                    overflow-y: scroll
                     font-family: $primary-font-family
                     font-size: $timer-input-text-size
                     line-height: $timer-input-text-size
-                    width: 100%
-                    height: calc(2rem * 2 + #{$timer-input-text-size})
-                    padding: 2rem
-                    display: flex
-                    flex-direction: row
-                    justify-content: center
-
-                    .digits
-                        display: flex
-                        flex-direction: column
-                        height: $timer-input-text-size
-                        overflow-y: scroll
-                        -ms-overflow-style: none
-                        scrollbar-width: none
-                        font-family: $primary-font-family
-                        font-size: $timer-input-text-size
-                        line-height: $timer-input-text-size
-                        scroll-snap-type: y mandatory
-                        position: relative
-
-                        &-container
-                            display: flex
-                            flex-direction: column
-                            height: calc(#{$timer-input-text-size} + 4px)
-                            overflow-y: scroll
-                            font-family: $primary-font-family
-                            font-size: $timer-input-text-size
-                            line-height: $timer-input-text-size
-                            position: relative
-
-                            &::after
-                                content: ' '
-                                width: 100%
-                                height: 4px
-                                border-radius: 4000px
-                                position: absolute
-                                background-color: $timer-input-placeholder-color-light
-                                top: $timer-input-text-size
-                                margin-left: auto
-                                margin-right: auto
-                                z-index: 5000
-
-                        &::-webkit-scrollbar
-                            display: none
-
-                        &-selector
-                            margin-right: 0.3rem
-                            &:last-child
-                                margin-right: 0
-
-                        .digit
-                            scroll-snap-align: start
-                            justify-content: center
-                            text-align: center
-                            font-family: $primary-font-family
-                            font-size: $timer-input-text-size
-                            line-height: $timer-input-text-size
-                            cursor: default
-                            color: $quaternary-text-color-light
-
-                    .digit-separator
-                        justify-content: center
-                        text-align: center
-                        font-family: $primary-font-family
-                        font-size: $timer-input-text-size
-                        line-height: calc(0.9 * #{$timer-input-text-size})
-                        cursor: default
-                        margin-right: 0.3rem
-                        color: $quaternary-text-color-light
-                &-footer
-                    margin-top: 1rem
-                    padding-right: 1rem
-                    padding-bottom: 1rem
-                &-cancel-button
-                    padding-left: 2rem
-                    padding-right: 2rem
-                    height: 3rem
-                    min-width: 8rem
-                    cursor: pointer
-                    color: $quaternary-button-ghost-label-light
-                    line-height: 3rem
-                    text-align: center
-                    font-weight: 400
-                    border-radius: $element-radius
-                    margin-right: 1rem
-                    text-decoration: underline
-                    &:hover
-                        color: $quaternary-button-ghost-label-light--hovered
-                &-confirm-button
-                    padding-left: 2rem
-                    padding-right: 2rem
-                    height: 3rem
-                    min-width: 8rem
-                    line-height: 3rem
-                    cursor: pointer
-                    color: $quaternary-button-label-light
-                    background-color: $quaternary-button-background-light
-                    text-align: center
-                    font-weight: 600
-                    border-radius: $element-radius
-                    &:hover
-                        color: $quaternary-button-label-light--hovered
-                    &.disabled
-                        cursor: not-allowed
-                        pointer-events: none
-                        color: $label-color--disabled--light
-                        &:hover
-                            color: $label-color--disabled--light
-
-        .settings
-
-            &__open-button
-                position: absolute
-                top: $app-padding
-                right: $app-padding
-                width: $setting-panel-toggle-button-size
-                height: $setting-panel-toggle-button-size
-                background-color: red
-                mask-position: center center
-                mask-repeat: no-repeat
-                background-color: $setting-panel-open-button-color
-                mask: url('/assets/icons/more.svg')
-                cursor: pointer
-
-            &__close-button
-                position: absolute
-                top: $container-padding
-                right: $container-padding
-                width: $setting-panel-toggle-button-size
-                height: $setting-panel-toggle-button-size
-                mask-position: center center
-                mask-repeat: no-repeat
-                background-color: $setting-panel-close-button-color
-                mask: url('/assets/icons/close.svg')
-                cursor: pointer
-
-            &-panel
-                margin-top: 1rem
-
-                &__header
-                    color: $tertiary-header-color-light
-                    font-family: $primary-font-family
-                    font-weight: 600
-                    font-size: $tertiary-header-size
-                    line-height: $tertiary-header-size
-                    margin-bottom: 1rem
-
-                &__list-container
-                    position: relative
-                    background-color: $tertiary-background-light
-                    border-radius: 4px
-
-                &__list-item
-                    padding: 0.5rem 1rem
-                    display: flex
-                    justify-content: space-between
-                    align-items: center
-                    line-height: 1.5rem
-
-                    &:not(:first-child)
-                        border-top: 1px solid $secondary-background-light
-
-                    &-label
-                        color: $tertiary-text-color-light
-                        font-weight: $tertiary-text-weight
-                        font-family: $primary-font-family
-                        font-size: $tertiary-text-size
-                        -webkit-user-select: none
-                        -ms-user-select: none
-                        user-select: none
-
-                    &-value
-                        display: flex
-                        justify-content: flex-end
-
-                    &.disabled
-                        pointer-events: none
-                        *
-                            color: $label-color--disabled--light
-
-                &:first-child
-                    margin-top: 0.5rem
-
-        .form
-            &__checkbox
-                cursor: pointer
-                position: relative
-                line-height: calc((2 * #{$form-checkbox-inner-padding}) + #{$form-checkbox-size})
-
-                .label
-                    display: block
-                    float: left
-                    margin-left: 0.25rem
-                    top: calc(-1 * (((2 * #{$form-checkbox-inner-padding}) + #{$form-checkbox-size}) * 0.15))
-                    line-height: calc((2 * #{$form-checkbox-inner-padding}) + #{$form-checkbox-size})
-
-                input[type="checkbox"]
-                    position: absolute
-                    opacity: 0
-
-                input[type="checkbox"]:not(:checked)
-                    & + .toggler
-
-                        // check container
-                        &::before
-                            width: calc(2 * (#{$form-checkbox-inner-padding} + #{$form-checkbox-size}))
-                            height: calc((2 * #{$form-checkbox-inner-padding}) + #{$form-checkbox-size})
-                            background-color: $form-checkbox-color
-                            content: " "
-                            display: block
-                            border-radius: $element-radius
-                            float: left
-                            margin-top: 2px
-                            margin-bottom: 2px
-
-                        // check button
-                        &::after
-                            width: $form-checkbox-size
-                            height: $form-checkbox-size
-                            content: " "
-                            display: block
-                            float: left
-                            background-color: $light-gray-6
-                            border-radius: calc(#{$element-radius} / 2)
-                            margin-top: calc(2px + #{$form-checkbox-inner-padding})
-                            margin-left: calc((-1 * 2 * (#{$form-checkbox-inner-padding} + #{$form-checkbox-size})) + #{$form-checkbox-inner-padding})
-
-                input[type="checkbox"]:checked
-                    & + .toggler
-                        // check container
-                        &::before
-                            width: calc(2 * (#{$form-checkbox-inner-padding} + #{$form-checkbox-size}))
-                            height: calc((2 * #{$form-checkbox-inner-padding}) + #{$form-checkbox-size})
-                            background-color: $form-checkbox-color--checked
-                            content: " "
-                            display: block
-                            border-radius: $element-radius
-                            float: left
-                            margin-top: 2px
-                            margin-bottom: 2px
-
-                        // check button
-                        &::after
-                            width: $form-checkbox-size
-                            height: $form-checkbox-size
-                            content: " "
-                            display: block
-                            float: left
-                            background-color: $light-gray-6
-                            border-radius: calc(#{$element-radius} / 2)
-                            margin-top: calc(2px + #{$form-checkbox-inner-padding})
-                            margin-left: calc(-1 * (#{$form-checkbox-inner-padding} + #{$form-checkbox-size}))
-
-            &__select
-                font-weight: $tertiary-text-weight
-                font-family: $primary-font-family
-                font-size: $form-dropdown-text-size
-                line-height: $form-dropdown-text-size
-
-                &:not(.is-multiple):not(.is-loading):not(:hover)
-                    &::after
-                        border-color: $form-dropdown-trigger-color
-
-                &:not(.is-multiple):not(.is-loading):hover
-                    &::after
-                        border-color: $form-dropdown-trigger-color--hovered
-
-                &--disabled
-                    pointer-events: none
-                    &:not(.is-multiple):not(.is-loading):not(:hover)
-                        &::after
-                            border-color: $border-color--disabled--light
-
-                    &:not(.is-multiple):not(.is-loading):hover
-                        &::after
-                            border-color: $border-color--disabled--light
-
-            &__buttons
-                display: flex
-                justify-content: flex-start
-                flex-wrap: wrap
-
-            &__button
-                &--square
-                    display: flex
-                    align-items: center
-                    justify-content: center
-                    margin-bottom: 0.5rem
-                    width: $tertiary-button-size
-                    height: $tertiary-button-size
-                    line-height: calc(#{$tertiary-button-label-size} * 1.2) !important
-                    font-size: $tertiary-button-label-size !important
-                    text-align: center
-                    font-family: $primary-font-family
-                    font-weight: $tertiary-button-label-weight
-                    background-color: $tertiary-button-background-light
-                    border-radius: $element-radius
-                    cursor: pointer
-                    color: $tertiary-button-label-light
-
-                    &:hover
-                        color: $tertiary-button-label-light--hovered
-
-                    &:not(:last-child)
-                        margin-right: 0.5rem
-
-                    .icon
-                        mask-size: 1rem
-                        mask-repeat: no-repeat
-                        mask-position: center center
-                        background-color: $tertiary-button-label-light
-                    &:not(:disabled):hover
-                        .icon
-                            background-color: $tertiary-button-label-light--hovered
-
-                    &.disabled
-                        cursor: not-allowed
-                        pointer-events: none
-                        color: $tertiary-button-label-light--disabled
-                        .icon
-                            background-color: $tertiary-button-label-light--disabled
-                        &:hover
-                            .icon
-                                background-color: $tertiary-button-label-light--disabled
-
-                &--custom-timer
-                    display: flex
-                    align-items: center
-                    justify-content: center
-                    margin-bottom: 0.5rem
-                    height: $tertiary-button-size
-                    line-height: calc(#{$tertiary-button-label-size} * 1.2) !important
-                    font-size: $tertiary-button-label-size !important
-                    text-align: center
-                    font-family: $primary-font-family
-                    font-weight: $tertiary-button-label-weight
-                    background-color: $tertiary-button-background-light
-                    border-radius: $element-radius
-                    cursor: pointer
-                    color: $tertiary-button-label-light
-                    padding-left: 1rem
-                    padding-right: 1rem
                     position: relative
 
-                    &-delete
-                        width: 16px
-                        height: 16px
-                        border-radius: 8px
+                    &::after
+                        content: ' '
+                        width: 100%
+                        height: 4px
+                        border-radius: 4000px
                         position: absolute
-                        right: -8px
-                        top: -8px
-                        background-color: $tertiary-button-label-light
-                        display: flex
-                        justify-content: center
-                        align-content: center
-                        padding: 5px
-                        &:hover
-                            background-color: $light-pink
+                        background-color: $timer-input-placeholder-color-light
+                        top: $timer-input-text-size
+                        margin-left: auto
+                        margin-right: auto
+                        z-index: 5000
+
+                &::-webkit-scrollbar
+                    display: none
+
+                &-selector
+                    margin-right: 0.3rem
+                    &:last-child
+                        margin-right: 0
+
+                .digit
+                    scroll-snap-align: start
+                    justify-content: center
+                    text-align: center
+                    font-family: $primary-font-family
+                    font-size: $timer-input-text-size
+                    line-height: $timer-input-text-size
+                    cursor: default
+                    color: $quaternary-text-color-light
+
+            .digit-separator
+                justify-content: center
+                text-align: center
+                font-family: $primary-font-family
+                font-size: $timer-input-text-size
+                line-height: calc(0.9 * #{$timer-input-text-size})
+                cursor: default
+                margin-right: 0.3rem
+                color: $quaternary-text-color-light
+        &-footer
+            margin-top: 1rem
+            padding-right: 1rem
+            padding-bottom: 1rem
+        &-cancel-button
+            padding-left: 2rem
+            padding-right: 2rem
+            height: 3rem
+            min-width: 8rem
+            cursor: pointer
+            color: $quaternary-button-ghost-label-light
+            line-height: 3rem
+            text-align: center
+            font-weight: 400
+            border-radius: $element-radius
+            margin-right: 1rem
+            text-decoration: underline
+            &:hover
+                color: $quaternary-button-ghost-label-light--hovered
+        &-confirm-button
+            padding-left: 2rem
+            padding-right: 2rem
+            height: 3rem
+            min-width: 8rem
+            line-height: 3rem
+            cursor: pointer
+            color: $quaternary-button-label-light
+            background-color: $quaternary-button-background-light
+            text-align: center
+            font-weight: 600
+            border-radius: $element-radius
+            &:hover
+                color: $quaternary-button-label-light--hovered
+            &.disabled
+                cursor: not-allowed
+                pointer-events: none
+                color: $label-color--disabled--light
+                &:hover
+                    color: $label-color--disabled--light
+
+        // .settings
+
+        //     &__open-button
+        //         position: absolute
+        //         top: $app-padding
+        //         right: $app-padding
+        //         width: $setting-panel-toggle-button-size
+        //         height: $setting-panel-toggle-button-size
+        //         background-color: red
+        //         mask-position: center center
+        //         mask-repeat: no-repeat
+        //         background-color: $setting-panel-open-button-color
+        //         mask: url('/assets/icons/more.svg')
+        //         cursor: pointer
+
+        //     &__close-button
+        //         position: absolute
+        //         top: $container-padding
+        //         right: $container-padding
+        //         width: $setting-panel-toggle-button-size
+        //         height: $setting-panel-toggle-button-size
+        //         mask-position: center center
+        //         mask-repeat: no-repeat
+        //         background-color: $setting-panel-close-button-color
+        //         mask: url('/assets/icons/close.svg')
+        //         cursor: pointer
+
+        //     &-panel
+        //         margin-top: 1rem
+
+        //         &__header
+        //             color: $tertiary-header-color-light
+        //             font-family: $primary-font-family
+        //             font-weight: 600
+        //             font-size: $tertiary-header-size
+        //             line-height: $tertiary-header-size
+        //             margin-bottom: 1rem
+
+        //         &__list-container
+        //             position: relative
+        //             background-color: $tertiary-background-light
+        //             border-radius: 4px
+
+        //         &__list-item
+        //             padding: 0.5rem 1rem
+        //             display: flex
+        //             justify-content: space-between
+        //             align-items: center
+        //             line-height: 1.5rem
+
+        //             &:not(:first-child)
+        //                 border-top: 1px solid $secondary-background-light
+
+        //             &-label
+        //                 color: $tertiary-text-color-light
+        //                 font-weight: $tertiary-text-weight
+        //                 font-family: $primary-font-family
+        //                 font-size: $tertiary-text-size
+        //                 -webkit-user-select: none
+        //                 -ms-user-select: none
+        //                 user-select: none
+
+        //             &-value
+        //                 display: flex
+        //                 justify-content: flex-end
+
+        //             &.disabled
+        //                 pointer-events: none
+        //                 *
+        //                     color: $label-color--disabled--light
+
+        //         &:first-child
+        //             margin-top: 0.5rem
+
+        // .form
+        //     &__checkbox
+        //         cursor: pointer
+        //         position: relative
+        //         line-height: calc((2 * #{$form-checkbox-inner-padding}) + #{$form-checkbox-size})
+
+        //         .label
+        //             display: block
+        //             float: left
+        //             margin-left: 0.25rem
+        //             top: calc(-1 * (((2 * #{$form-checkbox-inner-padding}) + #{$form-checkbox-size}) * 0.15))
+        //             line-height: calc((2 * #{$form-checkbox-inner-padding}) + #{$form-checkbox-size})
+
+        //         input[type="checkbox"]
+        //             position: absolute
+        //             opacity: 0
+
+        //         input[type="checkbox"]:not(:checked)
+        //             & + .toggler
+
+        //                 // check container
+        //                 &::before
+        //                     width: calc(2 * (#{$form-checkbox-inner-padding} + #{$form-checkbox-size}))
+        //                     height: calc((2 * #{$form-checkbox-inner-padding}) + #{$form-checkbox-size})
+        //                     background-color: $form-checkbox-color
+        //                     content: " "
+        //                     display: block
+        //                     border-radius: $element-radius
+        //                     float: left
+        //                     margin-top: 2px
+        //                     margin-bottom: 2px
+
+        //                 // check button
+        //                 &::after
+        //                     width: $form-checkbox-size
+        //                     height: $form-checkbox-size
+        //                     content: " "
+        //                     display: block
+        //                     float: left
+        //                     background-color: $light-gray-6
+        //                     border-radius: calc(#{$element-radius} / 2)
+        //                     margin-top: calc(2px + #{$form-checkbox-inner-padding})
+        //                     margin-left: calc((-1 * 2 * (#{$form-checkbox-inner-padding} + #{$form-checkbox-size})) + #{$form-checkbox-inner-padding})
+
+        //         input[type="checkbox"]:checked
+        //             & + .toggler
+        //                 // check container
+        //                 &::before
+        //                     width: calc(2 * (#{$form-checkbox-inner-padding} + #{$form-checkbox-size}))
+        //                     height: calc((2 * #{$form-checkbox-inner-padding}) + #{$form-checkbox-size})
+        //                     background-color: $form-checkbox-color--checked
+        //                     content: " "
+        //                     display: block
+        //                     border-radius: $element-radius
+        //                     float: left
+        //                     margin-top: 2px
+        //                     margin-bottom: 2px
+
+        //                 // check button
+        //                 &::after
+        //                     width: $form-checkbox-size
+        //                     height: $form-checkbox-size
+        //                     content: " "
+        //                     display: block
+        //                     float: left
+        //                     background-color: $light-gray-6
+        //                     border-radius: calc(#{$element-radius} / 2)
+        //                     margin-top: calc(2px + #{$form-checkbox-inner-padding})
+        //                     margin-left: calc(-1 * (#{$form-checkbox-inner-padding} + #{$form-checkbox-size}))
+
+        //     &__select
+        //         font-weight: $tertiary-text-weight
+        //         font-family: $primary-font-family
+        //         font-size: $form-dropdown-text-size
+        //         line-height: $form-dropdown-text-size
+
+        //         &:not(.is-multiple):not(.is-loading):not(:hover)
+        //             &::after
+        //                 border-color: $form-dropdown-trigger-color
+
+        //         &:not(.is-multiple):not(.is-loading):hover
+        //             &::after
+        //                 border-color: $form-dropdown-trigger-color--hovered
+
+        //         &--disabled
+        //             pointer-events: none
+        //             &:not(.is-multiple):not(.is-loading):not(:hover)
+        //                 &::after
+        //                     border-color: $border-color--disabled--light
+
+        //             &:not(.is-multiple):not(.is-loading):hover
+        //                 &::after
+        //                     border-color: $border-color--disabled--light
+
+        //     &__buttons
+        //         display: flex
+        //         justify-content: flex-start
+        //         flex-wrap: wrap
+
+        //     &__button
+        //         &--square
+        //             display: flex
+        //             align-items: center
+        //             justify-content: center
+        //             margin-bottom: 0.5rem
+        //             width: $tertiary-button-size
+        //             height: $tertiary-button-size
+        //             line-height: calc(#{$tertiary-button-label-size} * 1.2) !important
+        //             font-size: $tertiary-button-label-size !important
+        //             text-align: center
+        //             font-family: $primary-font-family
+        //             font-weight: $tertiary-button-label-weight
+        //             background-color: $tertiary-button-background-light
+        //             border-radius: $element-radius
+        //             cursor: pointer
+        //             color: $tertiary-button-label-light
+
+        //             &:hover
+        //                 color: $tertiary-button-label-light--hovered
+
+        //             &:not(:last-child)
+        //                 margin-right: 0.5rem
+
+        //             .icon
+        //                 mask-size: 1rem
+        //                 mask-repeat: no-repeat
+        //                 mask-position: center center
+        //                 background-color: $tertiary-button-label-light
+        //             &:not(:disabled):hover
+        //                 .icon
+        //                     background-color: $tertiary-button-label-light--hovered
+
+        //             &.disabled
+        //                 cursor: not-allowed
+        //                 pointer-events: none
+        //                 color: $tertiary-button-label-light--disabled
+        //                 .icon
+        //                     background-color: $tertiary-button-label-light--disabled
+        //                 &:hover
+        //                     .icon
+        //                         background-color: $tertiary-button-label-light--disabled
+
+                // &--custom-timer
+                //     display: flex
+                //     align-items: center
+                //     justify-content: center
+                //     margin-bottom: 0.5rem
+                //     height: $tertiary-button-size
+                //     line-height: calc(#{$tertiary-button-label-size} * 1.2) !important
+                //     font-size: $tertiary-button-label-size !important
+                //     text-align: center
+                //     font-family: $primary-font-family
+                //     font-weight: $tertiary-button-label-weight
+                //     background-color: $tertiary-button-background-light
+                //     border-radius: $element-radius
+                //     cursor: pointer
+                //     color: $tertiary-button-label-light
+                //     padding-left: 1rem
+                //     padding-right: 1rem
+                //     position: relative
+
+                //     &-delete
+                //         width: 16px
+                //         height: 16px
+                //         border-radius: 8px
+                //         position: absolute
+                //         right: -8px
+                //         top: -8px
+                //         background-color: $tertiary-button-label-light
+                //         display: flex
+                //         justify-content: center
+                //         align-content: center
+                //         padding: 5px
+                //         &:hover
+                //             background-color: $light-pink
                         
-                        .icon
-                            &.remove
-                                mask-position: center center
-                                mask-repeat: no-repeat
-                                mask: url('/assets/icons/delete.svg')
-                                background-color: $white
+                //         .icon
+                //             &.remove
+                //                 mask-position: center center
+                //                 mask-repeat: no-repeat
+                //                 mask: url('/assets/icons/delete.svg')
+                //                 background-color: $white
 
 
-                    &:hover
-                        color: $tertiary-button-label-light--hovered
+                //     &:hover
+                //         color: $tertiary-button-label-light--hovered
 
-                    &:not(:last-child)
-                        margin-right: 0.5rem
-                    &.disabled
-                        cursor: not-allowed
-                        pointer-events: none
-                        color: $tertiary-button-label-light--disabled
+                //     &:not(:last-child)
+                //         margin-right: 0.5rem
+                //     &.disabled
+                //         cursor: not-allowed
+                //         pointer-events: none
+                //         color: $tertiary-button-label-light--disabled
 
 // Dark Theme
 .timer
@@ -522,30 +515,4 @@
                 &__close-button
                     background-color: $setting-panel-close-button-color-light
 
-.icon
-    width: 100%
-    height: 100%
-    mask-position: center center
-    mask-repeat: no-repeat
 
-    &.add-icon
-        mask: url('/assets/icons/add.svg')
-
-    &.play-icon
-        mask: url('/assets/icons/play.svg')
-
-    &.resume-icon
-        mask: url('/assets/icons/play.svg')
-
-    &.pause-icon
-        mask: url('/assets/icons/pause.svg')
-
-    &.stop-icon
-        mask: url('/assets/icons/stop.svg')
-
-@keyframes slideIn
-    from
-        transform: translate(100% 100%)
-
-    to
-        transform: translate(0% 0%)

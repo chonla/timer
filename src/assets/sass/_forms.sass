@@ -1,0 +1,215 @@
+.form
+    &__checkbox
+        cursor: pointer
+        position: relative
+        line-height: calc((2 * #{$form-checkbox-inner-padding}) + #{$form-checkbox-size})
+
+        .label
+            display: block
+            float: left
+            margin-left: 0.25rem
+            top: calc(-1 * (((2 * #{$form-checkbox-inner-padding}) + #{$form-checkbox-size}) * 0.15))
+            line-height: calc((2 * #{$form-checkbox-inner-padding}) + #{$form-checkbox-size})
+
+        input[type="checkbox"]
+            position: absolute
+            opacity: 0
+
+        input[type="checkbox"]:not(:checked)
+            & + .toggler
+
+                // check container
+                &::before
+                    width: calc(2 * (#{$form-checkbox-inner-padding} + #{$form-checkbox-size}))
+                    height: calc((2 * #{$form-checkbox-inner-padding}) + #{$form-checkbox-size})
+                    background-color: $form-checkbox-background-color--unchecked--light
+                    content: " "
+                    display: block
+                    border-radius: $element-radius
+                    float: left
+                    margin-top: 2px
+                    margin-bottom: 2px
+
+                // check button
+                &::after
+                    width: $form-checkbox-size
+                    height: $form-checkbox-size
+                    content: " "
+                    display: block
+                    float: left
+                    background-color: $form-checkbox-button-color--unchecked--light
+                    border-radius: calc(#{$element-radius} / 2)
+                    margin-top: calc(2px + #{$form-checkbox-inner-padding})
+                    margin-left: calc((-1 * 2 * (#{$form-checkbox-inner-padding} + #{$form-checkbox-size})) + #{$form-checkbox-inner-padding})
+
+        input[type="checkbox"]:checked
+            & + .toggler
+                // check container
+                &::before
+                    width: calc(2 * (#{$form-checkbox-inner-padding} + #{$form-checkbox-size}))
+                    height: calc((2 * #{$form-checkbox-inner-padding}) + #{$form-checkbox-size})
+                    background-color: $form-checkbox-background-color--checked--light
+                    content: " "
+                    display: block
+                    border-radius: $element-radius
+                    float: left
+                    margin-top: 2px
+                    margin-bottom: 2px
+
+                // check button
+                &::after
+                    width: $form-checkbox-size
+                    height: $form-checkbox-size
+                    content: " "
+                    display: block
+                    float: left
+                    background-color: $form-checkbox-button-color--checked--light
+                    border-radius: calc(#{$element-radius} / 2)
+                    margin-top: calc(2px + #{$form-checkbox-inner-padding})
+                    margin-left: calc(-1 * (#{$form-checkbox-inner-padding} + #{$form-checkbox-size}))
+
+    &__select
+        font-weight: $tertiary-text-weight
+        font-family: $primary-font-family
+        font-size: $form-dropdown-text-size
+        line-height: $form-dropdown-text-size
+
+        &:not(.is-multiple):not(.is-loading):not(:hover)
+            &::after
+                border-color: $form-dropdown-trigger-color
+
+        &:not(.is-multiple):not(.is-loading):hover
+            &::after
+                border-color: $form-dropdown-trigger-color--hovered
+
+        &--disabled
+            pointer-events: none
+            &:not(.is-multiple):not(.is-loading):not(:hover)
+                &::after
+                    border-color: $border-color--disabled--light
+
+            &:not(.is-multiple):not(.is-loading):hover
+                &::after
+                    border-color: $border-color--disabled--light
+
+    &__buttons
+        display: flex
+        justify-content: flex-start
+        flex-wrap: wrap
+
+    &__button
+        &--square
+            display: flex
+            align-items: center
+            justify-content: center
+            margin-bottom: 0.5rem
+            width: $tertiary-button-size
+            height: $tertiary-button-size
+            line-height: calc(#{$tertiary-button-label-size} * 1.2) !important
+            font-size: $tertiary-button-label-size !important
+            text-align: center
+            font-family: $primary-font-family
+            font-weight: $tertiary-button-label-weight
+            background-color: $tertiary-button-background-light
+            border-radius: $element-radius
+            cursor: pointer
+            color: $tertiary-button-label-light
+
+            &:hover
+                color: $tertiary-button-label-light--hovered
+
+            &:not(:last-child)
+                margin-right: 0.5rem
+
+            .icon
+                mask-size: 1rem
+                mask-repeat: no-repeat
+                mask-position: center center
+                background-color: $tertiary-button-label-light
+            &:not(:disabled):hover
+                .icon
+                    background-color: $tertiary-button-label-light--hovered
+
+            &.disabled
+                cursor: not-allowed
+                pointer-events: none
+                color: $tertiary-button-label-light--disabled
+                .icon
+                    background-color: $tertiary-button-label-light--disabled
+                &:hover
+                    .icon
+                        background-color: $tertiary-button-label-light--disabled
+
+        &--custom-timer
+            display: flex
+            align-items: center
+            justify-content: center
+            margin-bottom: 0.5rem
+            height: $tertiary-button-size
+            line-height: calc(#{$tertiary-button-label-size} * 1.2) !important
+            font-size: $tertiary-button-label-size !important
+            text-align: center
+            font-family: $primary-font-family
+            font-weight: $tertiary-button-label-weight
+            background-color: $tertiary-button-background-light
+            border-radius: $element-radius
+            cursor: pointer
+            color: $tertiary-button-label-light
+            padding-left: 1rem
+            padding-right: 1rem
+            position: relative
+
+            &-delete
+                width: 16px
+                height: 16px
+                border-radius: 8px
+                position: absolute
+                right: -8px
+                top: -8px
+                background-color: $tertiary-button-label-light
+                display: flex
+                justify-content: center
+                align-content: center
+                padding: 5px
+                &:hover
+                    background-color: $light-pink
+                
+                .icon
+                    &.remove
+                        mask-position: center center
+                        mask-repeat: no-repeat
+                        mask: url('/assets/icons/delete.svg')
+                        background-color: $white
+
+
+            &:hover
+                color: $tertiary-button-label-light--hovered
+
+            &:not(:last-child)
+                margin-right: 0.5rem
+            &.disabled
+                cursor: not-allowed
+                pointer-events: none
+                color: $tertiary-button-label-light--disabled
+
+
+.form
+    &__checkbox
+        &.dark
+            input[type="checkbox"]:not(:checked)
+                & + .toggler
+                    // check container
+                    &::before
+                        background-color: $form-checkbox-background-color--unchecked--dark
+                    // check button
+                    &::after
+                        background-color: $form-checkbox-button-color--unchecked--dark
+            input[type="checkbox"]:checked
+                & + .toggler
+                    // check container
+                    &::before
+                        background-color: $form-checkbox-background-color--checked--dark
+
+                    // check button
+                    &::after
+                        background-color: $form-checkbox-button-color--checked--dark

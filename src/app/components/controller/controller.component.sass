@@ -1,0 +1,51 @@
+@import '../../../assets/sass/_all'
+
+.timer
+    &__controller
+        position: absolute
+        left: 50%
+        bottom: $app-padding
+        transform: translateX(-50%)
+        padding: $container-padding
+        background-color: $secondary-background-light
+        border-radius: $container-radius
+
+        &.dark
+            background-color: $secondary-background-dark
+
+        .buttons
+            display: flex
+            align-items: center
+
+            .button
+                background-color: $secondary-button-background-light
+                border: none
+
+                &:not(:last-child)
+                    margin-right: 1rem
+
+                .icon
+                    background-color: $secondary-button-label-light
+                    width: 1.25rem
+                    height: 1.25rem
+
+                &:not(:disabled):hover
+                    .icon
+                        background-color: $secondary-button-label-light--hovered
+
+                &.disabled
+                    cursor: not-allowed
+                    pointer-events: none
+                    .icon
+                        background-color: $secondary-button-label-light--disabled
+                    &:hover
+                        .icon
+                            background-color: $secondary-button-label-light--disabled
+
+            .divider
+                width: 0.2rem
+                height: 2.5rem
+                margin-right: 1rem
+                margin-bottom: 0.5rem
+                background-color: $secondary-button-background-divider-light
+                border-radius: 100000px

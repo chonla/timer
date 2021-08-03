@@ -90,6 +90,22 @@ export class TimerService {
     }
   }
 
+  public isRunning(): boolean {
+    return this._state === TimerState.RUNNING;
+  }
+
+  public isPaused(): boolean {
+    return this._state === TimerState.PAUSED;
+  }
+
+  public isUninitialized(): boolean {
+    return this._state === TimerState.UNINITIALIZED;
+  }
+
+  public isIdle(): boolean {
+    return this._state === TimerState.IDLE;
+  }
+
   private ticking(): void {
     this._ticksLeft--;
     this._ticksSource$.next(this._ticksLeft);

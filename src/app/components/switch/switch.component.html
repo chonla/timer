@@ -1,4 +1,4 @@
-<label for="switch-component-{{componentId}}" class="form__checkbox">
+<label for="switch-component-{{componentId}}" class="form__checkbox" [ngClass]="{'dark': darkMode}">
   <input type="checkbox" id="switch-component-{{componentId}}" (change)="change($event)" [checked]="value">
   <div class="toggler"></div>
 </label>
