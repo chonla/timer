@@ -42,7 +42,10 @@ export class TimerComponent implements OnInit {
 
     this.timer.onStateChange$()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(state => {
+      .subscribe((state: TimerState) => {
+        if (this.state === TimerState.IDLE && state === TimerState.RUNNING) {
+          this.attentionRequired = false;
+        }
         this.state = state;
       });
   }

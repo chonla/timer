@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { TimerState } from '../../enums/timer-state.enum';
 import { configurations } from '../../constants/configurations';
 import { AvailableSounds } from '../../constants/sounds';
 import { AvailableThemes } from '../../constants/themes';
@@ -42,6 +43,14 @@ export class SettingComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.timer.onStateChange$()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((state: TimerState) => {
+        if (state === TimerState.RUNNING) {
+          this.closeCustomModal();
+        }
+      });
+
     this.settings.onSettingChange$()
       .pipe(takeUntil(this.destroy$))
       .subscribe((settings: ISettings) => {

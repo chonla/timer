@@ -9,7 +9,7 @@ import { TimerService } from '../../services/timer.service';
 export class ControllerComponent implements OnInit {
   @Input() darkMode: boolean = false;
 
-  constructor(private timer: TimerService) { //}, private settings: SettingsService) {
+  constructor(private timer: TimerService) {
   }
 
   public ngOnInit(): void {
@@ -17,7 +17,6 @@ export class ControllerComponent implements OnInit {
 
   public start(): void {
     this.timer.start();
-    // this.closeSettings();
   }
 
   public pause(): void {
