@@ -6,7 +6,8 @@ const configurations: IAppConfig = {
     defaultUseSound: true,
     defaultTheme: 'google',
     defaultSound: 'mario_game_over', 
-    defaultCustomTimers: []
+    defaultCustomTimers: [],
+    ticksPerSecond: 25,
 }
 
 export { configurations }

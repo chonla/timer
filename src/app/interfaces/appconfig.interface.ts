@@ -11,6 +11,7 @@ interface IAppConfig {
     defaultDarkMode: boolean
     
     defaultCustomTimers: number[]
+    ticksPerSecond: number
 }
 
 export { IAppConfig }

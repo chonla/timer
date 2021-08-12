@@ -1,2 +1,4 @@
-<div class="dev-message" [ngClass]="{'dark': darkMode}">Ticks Left: {{ ticks }}/{{ totalTicks }}<br>
+<div class="dev-message" [ngClass]="{'dark': darkMode}">
+    Ticks Left: {{ ticks }}/{{ totalTicks }}<br>
+    Time Left: {{ ticks | toTime }}/{{ totalTicks | toTime }}<br>
     Timer State: {{ state | readableState }}</div>

@@ -19,7 +19,7 @@ import { TimerService } from '../../services/timer.service';
 export class SettingComponent implements OnInit {
   @Output('themeChange') onThemeChange: EventEmitter<string> = new EventEmitter<string>();
 
-  public themes: ITheme[] = AvailableThemes;
+  public themes: ITheme[] = AvailableThemes.filter((t: ITheme) => t.enabled);
   public sounds: ISound[] = AvailableSounds;
   public selectedTheme: string;
   public selectedSound: string;

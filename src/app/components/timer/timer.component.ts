@@ -34,7 +34,7 @@ export class TimerComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(ticks => {
         this.ticks = ticks;
-        this.totalTicks = this.timer.getTicks();
+        this.totalTicks = this.timer.getTicks().ticks();
         if (this.ticks <= configurations.attentionRequiredAt) {
           this.attentionRequired = true;
         }
