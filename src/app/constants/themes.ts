@@ -20,7 +20,7 @@ const AvailableThemes: ITheme[] = [
     {
         key: 'developer',
         label: 'Developer',
-        enabled: true,
+        enabled: false,
     },
 ];
 
