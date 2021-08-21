@@ -15,7 +15,7 @@ describe('SettingComponent', () => {
       stop: jest.fn(),
       pause: jest.fn(),
       resume: jest.fn(),
-      setTicks: jest.fn(),
+      setSeconds: jest.fn(),
       onStateChange$: jest.fn().mockReturnValue(of(TimerState.UNINITIALIZED)),
       isRunning: jest.fn(),
       isPaused: jest.fn(),
@@ -147,11 +147,11 @@ describe('SettingComponent', () => {
   });
 
   describe('Time Setting', () => {
-    it('should call timer setTicks', () => {
+    it('should call timer setSeconds', () => {
       component.setTime(300);
 
-      expect(mockTimer.setTicks).toBeCalledWith(300);
-      expect(mockTimer.setTicks).toBeCalledTimes(1);
+      expect(mockTimer.setSeconds).toBeCalledWith(300);
+      expect(mockTimer.setSeconds).toBeCalledTimes(1);
     });
 
     it('should disable time setting button if timer is running', () => {

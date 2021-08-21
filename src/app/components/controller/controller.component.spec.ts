@@ -14,7 +14,7 @@ describe('ControllerComponent', () => {
       stop: jest.fn(),
       pause: jest.fn(),
       resume: jest.fn(),
-      setTicks: jest.fn(),
+      setSeconds: jest.fn(),
       onStateChange$: jest.fn().mockReturnValue(of(TimerState.UNINITIALIZED)),
       isRunning: jest.fn(),
       isPaused: jest.fn(),

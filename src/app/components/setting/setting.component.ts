@@ -86,7 +86,7 @@ export class SettingComponent implements OnInit {
   }
 
   public setTime(seconds: number): void {
-    this.timer.setTicks(seconds);
+    this.timer.setSeconds(seconds);
   }
 
   public openSettings(): void {

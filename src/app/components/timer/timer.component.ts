@@ -35,7 +35,7 @@ export class TimerComponent implements OnInit {
       .subscribe(ticks => {
         this.ticks = ticks;
         this.totalTicks = this.timer.getTicks().ticks();
-        if (this.ticks <= configurations.attentionRequiredAt) {
+        if (this.ticks <= configurations.attentionRequiredAt * configurations.ticksPerSecond) {
           this.attentionRequired = true;
         }
       });

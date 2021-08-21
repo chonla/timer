@@ -1,3 +1,4 @@
+import { configurations } from '../constants/configurations';
 import { TimerState } from '../enums/timer-state.enum';
 import { TimerService } from './timer.service';
 
@@ -14,20 +15,20 @@ describe('TimerService', () => {
 
   describe('Ticks', () => {
     it('should set default ticks to 0 when initialized', () => {
-      expect(service.getTicks()).toEqual(0);
+      expect(service.getTicks().ticks()).toEqual(0);
     });
   
     it('should set ticks', () => {
-      service.setTicks(300);
-      expect(service.getTicks()).toEqual(300);
+      service.setSeconds(300);
+      expect(service.getTicks().ticks()).toEqual(300 * configurations.ticksPerSecond);
     });
   
     it('should trigger ticks change when set ticks', (done) => {
       service.onTicksChange$().subscribe(ticks => {
-        expect(ticks).toEqual(300);
+        expect(ticks).toEqual(300 * configurations.ticksPerSecond);
         done();
       });
-      service.setTicks(300);
+      service.setSeconds(300);
     });
   });
 
@@ -57,7 +58,7 @@ describe('TimerService', () => {
     });
 
     it('should set state to running when start timer', () => {
-      service.setTicks(1);
+      service.setSeconds(1);
       service.start();
       expect(service.getState()).toEqual(TimerState.RUNNING);
     });
@@ -67,25 +68,25 @@ describe('TimerService', () => {
         expect(state).toEqual(TimerState.IDLE);
         done();
       });
-      service.setTicks(1);
+      service.setSeconds(1);
     });
 
     it('should set state to idle when stop timer', () => {
-      service.setTicks(1);
+      service.setSeconds(1);
       service.start();
       service.stop();
       expect(service.getState()).toEqual(TimerState.IDLE);
     });
 
     it('should set state to paused when pause timer in running state', () => {
-      service.setTicks(1);
+      service.setSeconds(1);
       service.start();
       service.pause();
       expect(service.getState()).toEqual(TimerState.PAUSED);
     });
 
     it('should keep state to paused when start timer in paused state', () => {
-      service.setTicks(1);
+      service.setSeconds(1);
       service.start();
       service.pause();
       service.start();
@@ -93,13 +94,13 @@ describe('TimerService', () => {
     });
 
     it('should keep state to idle when pause timer in idle state', () => {
-      service.setTicks(1);
+      service.setSeconds(1);
       service.pause();
       expect(service.getState()).toEqual(TimerState.IDLE);
     });
 
     it('should keep state to idle when pause timer in paused state', () => {
-      service.setTicks(1);
+      service.setSeconds(1);
       service.start();
       service.pause();
       service.pause();
@@ -107,7 +108,7 @@ describe('TimerService', () => {
     });
 
     it('should continue running when resume from paused state', () => {
-      service.setTicks(1);
+      service.setSeconds(1);
       service.start();
       service.pause();
       service.resume();
@@ -115,13 +116,13 @@ describe('TimerService', () => {
     });
 
     it('should keep state to idle when resume from idle state', () => {
-      service.setTicks(1);
+      service.setSeconds(1);
       service.resume();
       expect(service.getState()).toEqual(TimerState.IDLE);
     });
 
     it('should keep state to running when resume from running state', () => {
-      service.setTicks(1);
+      service.setSeconds(1);
       service.start();
       service.resume();
       expect(service.getState()).toEqual(TimerState.RUNNING);
@@ -133,7 +134,7 @@ describe('TimerService', () => {
       jest.useRealTimers();
     });
     
-    it('should trigger timer changes 3 times when set ticks to 3 and start timer and after 3 ticks timer should stop', (done) => {
+    it('should trigger timer changes 77 times when set ticks to 3 and start timer and after 3 ticks timer should stop', (done) => {
       const tickCounter = jest.fn();
 
       jest.useFakeTimers();
@@ -145,14 +146,14 @@ describe('TimerService', () => {
         }
       });
 
-      service.setTicks(3);
+      service.setSeconds(3);
       service.start();
 
       jest.advanceTimersByTime(3100);
-      expect(tickCounter).toHaveBeenCalledTimes(5); // 3 for ticking, 1 for initializing on start, 1 for constructor
+      expect(tickCounter).toHaveBeenCalledTimes(77); // 75 for ticking, 1 for initializing on start, 1 for constructor
     });
 
-    it('should trigger timer changes 5 times when set ticks to 5 and start timer and after 3 ticks then pause and resume for 2 more ticks then timer should stop', (done) => {
+    it('should trigger timer changes 127 times when set ticks to 5 and start timer and after 3 ticks then pause and resume for 2 more ticks then timer should stop', (done) => {
       const tickCounter = jest.fn();
 
       jest.useFakeTimers();
@@ -164,14 +165,14 @@ describe('TimerService', () => {
         }
       });
 
-      service.setTicks(5);
+      service.setSeconds(5);
       service.start();
       jest.advanceTimersByTime(3000);
       service.pause();
       service.resume();
       jest.advanceTimersByTime(2100);
 
-      expect(tickCounter).toHaveBeenCalledTimes(7); // 5 for ticking, 1 for initializing on start, 1 for constructor
+      expect(tickCounter).toHaveBeenCalledTimes(127); // 125 for ticking, 1 for initializing on start, 1 for constructor
     });
   });
 });

@@ -23,7 +23,7 @@ export class TimerService {
     // this._ticksLeft = 0;
     this._ticksSource$ = new Subject<number>();
     this._interval$ = new Subscription();
-    this.setTicks(0);
+    this.setSeconds(0);
     this.setState(TimerState.UNINITIALIZED);
   }
 
@@ -31,7 +31,7 @@ export class TimerService {
     return this._ticks;
   }
 
-  public setTicks(seconds: number): void {
+  public setSeconds(seconds: number): void {
     this._ticks = new Ticks(Math.floor(seconds));
     // this._ticksLeft = this._ticks;
     // this._ticksSource$.next(this._ticksLeft);
