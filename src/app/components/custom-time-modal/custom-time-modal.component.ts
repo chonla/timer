@@ -1,5 +1,5 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { configurations } from 'src/app/constants/configurations';
 
 @Component({
   selector: 'app-custom-time-modal',
@@ -54,7 +54,7 @@ export class CustomTimeModalComponent implements OnInit, OnChanges {
         break;
     }
 
-    this._ticks = (((this._mm * 10) + this._m) * 60) + ((this._ss * 10) + this._s);
+    this._ticks = ((((this._mm * 10) + this._m) * 60) + ((this._ss * 10) + this._s));
   }
 
   public canSubmit(): boolean {

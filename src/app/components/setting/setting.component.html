@@ -44,30 +44,9 @@
     <div class="settings__panel__header">Time Presets</div>
     <div class="settings__blank_container">
       <div class="form__buttons">
-        <app-preset-button class="form__button--square" label="1m" (clicked)="setTime(60)"
-          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
-        </app-preset-button>
-        <app-preset-button class="form__button--square" label="2m" (clicked)="setTime(120)"
-          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
-        </app-preset-button>
-        <app-preset-button class="form__button--square" label="3m" (clicked)="setTime(180)"
-          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
-        </app-preset-button>
-        <app-preset-button class="form__button--square" label="5m" (clicked)="setTime(300)"
-          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
-        </app-preset-button>
-        <app-preset-button class="form__button--square" label="10m" (clicked)="setTime(600)"
-          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
-        </app-preset-button>
-        <app-preset-button class="form__button--square" label="20m" (clicked)="setTime(1200)"
-          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
-        </app-preset-button>
-        <app-preset-button class="form__button--square" label="30m" (clicked)="setTime(1800)"
-          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
-        </app-preset-button>
-        <app-preset-button class="form__button--square" label="60m" (clicked)="setTime(3600)"
-          [disabled]="shouldDisableTimeSetButton()" [ngClass]="{'disabled':shouldDisableTimeSetButton()}">
-        </app-preset-button>
+        <app-preset-button *ngFor="let t of presetTimers" class="form__button--square" label="{{ t }}m"
+          (click)="setTime(t * 60)" [disabled]="shouldDisableTimeSetButton()"
+          [ngClass]="{'disabled':shouldDisableTimeSetButton()}"></app-preset-button>
       </div>
     </div>
   </div>
@@ -80,8 +59,11 @@
           (click)="openCustomModal()">
           <div class="icon add-icon"></div>
         </div>
-        <div class="form__button--custom-timer" [ngClass]="{'disabled': shouldDisableTimeSetButton()}" *ngFor="let customTimer of customTimers; index as idx" (click)="setTime(customTimer)">
-          {{ customTimer | toTime }} <div class="form__button--custom-timer-delete" (click)="deleteTime(idx)"><div class="icon remove"></div></div>
+        <div class="form__button--custom-timer" [ngClass]="{'disabled': shouldDisableTimeSetButton()}"
+          *ngFor="let customTimer of customTimers; index as idx" (click)="setTime(customTimer)">
+          {{ (customTimer * configuration.ticksPerSecond) | toTime }} <div class="form__button--custom-timer-delete" (click)="deleteTime(idx)">
+            <div class="icon remove"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -91,4 +73,5 @@
 </div>
 
 
-<app-custom-time-modal [closed]="customModalClosed" (close)="onTimerModalClosed()" (submit)="onCreateCustomTime($event)"></app-custom-time-modal>
+<app-custom-time-modal [closed]="customModalClosed" (close)="onTimerModalClosed()"
+  (submit)="onCreateCustomTime($event)"></app-custom-time-modal>

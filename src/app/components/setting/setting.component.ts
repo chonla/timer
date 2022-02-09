@@ -10,6 +10,7 @@ import { ISound } from '../../interfaces/sound.interface';
 import { ITheme } from '../../interfaces/themes.interface';
 import { SettingsService } from '../../services/settings.service';
 import { TimerService } from '../../services/timer.service';
+import { IAppConfig } from 'src/app/interfaces/appconfig.interface';
 
 @Component({
   selector: 'app-setting',
@@ -18,6 +19,11 @@ import { TimerService } from '../../services/timer.service';
 })
 export class SettingComponent implements OnInit {
   @Output('themeChange') onThemeChange: EventEmitter<string> = new EventEmitter<string>();
+
+  public readonly presetTimers: number[] = [
+    1, 2, 3, 5, 10, 20, 30, 60
+  ];
+  public readonly configuration: IAppConfig = configurations;
 
   public themes: ITheme[] = AvailableThemes.filter((t: ITheme) => t.enabled);
   public sounds: ISound[] = AvailableSounds;
